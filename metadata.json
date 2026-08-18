@@ -1,0 +1,6 @@
+{
+  "name": "William Buck Godfrey Legacy Scholarship",
+  "description": "Official landing page and scholarship portal for The William Buck Godfrey Legacy Scholarship, empowering the next generation of HBCU leaders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
