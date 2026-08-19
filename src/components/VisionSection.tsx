@@ -30,7 +30,7 @@ export const VisionSection: React.FC = () => {
     <section
       ref={containerRef}
       id="vision"
-      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-white border-t border-[#1B365D]/10"
+      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
     >
       {/* Background Watermark */}
       <motion.div
@@ -46,10 +46,10 @@ export const VisionSection: React.FC = () => {
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
               FOUR-YEAR HBCU ENDOWMENT
             </span>
-            <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#1B365D]">
+            <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
               OUR VISION
             </h2>
-            <p className="font-body-text text-sm sm:text-base md:text-lg text-[#1B365D]/80 leading-relaxed font-normal">
+            <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
               The William Buck Godfrey Legacy Scholarship will annually award a deserving student attending a Historically Black College or University with a full four-year scholarship, including semester stipends to support educational and personal success.
             </p>
           </div>
@@ -57,36 +57,36 @@ export const VisionSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <FadeInView direction="up" delay={0.15}>
-            <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
-              <div className="w-12 h-12 bg-[#F8FAFC] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
+            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
+              <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#1B365D]">Four-Year HBCU Tuition</h3>
-              <p className="font-body-text text-xs sm:text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Four-Year HBCU Tuition</h3>
+              <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                 Multi-year financial stipends covering tuition, housing, and instructional technology across all 4 years of college.
               </p>
             </div>
           </FadeInView>
 
           <FadeInView direction="up" delay={0.25}>
-            <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
-              <div className="w-12 h-12 bg-[#F8FAFC] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
+            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
+              <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#1B365D]">Executive Mentorship</h3>
-              <p className="font-body-text text-xs sm:text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Executive Mentorship</h3>
+              <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                 Direct pairing with Godfrey alumni mentors in engineering, healthcare, public policy, athletics, and business.
               </p>
             </div>
           </FadeInView>
 
           <FadeInView direction="up" delay={0.35}>
-            <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
-              <div className="w-12 h-12 bg-[#F8FAFC] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
+            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
+              <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#1B365D]">Civic Leadership</h3>
-              <p className="font-body-text text-xs sm:text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Civic Leadership</h3>
+              <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                 Scholars complete youth athletic mentorship and community tutoring projects, continuing Coach Godfrey's legacy of service.
               </p>
             </div>
@@ -97,13 +97,13 @@ export const VisionSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <button
               onClick={() => scrollToSection('donate')}
-              className="font-body-text text-xs font-bold tracking-[0.2em] bg-[#1B365D] text-white py-4 px-8 hover:bg-[#C5A253] hover:text-[#1B365D] transition-all uppercase cursor-pointer shadow-md"
+              className="font-body-text text-xs font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase cursor-pointer shadow-md"
             >
               CONTRIBUTE TO SCHOLARSHIP FUND
             </button>
             <button
               onClick={() => scrollToSection('apply')}
-              className="font-body-text text-xs font-bold tracking-[0.2em] border border-[#1B365D]/20 text-[#1B365D] py-4 px-8 hover:border-[#1B365D] hover:bg-[#F8FAFC] transition-all uppercase cursor-pointer"
+              className="font-body-text text-xs font-bold tracking-[0.2em] border border-[#0A1B36]/25 text-[#0A1B36] py-4 px-8 hover:border-[#0A1B36] hover:bg-[#ffffff] transition-all uppercase cursor-pointer"
             >
               REVIEW SCHOLAR APPLICATION
             </button>

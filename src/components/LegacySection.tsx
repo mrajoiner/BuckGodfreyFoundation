@@ -72,7 +72,7 @@ export const LegacySection: React.FC = () => {
     <section
       ref={containerRef}
       id="legacy"
-      className="relative py-20 sm:py-28 md:py-36 lg:py-40 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden border-t border-[#1B365D]/10 bg-white"
+      className="relative py-20 sm:py-28 md:py-36 lg:py-40 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden border-t border-[#0A1B36]/10 bg-[#ffffff]"
     >
       {/* Parallax Massive Editorial Watermark */}
       <motion.div
@@ -91,19 +91,19 @@ export const LegacySection: React.FC = () => {
               <motion.div
                 style={{ y: photoY }}
                 id="legacy-sideline-frame"
-                className="relative w-full aspect-[4/5] border border-[#1B365D]/15 p-2.5 sm:p-3 bg-white shadow-xl group transform-gpu"
+                className="relative w-full aspect-[4/5] border border-[#0A1B36]/15 p-2.5 sm:p-3 bg-[#ffffff] shadow-xl group transform-gpu"
               >
-                <div className="relative w-full h-full overflow-hidden bg-slate-200">
+                <div className="relative w-full h-full overflow-hidden bg-[#ffffff]">
                   <img
                     id="legacy-sideline-img"
-                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover contrast-105 group-hover:grayscale group-hover:scale-105 transition-all duration-700 ease-out"
                     alt="Vintage photo of Coach Godfrey crouching on the sideline during a football game in a yellow shirt"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBEMjOAoy5Xno6zGiVNGYo8jhAzrnTXiN3GL5xJbGwI3QgpdNMo_u8QW0tOPZD3r_CMY1isijjkINBSxtsc_xz4Wsz2vv5MZgmxgcy6A4UV5mNw8b8WAJegLHIyXdmddQ3TNwqwhAye5QLicI2YZp0z72SeR9VmcWCgT6WSgGKWG_mHAvFr2NnsObN3lW6Ngsc5cgPXASIo-z_Z7aIbjk--Q1XJ8LIaDUtEfZEs2WNi9ZiqK1lXLAWDOVkpU0Q7dGKWg"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1B365D]/40 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A1B36]/40 via-transparent to-transparent"></div>
                 </div>
-                <div className="mt-3 flex items-center justify-between font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#1B365D]/60 uppercase">
+                <div className="mt-3 flex items-center justify-between font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#0A1B36]/70 uppercase">
                   <span>Southwest DeKalb Dynasty</span>
                   <span className="text-[#C5A253] font-bold">Historic Archive</span>
                 </div>
@@ -126,20 +126,20 @@ export const LegacySection: React.FC = () => {
               <FadeInView direction="up" delay={0.2} distance={24}>
                 <h2
                   id="legacy-headline"
-                  className="font-display-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] sm:leading-[0.92] text-[#1B365D] mb-6 sm:mb-8 font-bold uppercase tracking-[-0.03em]"
+                  className="font-display-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] sm:leading-[0.92] text-[#0A1B36] mb-6 sm:mb-8 font-bold uppercase tracking-[-0.03em]"
                 >
-                  Greatness was never just about winning.
+                  Greatness is more than just victories.
                 </h2>
               </FadeInView>
 
               <FadeInView direction="up" delay={0.3} distance={20}>
-                <p className="font-body-text text-sm sm:text-base md:text-lg text-[#1B365D]/80 mb-4 sm:mb-6 leading-relaxed font-normal">
+                <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 mb-4 sm:mb-6 leading-relaxed font-medium">
                   For decades, Coach Godfrey built more than just winning teams; he built men of character. He understood that true excellence extends far beyond the final whistle.
                 </p>
               </FadeInView>
 
               <FadeInView direction="up" delay={0.4} distance={20}>
-                <p className="font-body-text text-sm sm:text-base text-[#1B365D]/70 mb-8 sm:mb-10 leading-relaxed font-normal">
+                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 mb-8 sm:mb-10 leading-relaxed font-medium">
                   His approach to mentorship was rigorous, demanding, and profoundly compassionate. As an English teacher, published poet, and hall of fame coach, he demanded that students cultivate intellectual discipline and character for collegiate and life success.
                 </p>
               </FadeInView>
@@ -147,7 +147,7 @@ export const LegacySection: React.FC = () => {
               <FadeInView direction="up" delay={0.5} distance={20}>
                 <button
                   onClick={() => scrollToSection('scholar')}
-                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#1B365D] transition-colors flex items-center justify-center sm:justify-start gap-2 uppercase py-2 sm:py-1 border-b border-[#C5A253] hover:border-[#1B365D] min-h-[44px] cursor-pointer"
+                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#0A1B36] transition-colors flex items-center justify-center sm:justify-start gap-2 uppercase py-2 sm:py-1 border-b border-[#C5A253] hover:border-[#0A1B36] min-h-[44px] cursor-pointer"
                 >
                   THE SCHOLAR WE SEEK{' '}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -159,29 +159,29 @@ export const LegacySection: React.FC = () => {
 
         {/* Persistent Full Biography, Career Timeline & Writings */}
         <FadeInView direction="up" delay={0.2}>
-          <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-10 shadow-lg space-y-10">
+          <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-10 shadow-lg space-y-10">
             {/* Career Numbers Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#1B365D]/10 border border-[#1B365D]/10 text-center">
-              <div className="bg-white p-6">
-                <div className="font-display-title text-3xl font-bold text-[#1B365D]">273+</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#0A1B36]/10 border border-[#0A1B36]/10 text-center">
+              <div className="bg-[#ffffff] p-6">
+                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">273+</div>
                 <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Victories
                 </div>
               </div>
-              <div className="bg-white p-6">
-                <div className="font-display-title text-3xl font-bold text-[#1B365D]">250+</div>
+              <div className="bg-[#ffffff] p-6">
+                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">250+</div>
                 <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Scholarships
                 </div>
               </div>
-              <div className="bg-white p-6">
-                <div className="font-display-title text-3xl font-bold text-[#1B365D]">30 Yrs</div>
+              <div className="bg-[#ffffff] p-6">
+                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">30 Yrs</div>
                 <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Dynasty
                 </div>
               </div>
-              <div className="bg-white p-6">
-                <div className="font-display-title text-3xl font-bold text-[#1B365D]">100%</div>
+              <div className="bg-[#ffffff] p-6">
+                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">100%</div>
                 <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Graduation Focus
                 </div>
@@ -191,11 +191,11 @@ export const LegacySection: React.FC = () => {
             {/* Biography Detailed Text */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               <div className="md:col-span-5">
-                <div className="border border-[#1B365D]/15 p-2 bg-white">
+                <div className="border border-[#0A1B36]/15 p-2 bg-[#ffffff] group">
                   <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKjLJPx0bWhTcZfH2Oq7mqtwVyAo6AFwOc5EeauzLywQbr2JIvsFoh_HNDvClIXcdzzplgGmywAUu6SZG8j92p8AHkK4CJPvaAPAfKBRJgh-7RusInmibzCH5WJQgKtb6HspgZO79JTFZOulAlRfdLiKazY7S5E_sDaIiydxuzqZXw_pvsKueILm27H9ODTAZQNPgaO3cMvsO3KpSLFD0UpzJYuygzgqZqLh-l2MNW-QnV1sk-bBOib-sZjBlrjFi9dw"
                     alt="Coach William Buck Godfrey portrait"
-                    className="w-full aspect-[4/5] object-cover grayscale contrast-125"
+                    className="w-full aspect-[4/5] object-cover contrast-105 hover:grayscale group-hover:grayscale transition-all duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -204,13 +204,13 @@ export const LegacySection: React.FC = () => {
                 <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
                   Educator • Poet • Hall of Fame Coach
                 </span>
-                <h4 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-bold uppercase tracking-tight leading-snug">
+                <h4 className="font-display-title text-2xl sm:text-3xl text-[#0A1B36] font-bold uppercase tracking-tight leading-snug">
                   "The measure of our season is not our trophy case, but where our young men stand twenty years from today."
                 </h4>
-                <p className="font-body-text text-sm sm:text-base text-[#1B365D]/80 leading-relaxed font-normal">
+                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
                   Coach Godfrey was far more than an athletic icon; he was a master educator. As an English teacher and published author, he insisted that intellect, articulate communication, and civic consciousness were the true hallmarks of a champion.
                 </p>
-                <div className="flex items-center gap-2 font-tech-mono text-xs text-[#1B365D]/60 pt-2">
+                <div className="flex items-center gap-2 font-tech-mono text-xs text-[#0A1B36]/70 pt-2">
                   <MapPin className="w-4 h-4 text-[#C5A253]" />
                   <span>Southwest DeKalb High School // Decatur, GA</span>
                 </div>
@@ -218,11 +218,11 @@ export const LegacySection: React.FC = () => {
             </div>
 
             {/* Timeline Milestones (No all-caps in chronology) */}
-            <div className="space-y-6 pt-4 border-t border-[#1B365D]/10">
+            <div className="space-y-6 pt-4 border-t border-[#0A1B36]/10">
               <span className="font-tech-mono text-xs font-bold tracking-[0.25em] text-[#C5A253] uppercase block">
                 Chronology // Career Milestones
               </span>
-              <div className="space-y-4 border-l border-[#1B365D]/20 pl-6 ml-2">
+              <div className="space-y-4 border-l border-[#0A1B36]/20 pl-6 ml-2">
                 {MILESTONES.map((m, idx) => (
                   <div key={idx} className="relative group">
                     <div className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 bg-[#C5A253]" />
@@ -230,11 +230,11 @@ export const LegacySection: React.FC = () => {
                       <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253]">
                         {m.year}
                       </span>
-                      <h5 className="font-display-title text-base sm:text-lg text-[#1B365D] font-bold tracking-tight">
+                      <h5 className="font-display-title text-base sm:text-lg text-[#0A1B36] font-bold tracking-tight">
                         {m.title}
                       </h5>
                     </div>
-                    <p className="font-body-text text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+                    <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                       {m.description}
                     </p>
                   </div>
@@ -243,17 +243,17 @@ export const LegacySection: React.FC = () => {
             </div>
 
             {/* Coach's Famous Writing & Creed (No all-caps in quote) */}
-            <div className="p-6 bg-white border-l-4 border-[#C5A253] border border-[#1B365D]/10">
+            <div className="p-6 bg-[#ffffff] border-l-4 border-[#C5A253] border border-[#0A1B36]/10">
               <div className="flex items-center gap-2 mb-3">
                 <BookOpen className="w-4 h-4 text-[#C5A253]" />
-                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#1B365D] uppercase">
+                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
                   The Literary Coach
                 </span>
               </div>
-              <p className="font-display-title text-base sm:text-lg text-[#1B365D]/90 font-bold leading-relaxed mb-3">
+              <p className="font-display-title text-base sm:text-lg text-[#0A1B36] font-bold leading-relaxed mb-3">
                 "We run not only to score points against our opponents, but to outrun ignorance, outrun poverty, and outrun the low expectations others might have set for us."
               </p>
-              <p className="font-tech-mono text-[10px] text-[#1B365D]/60 uppercase tracking-widest">
+              <p className="font-tech-mono text-[10px] text-[#0A1B36]/70 uppercase tracking-widest">
                 — Coach Godfrey's Essays &amp; Speeches
               </p>
             </div>

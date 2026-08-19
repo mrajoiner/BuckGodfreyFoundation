@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-28 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex items-center bg-white"
+      className="relative min-h-[90vh] md:min-h-[94vh] pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-28 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex items-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
@@ -67,7 +67,7 @@ export const HeroSection: React.FC = () => {
           <FadeInView direction="up" delay={0.2} distance={24}>
             <h1
               id="hero-main-title"
-              className="font-display-title text-3xl sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[84px] leading-[0.94] sm:leading-[0.9] tracking-[-0.03em] text-[#1B365D] uppercase mb-6 sm:mb-8 max-w-2xl font-bold"
+              className="font-display-title text-3xl sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[84px] leading-[0.94] sm:leading-[0.9] tracking-[-0.03em] text-[#0A1B36] uppercase mb-6 sm:mb-8 max-w-2xl font-bold"
             >
               BUILDING A LEGACY.
               <br />
@@ -80,10 +80,10 @@ export const HeroSection: React.FC = () => {
 
           {/* Lead Quote Paragraph */}
           <FadeInView direction="up" delay={0.3} distance={20}>
-            <div className="border-l-2 border-[#C5A253] pl-4 sm:pl-6 py-2.5 sm:py-3 mb-8 sm:mb-10 max-w-2xl bg-white border border-[#1B365D]/10">
+            <div className="border-l-2 border-[#C5A253] pl-4 sm:pl-6 py-2.5 sm:py-3 mb-8 sm:mb-10 max-w-2xl bg-[#ffffff] border border-[#0A1B36]/10">
               <p
                 id="hero-subtext"
-                className="font-body-text text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-[#1B365D]/80 font-normal"
+                className="font-body-text text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-[#0A1B36]/90 font-medium"
               >
                 Coach William 'Buck' Godfrey dedicated his life to developing champions in the classroom, on the field, and in life. As an educator, coach, mentor, author, and community leader, he believed that greatness was cultivated through discipline, character, service, and an unwavering commitment to excellence.
               </p>
@@ -97,7 +97,7 @@ export const HeroSection: React.FC = () => {
                 <button
                   id="hero-cta-support"
                   onClick={() => scrollToSection('donate')}
-                  className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] bg-[#1B365D] text-white py-4 px-6 sm:px-8 hover:bg-[#C5A253] hover:text-[#1B365D] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center"
+                  className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-6 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center"
                 >
                   SUPPORT THE LEGACY
                 </button>
@@ -105,7 +105,7 @@ export const HeroSection: React.FC = () => {
                 <button
                   id="hero-cta-discover"
                   onClick={() => scrollToSection('legacy')}
-                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] border border-[#1B365D]/20 text-[#1B365D] hover:border-[#1B365D] hover:bg-[#F8FAFC] transition-all py-4 px-5 sm:px-6 flex items-center justify-center gap-2 uppercase cursor-pointer min-h-[48px]"
+                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] border border-[#0A1B36]/25 text-[#0A1B36] hover:border-[#0A1B36] hover:bg-[#ffffff] transition-all py-4 px-5 sm:px-6 flex items-center justify-center gap-2 uppercase cursor-pointer min-h-[48px]"
                 >
                   DISCOVER HIS LEGACY{' '}
                   <ArrowDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-1 text-[#C5A253]" />
@@ -114,8 +114,8 @@ export const HeroSection: React.FC = () => {
 
               {/* Current Phase Accent (Desktop) */}
               <div className="hidden lg:flex items-baseline gap-3 shrink-0">
-                <div className="font-display-title text-4xl font-light italic text-[#1B365D]/30">01</div>
-                <div className="w-12 xl:w-16 h-[1px] bg-[#1B365D]/20 mb-2"></div>
+                <div className="font-display-title text-4xl font-light italic text-[#0A1B36]/30">01</div>
+                <div className="w-12 xl:w-16 h-[1px] bg-[#0A1B36]/20 mb-2"></div>
                 <div className="font-tech-mono text-[10px] uppercase tracking-widest text-[#C5A253] font-bold">
                   ACTIVE HBCU ENDOWMENT
                 </div>
@@ -130,24 +130,24 @@ export const HeroSection: React.FC = () => {
             <motion.div
               style={{ y: portraitY }}
               id="hero-portrait-card"
-              className="relative w-full aspect-[3/4] border border-[#1B365D]/15 p-2.5 sm:p-3 bg-white shadow-2xl group transform-gpu"
+              className="relative w-full aspect-[3/4] border border-[#0A1B36]/15 p-2.5 sm:p-3 bg-[#ffffff] shadow-2xl group transform-gpu"
             >
-              <div className="relative w-full h-full overflow-hidden bg-white">
+              <div className="relative w-full h-full overflow-hidden bg-[#ffffff]">
                 <img
                   id="hero-portrait-img"
-                  className="w-full h-full object-cover contrast-105 brightness-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover contrast-105 brightness-100 group-hover:grayscale group-hover:scale-105 transition-all duration-700 ease-out"
                   alt="Coach William Buck Godfrey smiling in suit with medal in front of Hall of Fame bronze wall plaques"
                   src={buckHallOfFameImg}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1B365D]/20 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1B36]/20 via-transparent to-transparent"></div>
               </div>
 
               {/* Parallax Plaque Badge */}
               <motion.div
                 style={{ y: badgeY }}
                 id="hero-est-badge"
-                className="absolute -bottom-3 -left-3 sm:-bottom-5 sm:-left-5 bg-white px-3.5 py-2.5 sm:px-5 sm:py-3.5 border border-[#1B365D]/15 font-tech-mono text-[10px] sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#C5A253] shadow-lg flex items-center gap-2"
+                className="absolute -bottom-3 -left-3 sm:-bottom-5 sm:-left-5 bg-[#ffffff] px-3.5 py-2.5 sm:px-5 sm:py-3.5 border border-[#0A1B36]/15 font-tech-mono text-[10px] sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] text-[#C5A253] shadow-lg flex items-center gap-2"
               >
                 <div className="w-2 h-2 rounded-full bg-[#C5A253] animate-pulse"></div>
                 HALL OF FAME INDUCTEE

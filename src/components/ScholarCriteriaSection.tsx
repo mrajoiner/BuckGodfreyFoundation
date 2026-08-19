@@ -69,7 +69,7 @@ export const ScholarCriteriaSection: React.FC = () => {
     <section
       ref={containerRef}
       id="scholar"
-      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-white border-t border-[#1B365D]/10"
+      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
     >
       {/* Background Watermark */}
       <motion.div
@@ -85,10 +85,10 @@ export const ScholarCriteriaSection: React.FC = () => {
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
               SELECTION STANDARDS
             </span>
-            <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#1B365D]">
+            <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
               THE SCHOLAR WE SEEK
             </h2>
-            <p className="font-body-text text-sm sm:text-base md:text-lg text-[#1B365D]/80 leading-relaxed font-normal">
+            <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
               Recipients of the William Buck Godfrey Legacy Scholarship embody the core principles Coach Godfrey cultivated across four decades of leadership.
             </p>
           </div>
@@ -98,15 +98,15 @@ export const ScholarCriteriaSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CRITERIA_DATA.map((item, index) => (
             <FadeInView key={item.number} direction="up" delay={0.08 * (index + 1)}>
-              <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all h-full flex flex-col justify-between">
+              <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all h-full flex flex-col justify-between">
                 <div>
                   <span className="font-display-title text-3xl font-bold text-[#C5A253] block mb-2">
                     {item.number}
                   </span>
-                  <h3 className="font-display-title text-xl font-bold uppercase text-[#1B365D] mb-2">
+                  <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36] mb-2">
                     {item.title}
                   </h3>
-                  <p className="font-body-text text-xs sm:text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+                  <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                     {item.description}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export const ScholarCriteriaSection: React.FC = () => {
           <div className="text-center pt-6">
             <button
               onClick={scrollToApply}
-              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#1B365D] text-white py-4 px-10 hover:bg-[#C5A253] hover:text-[#1B365D] transition-all uppercase inline-flex items-center gap-2 cursor-pointer shadow-md"
+              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase inline-flex items-center gap-2 cursor-pointer shadow-md"
             >
               <span>SUBMIT APPLICATION</span>
               <ArrowRight className="w-4 h-4" />

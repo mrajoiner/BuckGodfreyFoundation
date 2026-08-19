@@ -2,14 +2,14 @@
 
 @theme {
   --color-canvas: #FFFFFF;
-  --color-card-light: #F8FAFC;
-  --color-card-border: rgba(27, 54, 93, 0.12);
+  --color-card-light: #FFFFFF;
+  --color-card-border: rgba(10, 27, 54, 0.12);
   --color-accent: #C5A253;
   --color-accent-hover: #b48e3d;
-  --color-dark-blue: #1B365D;
-  --color-navy: #1B365D;
-  --color-muted-text: rgba(27, 54, 93, 0.7);
-  --color-subtle-text: rgba(27, 54, 93, 0.45);
+  --color-dark-blue: #0A1B36;
+  --color-navy: #0A1B36;
+  --color-muted-text: rgba(10, 27, 54, 0.8);
+  --color-subtle-text: rgba(10, 27, 54, 0.55);
 
   --font-display: "Playfair Display", Georgia, serif;
   --font-sans: "Raleway", sans-serif;
@@ -29,16 +29,16 @@
     font-family: 'JetBrains Mono', monospace;
   }
   .hairline-dark-y {
-    border-left: 1px solid rgba(27, 54, 93, 0.15);
+    border-left: 1px solid rgba(10, 27, 54, 0.15);
   }
   .hairline-dark-x {
-    border-bottom: 1px solid rgba(27, 54, 93, 0.1);
+    border-bottom: 1px solid rgba(10, 27, 54, 0.1);
   }
   .hairline-accent-y {
     border-left: 2px solid #C5A253;
   }
   .ghost-border-dark {
-    border: 1px solid rgba(27, 54, 93, 0.12);
+    border: 1px solid rgba(10, 27, 54, 0.12);
   }
   .accent-glow {
     box-shadow: 0 0 50px -10px rgba(197, 162, 83, 0.25);
@@ -46,11 +46,11 @@
 
   @keyframes donate-pulse {
     0%, 100% {
-      box-shadow: 0 0 0 0 rgba(197, 162, 83, 0.7), 0 10px 25px -5px rgba(27, 54, 93, 0.4);
+      box-shadow: 0 0 0 0 rgba(197, 162, 83, 0.7), 0 10px 25px -5px rgba(10, 27, 54, 0.4);
       transform: scale(1);
     }
     50% {
-      box-shadow: 0 0 0 12px rgba(197, 162, 83, 0), 0 14px 30px -5px rgba(27, 54, 93, 0.5);
+      box-shadow: 0 0 0 12px rgba(197, 162, 83, 0), 0 14px 30px -5px rgba(10, 27, 54, 0.5);
       transform: scale(1.02);
     }
   }
@@ -78,7 +78,7 @@
 .bg-text-massive {
   font-size: clamp(5rem, 18vw, 18rem);
   line-height: 0.85;
-  color: rgba(27, 54, 93, 0.04);
+  color: rgba(10, 27, 54, 0.04);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.04em;
@@ -93,9 +93,11 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #FFFFFF;
 }
 ::-webkit-scrollbar-thumb {
   background: #C5A253;
 }
-
+::-webkit-scrollbar-thumb:hover {
+  background: #0A1B36;
+}

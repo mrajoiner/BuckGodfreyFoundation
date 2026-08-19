@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Quote } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import { FadeInView } from './FadeInView';
 
 export const FamilyQuoteSection: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -23,7 +24,7 @@ export const FamilyQuoteSection: React.FC = () => {
     <section
       ref={containerRef}
       id="family-quote"
-      className="py-20 sm:py-28 md:py-36 bg-[#ffffff] border-t border-[#1B365D]/10 overflow-hidden"
+      className="py-20 sm:py-28 md:py-36 bg-[#ffffff] border-t border-[#0A1B36]/10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-14 lg:px-20 grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
         {/* Left Family Message with Parallax */}
@@ -38,15 +39,15 @@ export const FamilyQuoteSection: React.FC = () => {
 
             <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-[#C5A253] mb-4 sm:mb-6 opacity-80" />
 
-            <blockquote
+            <h3
               id="family-quote-text"
-              className="font-display-title text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-[1.3] text-[#1B365D] mb-6 sm:mb-8 font-bold tracking-tight"
+              className="font-display-title text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#0A1B36] font-bold leading-snug sm:leading-tight mb-4 sm:mb-6"
             >
               "This scholarship is a continuation of Coach Godfrey's life's work. Every contribution helps ensure that future generations have the opportunity to learn, lead, and leave their own lasting legacy."
-            </blockquote>
+            </h3>
 
             <p
-              id="family-quote-attribution"
+              id="family-attribution"
               className="font-tech-mono text-xs sm:text-sm font-bold tracking-[0.2em] text-[#C5A253] uppercase"
             >
               — The Godfrey Family
@@ -59,18 +60,18 @@ export const FamilyQuoteSection: React.FC = () => {
           <motion.div
             style={{ y: photoY }}
             id="family-photo-card"
-            className="relative w-full max-w-sm sm:max-w-md aspect-square border border-[#1B365D]/15 p-2.5 sm:p-3 bg-white shadow-xl group transform-gpu"
+            className="relative w-full max-w-sm sm:max-w-md aspect-square border border-[#0A1B36]/15 p-2.5 sm:p-3 bg-[#ffffff] shadow-xl group transform-gpu"
           >
-            <div className="relative w-full h-full overflow-hidden bg-slate-200">
+            <div className="relative w-full h-full overflow-hidden bg-[#ffffff]">
               <img
                 id="family-celebration-img"
-                className="w-full h-full object-cover grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                className="w-full h-full object-cover contrast-105 brightness-100 group-hover:grayscale group-hover:scale-105 transition-all duration-700 ease-out"
                 alt="Warm candid photo of Coach Godfrey smiling with family and friends in a gymnasium, celebrating, vintage feel."
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbHVJNPuOGjDB181AZS259WfjjeG_zdZ9voH0hk_gnsaOus59bgdilFuPyp0Zfzq0f5avk2cwrsT0_J5Tzz23Vm_VCsu-8fk_bD51QDiMujzjxd_koHXDN2j6XoBJ3fH4RtmsOXjGggHMM2OhPuKHEbPFpJsSREyhAp2j2GO0gZWgF7DkU2wql2V_hgaZSnOfnAXdtDZjXovN8wIL271L5WEiTOpo1i573D-gDHhYr_xbTviSzl7FW51djxVCzt9aIhQ"
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="mt-3 text-right font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#1B365D]/60 uppercase">
+            <div className="mt-3 text-right font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#0A1B36]/70 uppercase">
               Coach Godfrey &amp; DeKalb Community
             </div>
           </motion.div>

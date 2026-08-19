@@ -14,7 +14,7 @@ import { PersistentDonateButton } from './components/PersistentDonateButton';
 
 export default function App() {
   return (
-    <div id="wbg-app-root" className="min-h-screen bg-white text-[#1B365D] font-['Raleway',sans-serif] flex flex-col selection:bg-[#C5A253] selection:text-[#1B365D] overflow-x-hidden relative">
+    <div id="wbg-app-root" className="min-h-screen bg-[#ffffff] text-[#0A1B36] font-['Raleway',sans-serif] flex flex-col selection:bg-[#C5A253] selection:text-[#0A1B36] overflow-x-hidden relative">
       {/* Sticky Editorial Navigation */}
       <Navigation />
 
