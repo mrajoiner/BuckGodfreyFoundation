@@ -1,79 +1,54 @@
 import React from 'react';
-import { Heart, ShieldCheck, Sparkles, Globe } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { FadeInView } from './FadeInView';
 
-interface CtaSectionProps {
-  onOpenSupport: () => void;
-}
+export const CtaSection: React.FC = () => {
+  const scrollToSection = (sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
-export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenSupport }) => {
   return (
-    <section
-      id="support"
-      className="py-28 sm:py-36 md:py-44 px-6 sm:px-10 md:px-16 lg:px-20 bg-white text-center border-t border-[#1B365D]/10 relative overflow-hidden text-[#1B365D]"
-    >
-      {/* Background Glows & Architectural Watermark */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="bg-text-massive opacity-10">
-          LEGACY
-        </span>
-      </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#C5A253] rounded-full blur-[160px] opacity-15 pointer-events-none"></div>
-
-      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#1B365D]/10 bg-[#F8FAFC] mb-8 shadow-xs">
-          <Sparkles className="w-3.5 h-3.5 text-[#C5A253]" />
-          <span className="font-tech-mono text-[11px] font-bold tracking-[0.25em] text-[#C5A253] uppercase">
-            ENDOWMENT &amp; GIVING
+    <section className="py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 bg-[#1B365D] text-white relative overflow-hidden">
+      <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+        <FadeInView direction="up" delay={0.1}>
+          <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
+            HONOR THE LEGACY • EMPOWER THE SCHOLAR
           </span>
-        </div>
+          <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight mt-3 text-white">
+            HELP SHAPE THE NEXT GENERATION
+          </h2>
+          <p className="font-body-text text-sm sm:text-base md:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto mt-4 font-normal">
+            Your support ensures Coach Godfrey’s enduring values of discipline, academic commitment, and service continue to transform lives for decades to come.
+          </p>
+        </FadeInView>
 
-        <h2
-          id="cta-headline"
-          className="font-display-title text-4xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.9] text-[#1B365D] mb-8 max-w-3xl font-black uppercase tracking-[-0.04em]"
-        >
-          SUPPORT THE <span className="text-[#C5A253]">LEGACY</span>
-        </h2>
+        <FadeInView direction="up" delay={0.2}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <button
+              onClick={() => scrollToSection('donate')}
+              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#C5A253] text-[#1B365D] py-4 px-10 hover:bg-white hover:text-[#1B365D] transition-all uppercase flex items-center justify-center gap-2 cursor-pointer shadow-lg w-full sm:w-auto"
+            >
+              <span>SUPPORT THE LEGACY</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scrollToSection('apply')}
+              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] border border-white/30 text-white py-4 px-10 hover:border-white hover:bg-white/10 transition-all uppercase cursor-pointer w-full sm:w-auto"
+            >
+              SUBMIT APPLICATION
+            </button>
+          </div>
+        </FadeInView>
 
-        <p
-          id="cta-description"
-          className="font-body-text text-lg sm:text-xl md:text-2xl text-[#1B365D]/80 mb-6 max-w-2xl mx-auto leading-relaxed font-normal"
-        >
-          Honor Coach Godfrey by investing in the next generation of HBCU leaders.
-        </p>
-
-        {/* Domain Display */}
-        <a
-          href="https://www.WilliamBuckGodfrey.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-tech-mono text-sm sm:text-base text-[#C5A253] font-bold hover:text-[#1B365D] transition-colors mb-10 tracking-[0.15em] uppercase border-b border-[#C5A253]/40 hover:border-[#1B365D] pb-1"
-        >
-          <Globe className="w-4 h-4" />
-          www.WilliamBuckGodfrey.com
-        </a>
-
-        {/* Primary Support Action Button */}
-        <div>
-          <button
-            id="cta-support-btn"
-            onClick={onOpenSupport}
-            className="font-body-text text-[11px] sm:text-xs font-bold tracking-[0.2em] bg-[#1B365D] text-white py-5 px-10 sm:px-14 hover:bg-[#C5A253] hover:text-[#1B365D] active:scale-[0.98] transition-all duration-200 uppercase cursor-pointer shadow-xl"
-          >
-            SUPPORT THE LEGACY
-          </button>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="mt-14 pt-8 border-t border-[#1B365D]/10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 font-tech-mono text-[11px] text-[#1B365D]/60 uppercase tracking-widest font-semibold">
-          <div className="flex items-center gap-2">
+        <FadeInView direction="up" delay={0.3}>
+          <div className="pt-4 flex items-center justify-center gap-2 text-xs font-tech-mono text-white/60">
             <ShieldCheck className="w-4 h-4 text-[#C5A253]" />
-            <span>501(C)(3) TAX-DEDUCTIBLE ENDOWMENT</span>
+            <span>Official 501(c)(3) Charitable Endowment • All Contributions Tax-Deductible</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-[#C5A253]" />
-            <span>100% DIRECT HBCU SCHOLAR ALLOCATION</span>
-          </div>
-        </div>
+        </FadeInView>
       </div>
     </section>
   );

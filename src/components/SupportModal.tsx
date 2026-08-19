@@ -45,9 +45,10 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
   const [frequency, setFrequency] = useState<'once' | 'monthly'>('monthly');
   const [selectedTier, setSelectedTier] = useState<number>(150);
   const [customAmount, setCustomAmount] = useState<string>('');
-  const [fundDesignation, setFundDesignation] = useState<string>('Four-Year Tuition Fund');
-  const [donorName, setDonorName] = useState<string>('');
-  const [donorEmail, setDonorEmail] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [dedication, setDedication] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -57,7 +58,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!donorName || !donorEmail) return;
+    if (!firstName || !lastName || !email) return;
     setIsSubmitted(true);
   };
 
@@ -82,7 +83,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
             <span className="font-tech-mono text-[10px] font-bold tracking-[0.2em] text-[#C5A253] uppercase block mb-1">
               TAX-DEDUCTIBLE DONATION // 501(C)(3)
             </span>
-            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-black uppercase tracking-tight">
+            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-bold uppercase tracking-tight">
               Support The Godfrey Legacy
             </h3>
           </div>
@@ -107,27 +108,33 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                 <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
                   PLEDGE CONFIRMED // ACTIVE
                 </span>
-                <h4 className="font-display-title text-3xl text-[#1B365D] uppercase tracking-tight font-black">
-                  Thank You, {donorName || 'Champion Supporter'}!
+                <h4 className="font-display-title text-3xl text-[#1B365D] uppercase tracking-tight font-bold">
+                  Thank You, {firstName} {lastName}!
                 </h4>
                 <p className="font-body-text text-sm sm:text-base text-[#1B365D]/75 max-w-md mx-auto leading-relaxed font-normal">
                   Your generous commitment of{' '}
                   <strong className="text-[#1B365D] font-bold">
                     ${currentAmount} {frequency === 'monthly' ? '/ month' : 'one-time'}
                   </strong>{' '}
-                  to the <span className="text-[#C5A253] font-bold">{fundDesignation}</span> will directly empower our next HBCU cohort.
+                  will directly empower our next HBCU cohort.
                 </p>
               </div>
 
               <div className="p-5 bg-[#F8FAFC] border border-[#1B365D]/10 text-left max-w-md mx-auto space-y-2 font-tech-mono text-xs text-[#1B365D]/75">
                 <div className="flex justify-between border-b border-[#1B365D]/10 pb-2">
                   <span className="text-[#1B365D]/50 uppercase">Donor:</span>
-                  <span className="font-bold text-[#1B365D]">{donorName}</span>
+                  <span className="font-bold text-[#1B365D]">{firstName} {lastName}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#1B365D]/10 pb-2">
-                  <span className="text-[#1B365D]/50 uppercase">Receipt Email:</span>
-                  <span className="font-bold text-[#1B365D]">{donorEmail}</span>
+                  <span className="text-[#1B365D]/50 uppercase">Email:</span>
+                  <span className="font-bold text-[#1B365D]">{email}</span>
                 </div>
+                {phone && (
+                  <div className="flex justify-between border-b border-[#1B365D]/10 pb-2">
+                    <span className="text-[#1B365D]/50 uppercase">Phone:</span>
+                    <span className="font-bold text-[#1B365D]">{phone}</span>
+                  </div>
+                )}
                 {dedication && (
                   <div className="flex justify-between border-b border-[#1B365D]/10 pb-2">
                     <span className="text-[#1B365D]/50 uppercase">Dedication:</span>
@@ -235,38 +242,38 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                 </div>
               </div>
 
-              {/* Fund Allocation */}
-              <div>
-                <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-2">
-                  ALLOCATE TO INITIATIVE
-                </label>
-                <select
-                  value={fundDesignation}
-                  onChange={(e) => setFundDesignation(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden cursor-pointer"
-                >
-                  <option value="Four-Year Tuition Fund">Four-Year HBCU Tuition Fund</option>
-                  <option value="Semester Stipends & Books">Semester Technology &amp; Book Stipend</option>
-                  <option value="Executive Mentorship Program">Executive Mentorship &amp; Leadership Development</option>
-                  <option value="General Legacy Endowment">General Legacy Endowment (Where Needed Most)</option>
-                </select>
-              </div>
-
-              {/* Donor Contact Fields */}
+              {/* Separate First Name & Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
-                    FULL NAME *
+                    FIRST NAME *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="Marcus Vance"
-                    value={donorName}
-                    onChange={(e) => setDonorName(e.target.value)}
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    LAST NAME *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+              </div>
+
+              {/* Email & Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
                     EMAIL ADDRESS *
@@ -275,8 +282,20 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                     type="email"
                     required
                     placeholder="marcus@example.com"
-                    value={donorEmail}
-                    onChange={(e) => setDonorEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    PHONE NUMBER
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="(404) 555-0199"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>

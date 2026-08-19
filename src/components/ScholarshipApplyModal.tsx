@@ -12,7 +12,8 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
 }) => {
   const [applicantType, setApplicantType] = useState<'student' | 'nominator'>('student');
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     highSchool: '',
@@ -27,7 +28,7 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email) return;
+    if (!formData.firstName || !formData.lastName || !formData.email) return;
     setIsSubmitted(true);
   };
 
@@ -52,7 +53,7 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
             <span className="font-tech-mono text-[10px] font-bold tracking-[0.2em] text-[#C5A253] uppercase block mb-1">
               4-YEAR HBCU ENDOWMENT &amp; STIPENDS
             </span>
-            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-black uppercase tracking-tight">
+            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-bold uppercase tracking-tight">
               Scholar Application &amp; Nomination
             </h3>
           </div>
@@ -74,19 +75,19 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
               </div>
               <div className="space-y-2">
                 <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
-                  APPLICATION DOSSIER INITIATED
+                  APPLICATION SUBMITTED
                 </span>
-                <h4 className="font-display-title text-3xl text-[#1B365D] uppercase tracking-tight font-black">
-                  Submission Received, {formData.fullName}!
+                <h4 className="font-display-title text-3xl text-[#1B365D] uppercase tracking-tight font-bold">
+                  Submission Received, {formData.firstName} {formData.lastName}!
                 </h4>
                 <p className="font-body-text text-sm sm:text-base text-[#1B365D]/75 max-w-md mx-auto leading-relaxed font-normal">
-                  We have dispatched complete packet instructions to <strong>{formData.email}</strong>. Our Selection Committee reviews candidates on a rolling basis.
+                  We have dispatched complete instructions to <strong>{formData.email}</strong>. Our Selection Committee reviews candidates on a rolling basis.
                 </p>
               </div>
 
               <div className="p-5 bg-[#F8FAFC] border border-[#1B365D]/10 text-left max-w-lg mx-auto space-y-2 font-tech-mono text-xs text-[#1B365D]/75">
                 <div className="font-bold text-[#1B365D] border-b border-[#1B365D]/10 pb-2 flex items-center justify-between">
-                  <span>REQUIRED EVALUATION MATERIALS:</span>
+                  <span>REQUIRED MATERIALS:</span>
                   <span className="text-[#C5A253] uppercase">ACTION REQUIRED</span>
                 </div>
                 <p>1. Official High School Transcript submission.</p>
@@ -135,21 +136,38 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
                 </div>
               </div>
 
-              {/* Personal Info */}
+              {/* Separate First Name & Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
-                    {applicantType === 'student' ? 'STUDENT FULL NAME *' : 'NOMINATED STUDENT NAME *'}
+                    {applicantType === 'student' ? 'STUDENT FIRST NAME *' : 'NOMINEE FIRST NAME *'}
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="First & Last Name"
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    {applicantType === 'student' ? 'STUDENT LAST NAME *' : 'NOMINEE LAST NAME *'}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+              </div>
+
+              {/* Email & Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
                     PRIMARY EMAIL *
@@ -160,6 +178,18 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
                     placeholder="student@school.edu"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    PHONE NUMBER
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="(404) 555-0199"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>
@@ -243,7 +273,7 @@ export const ScholarshipApplyModal: React.FC<ScholarshipApplyModalProps> = ({
                   className="w-full font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#1B365D] text-white py-4 px-8 hover:bg-[#C5A253] hover:text-[#1B365D] transition-all uppercase flex items-center justify-center gap-2 cursor-pointer shadow-lg"
                 >
                   <Send className="w-4 h-4 text-[#C5A253]" />
-                  SUBMIT SCHOLARSHIP DOSSIER
+                  SUBMIT APPLICATION
                 </button>
               </div>
             </form>

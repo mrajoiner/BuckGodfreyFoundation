@@ -1,87 +1,264 @@
-import React from 'react';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import React, { useRef } from 'react';
+import { ArrowRight, BookOpen, MapPin } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import { FadeInView } from './FadeInView';
+import { CareerMilestone } from '../types';
 
-interface LegacySectionProps {
-  onOpenLegacyModal: () => void;
-}
+const MILESTONES: CareerMilestone[] = [
+  {
+    year: '1960s',
+    title: 'HBCU Collegiate Roots at Delaware State',
+    description: 'A standout multi-sport collegiate student-athlete, earning his degree with distinction in English and Physical Education.',
+    category: 'academic',
+  },
+  {
+    year: '1983',
+    title: 'Southwest DeKalb High School Appointment',
+    description: 'Named head football coach and English literature instructor at Southwest DeKalb High School in Decatur, Georgia, establishing mandatory study tables.',
+    category: 'coaching',
+  },
+  {
+    year: '1995',
+    title: 'Class AAAA Georgia State Championship',
+    description: 'Guided the Panthers to an undefeated season and state title while graduating 100% of seniors with college or vocational placement.',
+    category: 'honor',
+  },
+  {
+    year: '1983–2012',
+    title: '30-Year Dynasty & 273 Victories',
+    description: 'Amassed 273 career victories, sending more than 250 student-athletes to collegiate football on scholarship, including numerous NFL standouts.',
+    category: 'coaching',
+  },
+  {
+    year: '2014',
+    title: 'Georgia Athletic Coaches Hall of Fame',
+    description: 'Inducted into the Georgia Athletic Coaches Association Hall of Fame and Atlanta Sports Hall of Fame.',
+    category: 'honor',
+  },
+  {
+    year: '2022',
+    title: 'William Buck Godfrey Stadium Dedication',
+    description: 'DeKalb County officially rededicated Panthersville Stadium as William Buck Godfrey Stadium to honor his monumental civic contribution.',
+    category: 'honor',
+  },
+];
 
-export const LegacySection: React.FC<LegacySectionProps> = ({ onOpenLegacyModal }) => {
+export const LegacySection: React.FC = () => {
+  const containerRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
+  const watermarkY = useTransform(smoothProgress, [0, 1], ['-20%', '30%']);
+  const photoY = useTransform(smoothProgress, [0, 1], ['-8%', '12%']);
+  const textY = useTransform(smoothProgress, [0, 1], ['5%', '-5%']);
+
+  const scrollToSection = (sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section
+      ref={containerRef}
       id="legacy"
-      className="relative py-24 sm:py-32 md:py-40 px-6 sm:px-10 md:px-16 lg:px-20 overflow-hidden border-t border-[#1B365D]/10 bg-[#FAFAFA]"
+      className="relative py-20 sm:py-28 md:py-36 lg:py-40 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden border-t border-[#1B365D]/10 bg-white"
     >
-      {/* Massive Editorial Watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-40">
+      {/* Parallax Massive Editorial Watermark */}
+      <motion.div
+        style={{ y: watermarkY }}
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-20 sm:opacity-30 select-none transform-gpu"
+      >
         LEGACY
-      </div>
+      </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
-        {/* Left Sideline Vintage Photo Frame */}
-        <div className="md:col-span-5 flex justify-center md:justify-start">
-          <div
-            id="legacy-sideline-frame"
-            className="relative w-full max-w-md aspect-[4/5] border border-[#1B365D]/15 p-3 bg-white shadow-xl group"
+      <div className="relative z-10 max-w-7xl mx-auto space-y-16 sm:space-y-20">
+        {/* Top Split: Photo & Creed */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
+          {/* Left Sideline Vintage Photo Frame */}
+          <div className="md:col-span-5 flex justify-center md:justify-start">
+            <FadeInView direction="right" delay={0.15} distance={30} className="w-full max-w-sm sm:max-w-md">
+              <motion.div
+                style={{ y: photoY }}
+                id="legacy-sideline-frame"
+                className="relative w-full aspect-[4/5] border border-[#1B365D]/15 p-2.5 sm:p-3 bg-white shadow-xl group transform-gpu"
+              >
+                <div className="relative w-full h-full overflow-hidden bg-slate-200">
+                  <img
+                    id="legacy-sideline-img"
+                    className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                    alt="Vintage photo of Coach Godfrey crouching on the sideline during a football game in a yellow shirt"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBEMjOAoy5Xno6zGiVNGYo8jhAzrnTXiN3GL5xJbGwI3QgpdNMo_u8QW0tOPZD3r_CMY1isijjkINBSxtsc_xz4Wsz2vv5MZgmxgcy6A4UV5mNw8b8WAJegLHIyXdmddQ3TNwqwhAye5QLicI2YZp0z72SeR9VmcWCgT6WSgGKWG_mHAvFr2NnsObN3lW6Ngsc5cgPXASIo-z_Z7aIbjk--Q1XJ8LIaDUtEfZEs2WNi9ZiqK1lXLAWDOVkpU0Q7dGKWg"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1B365D]/40 via-transparent to-transparent"></div>
+                </div>
+                <div className="mt-3 flex items-center justify-between font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#1B365D]/60 uppercase">
+                  <span>Southwest DeKalb Dynasty</span>
+                  <span className="text-[#C5A253] font-bold">Historic Archive</span>
+                </div>
+              </motion.div>
+            </FadeInView>
+          </div>
+
+          {/* Right Editorial Story */}
+          <motion.div
+            style={{ y: textY }}
+            className="md:col-span-7 md:pl-2 lg:pl-10 transform-gpu"
           >
-            <div className="relative w-full h-full overflow-hidden bg-slate-200">
-              <img
-                id="legacy-sideline-img"
-                className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                alt="Vintage photo of Coach Godfrey crouching on the sideline during a football game in a yellow shirt"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBEMjOAoy5Xno6zGiVNGYo8jhAzrnTXiN3GL5xJbGwI3QgpdNMo_u8QW0tOPZD3r_CMY1isijjkINBSxtsc_xz4Wsz2vv5MZgmxgcy6A4UV5mNw8b8WAJegLHIyXdmddQ3TNwqwhAye5QLicI2YZp0z72SeR9VmcWCgT6WSgGKWG_mHAvFr2NnsObN3lW6Ngsc5cgPXASIo-z_Z7aIbjk--Q1XJ8LIaDUtEfZEs2WNi9ZiqK1lXLAWDOVkpU0Q7dGKWg"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1B365D]/40 via-transparent to-transparent"></div>
+            <div className="border-l-2 border-[#C5A253] pl-5 sm:pl-8 md:pl-12 py-2">
+              <FadeInView direction="up" delay={0.1} distance={20}>
+                <span className="font-tech-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#C5A253] font-bold block mb-3">
+                  The Coach's Creed
+                </span>
+              </FadeInView>
+
+              <FadeInView direction="up" delay={0.2} distance={24}>
+                <h2
+                  id="legacy-headline"
+                  className="font-display-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] sm:leading-[0.92] text-[#1B365D] mb-6 sm:mb-8 font-bold uppercase tracking-[-0.03em]"
+                >
+                  Greatness was never just about winning.
+                </h2>
+              </FadeInView>
+
+              <FadeInView direction="up" delay={0.3} distance={20}>
+                <p className="font-body-text text-sm sm:text-base md:text-lg text-[#1B365D]/80 mb-4 sm:mb-6 leading-relaxed font-normal">
+                  For decades, Coach Godfrey built more than just winning teams; he built men of character. He understood that true excellence extends far beyond the final whistle.
+                </p>
+              </FadeInView>
+
+              <FadeInView direction="up" delay={0.4} distance={20}>
+                <p className="font-body-text text-sm sm:text-base text-[#1B365D]/70 mb-8 sm:mb-10 leading-relaxed font-normal">
+                  His approach to mentorship was rigorous, demanding, and profoundly compassionate. As an English teacher, published poet, and hall of fame coach, he demanded that students cultivate intellectual discipline and character for collegiate and life success.
+                </p>
+              </FadeInView>
+
+              <FadeInView direction="up" delay={0.5} distance={20}>
+                <button
+                  onClick={() => scrollToSection('scholar')}
+                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#1B365D] transition-colors flex items-center justify-center sm:justify-start gap-2 uppercase py-2 sm:py-1 border-b border-[#C5A253] hover:border-[#1B365D] min-h-[44px] cursor-pointer"
+                >
+                  THE SCHOLAR WE SEEK{' '}
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </FadeInView>
             </div>
-            <div className="mt-3 flex items-center justify-between font-tech-mono text-[10px] tracking-widest text-[#1B365D]/60 uppercase">
-              <span>SOUTHWEST DEKALB DYNASTY</span>
-              <span className="text-[#C5A253] font-bold">HISTORIC ARCHIVE</span>
-            </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right Editorial Story */}
-        <div className="md:col-span-7 md:pl-4 lg:pl-10">
-          <div className="border-l-2 border-[#C5A253] pl-8 sm:pl-12 py-2">
-            <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block mb-3">
-              THE COACH'S CREED
-            </span>
-            <h2
-              id="legacy-headline"
-              className="font-display-title text-3xl sm:text-5xl md:text-6xl leading-[0.92] text-[#1B365D] mb-8 font-black uppercase tracking-[-0.03em]"
-            >
-              GREATNESS WAS NEVER JUST ABOUT WINNING.
-            </h2>
+        {/* Persistent Full Biography, Career Timeline & Writings */}
+        <FadeInView direction="up" delay={0.2}>
+          <div className="bg-white border border-[#1B365D]/15 p-6 sm:p-10 shadow-lg space-y-10">
+            {/* Career Numbers Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#1B365D]/10 border border-[#1B365D]/10 text-center">
+              <div className="bg-white p-6">
+                <div className="font-display-title text-3xl font-bold text-[#1B365D]">273+</div>
+                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+                  Victories
+                </div>
+              </div>
+              <div className="bg-white p-6">
+                <div className="font-display-title text-3xl font-bold text-[#1B365D]">250+</div>
+                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+                  Scholarships
+                </div>
+              </div>
+              <div className="bg-white p-6">
+                <div className="font-display-title text-3xl font-bold text-[#1B365D]">30 Yrs</div>
+                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+                  Dynasty
+                </div>
+              </div>
+              <div className="bg-white p-6">
+                <div className="font-display-title text-3xl font-bold text-[#1B365D]">100%</div>
+                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+                  Graduation Focus
+                </div>
+              </div>
+            </div>
 
-            <p className="font-body-text text-sm sm:text-base md:text-lg text-[#1B365D]/80 mb-6 leading-relaxed font-normal">
-              For decades, Coach Godfrey built more than just winning teams; he built men of character. He understood that true excellence extends far beyond the final whistle.
-            </p>
+            {/* Biography Detailed Text */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              <div className="md:col-span-5">
+                <div className="border border-[#1B365D]/15 p-2 bg-white">
+                  <img
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKjLJPx0bWhTcZfH2Oq7mqtwVyAo6AFwOc5EeauzLywQbr2JIvsFoh_HNDvClIXcdzzplgGmywAUu6SZG8j92p8AHkK4CJPvaAPAfKBRJgh-7RusInmibzCH5WJQgKtb6HspgZO79JTFZOulAlRfdLiKazY7S5E_sDaIiydxuzqZXw_pvsKueILm27H9ODTAZQNPgaO3cMvsO3KpSLFD0UpzJYuygzgqZqLh-l2MNW-QnV1sk-bBOib-sZjBlrjFi9dw"
+                    alt="Coach William Buck Godfrey portrait"
+                    className="w-full aspect-[4/5] object-cover grayscale contrast-125"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+              <div className="md:col-span-7 space-y-4">
+                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
+                  Educator • Poet • Hall of Fame Coach
+                </span>
+                <h4 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-bold uppercase tracking-tight leading-snug">
+                  "The measure of our season is not our trophy case, but where our young men stand twenty years from today."
+                </h4>
+                <p className="font-body-text text-sm sm:text-base text-[#1B365D]/80 leading-relaxed font-normal">
+                  Coach Godfrey was far more than an athletic icon; he was a master educator. As an English teacher and published author, he insisted that intellect, articulate communication, and civic consciousness were the true hallmarks of a champion.
+                </p>
+                <div className="flex items-center gap-2 font-tech-mono text-xs text-[#1B365D]/60 pt-2">
+                  <MapPin className="w-4 h-4 text-[#C5A253]" />
+                  <span>Southwest DeKalb High School // Decatur, GA</span>
+                </div>
+              </div>
+            </div>
 
-            <p className="font-body-text text-sm sm:text-base text-[#1B365D]/60 mb-10 leading-relaxed font-normal">
-              His approach to mentorship was rigorous, demanding, and profoundly compassionate. He saw the potential in every student-athlete and demanded their very best, preparing them for the challenges of higher education and professional life.
-            </p>
+            {/* Timeline Milestones (No all-caps in chronology) */}
+            <div className="space-y-6 pt-4 border-t border-[#1B365D]/10">
+              <span className="font-tech-mono text-xs font-bold tracking-[0.25em] text-[#C5A253] uppercase block">
+                Chronology // Career Milestones
+              </span>
+              <div className="space-y-4 border-l border-[#1B365D]/20 pl-6 ml-2">
+                {MILESTONES.map((m, idx) => (
+                  <div key={idx} className="relative group">
+                    <div className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 bg-[#C5A253]" />
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-1">
+                      <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253]">
+                        {m.year}
+                      </span>
+                      <h5 className="font-display-title text-base sm:text-lg text-[#1B365D] font-bold tracking-tight">
+                        {m.title}
+                      </h5>
+                    </div>
+                    <p className="font-body-text text-sm text-[#1B365D]/75 leading-relaxed font-normal">
+                      {m.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-            <div className="flex flex-wrap items-center gap-6">
-              <a
-                id="legacy-vision-link"
-                href="#scholar"
-                className="group font-body-text text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#1B365D] transition-colors flex items-center gap-2 uppercase py-1 border-b border-[#C5A253] hover:border-[#1B365D]"
-              >
-                THE SCHOLARSHIP VISION{' '}
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-
-              <button
-                id="legacy-read-bio-btn"
-                onClick={onOpenLegacyModal}
-                className="font-body-text text-[11px] font-medium tracking-[0.2em] text-[#1B365D]/70 hover:text-[#C5A253] transition-colors flex items-center gap-2 uppercase cursor-pointer"
-              >
-                <BookOpen className="w-3.5 h-3.5 text-[#C5A253]" />
-                READ BIOGRAPHY &amp; HONORS
-              </button>
+            {/* Coach's Famous Writing & Creed (No all-caps in quote) */}
+            <div className="p-6 bg-white border-l-4 border-[#C5A253] border border-[#1B365D]/10">
+              <div className="flex items-center gap-2 mb-3">
+                <BookOpen className="w-4 h-4 text-[#C5A253]" />
+                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#1B365D] uppercase">
+                  The Literary Coach
+                </span>
+              </div>
+              <p className="font-display-title text-base sm:text-lg text-[#1B365D]/90 font-bold leading-relaxed mb-3">
+                "We run not only to score points against our opponents, but to outrun ignorance, outrun poverty, and outrun the low expectations others might have set for us."
+              </p>
+              <p className="font-tech-mono text-[10px] text-[#1B365D]/60 uppercase tracking-widest">
+                — Coach Godfrey's Essays &amp; Speeches
+              </p>
             </div>
           </div>
-        </div>
+        </FadeInView>
       </div>
     </section>
   );

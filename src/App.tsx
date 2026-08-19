@@ -1,119 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
 import { LegacySection } from './components/LegacySection';
 import { VisionSection } from './components/VisionSection';
 import { ScholarCriteriaSection } from './components/ScholarCriteriaSection';
+import { ApplicationSection } from './components/ApplicationSection';
 import { DonationSection } from './components/DonationSection';
 import { FamilyQuoteSection } from './components/FamilyQuoteSection';
+import { ContactSection } from './components/ContactSection';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
 import { PersistentDonateButton } from './components/PersistentDonateButton';
-import { SupportModal } from './components/SupportModal';
-import { LegacyDetailsModal } from './components/LegacyDetailsModal';
-import { ScholarshipApplyModal } from './components/ScholarshipApplyModal';
-import { ContactModal } from './components/ContactModal';
-import { HbcuExcellenceModal } from './components/HbcuExcellenceModal';
-import { PrivacyModal } from './components/PrivacyModal';
 
 export default function App() {
-  const [supportModalOpen, setSupportModalOpen] = useState(false);
-  const [legacyModalOpen, setLegacyModalOpen] = useState(false);
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
-  const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [hbcuModalOpen, setHbcuModalOpen] = useState(false);
-  const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
-
   return (
-    <div id="wbg-app-root" className="min-h-screen bg-white text-[#1B365D] font-['Space_Grotesk',sans-serif] flex flex-col selection:bg-[#C5A253] selection:text-[#1B365D]">
+    <div id="wbg-app-root" className="min-h-screen bg-white text-[#1B365D] font-['Raleway',sans-serif] flex flex-col selection:bg-[#C5A253] selection:text-[#1B365D] overflow-x-hidden relative">
       {/* Sticky Editorial Navigation */}
-      <Navigation
-        onOpenSupport={() => setSupportModalOpen(true)}
-        onOpenApply={() => setApplyModalOpen(true)}
-      />
+      <Navigation />
 
       {/* Persistent Flashing Donate Button */}
       <PersistentDonateButton
-        onDonateClick={() => setSupportModalOpen(true)}
+        onDonateClick={() => {
+          const donateSection = document.getElementById('donate');
+          if (donateSection) {
+            donateSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
       />
 
-      {/* Main Content Sections */}
-      <main id="main-content" className="grow">
+      {/* Main Content Sections (Completely Inline - Zero Popups) */}
+      <main id="main-content" className="grow overflow-x-hidden">
         {/* Hero Section */}
-        <HeroSection
-          onOpenSupport={() => setSupportModalOpen(true)}
-          onOpenLegacyModal={() => setLegacyModalOpen(true)}
-        />
+        <HeroSection />
 
-        {/* Legacy Section */}
-        <LegacySection
-          onOpenLegacyModal={() => setLegacyModalOpen(true)}
-        />
+        {/* Legacy Section with Inline Bio & Milestones */}
+        <LegacySection />
 
-        {/* Vision / Impact Pillars */}
-        <VisionSection
-          onOpenSupport={() => setSupportModalOpen(true)}
-          onOpenApply={() => setApplyModalOpen(true)}
-        />
+        {/* Vision / 4-Year HBCU Impact Pillars */}
+        <VisionSection />
 
-        {/* 6 Criteria: The Scholar We Seek */}
-        <ScholarCriteriaSection
-          onOpenApply={() => setApplyModalOpen(true)}
-        />
+        {/* 7 Criteria: The Scholar We Seek */}
+        <ScholarCriteriaSection />
 
-        {/* Dedicated Persuasive Donation & PayPal Section */}
-        <DonationSection
-          onOpenSupportModal={() => setSupportModalOpen(true)}
-        />
+        {/* Inline Application & Nomination Portal */}
+        <ApplicationSection />
 
-        {/* Godfrey Family Quote & Candid Photo */}
+        {/* Dedicated Persuasive Donation & PayPal Console */}
+        <DonationSection />
+
+        {/* Godfrey Family Quote & Photo */}
         <FamilyQuoteSection />
 
+        {/* Inline Contact & Inquiry Section */}
+        <ContactSection />
+
         {/* Final Dark Navy Support Banner */}
-        <CtaSection
-          onOpenSupport={() => setSupportModalOpen(true)}
-        />
+        <CtaSection />
       </main>
 
       {/* Editorial Footer */}
-      <Footer
-        onOpenContact={() => setContactModalOpen(true)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-        onOpenHbcuInfo={() => setHbcuModalOpen(true)}
-      />
-
-      {/* Interactive Modals */}
-      <SupportModal
-        isOpen={supportModalOpen}
-        onClose={() => setSupportModalOpen(false)}
-      />
-
-      <LegacyDetailsModal
-        isOpen={legacyModalOpen}
-        onClose={() => setLegacyModalOpen(false)}
-        onOpenSupport={() => setSupportModalOpen(true)}
-      />
-
-      <ScholarshipApplyModal
-        isOpen={applyModalOpen}
-        onClose={() => setApplyModalOpen(false)}
-      />
-
-      <ContactModal
-        isOpen={contactModalOpen}
-        onClose={() => setContactModalOpen(false)}
-      />
-
-      <HbcuExcellenceModal
-        isOpen={hbcuModalOpen}
-        onClose={() => setHbcuModalOpen(false)}
-      />
-
-      {/* Privacy Modal */}
-      <PrivacyModal
-        isOpen={privacyModalOpen}
-        onClose={() => setPrivacyModalOpen(false)}
-      />
+      <Footer />
     </div>
   );
 }

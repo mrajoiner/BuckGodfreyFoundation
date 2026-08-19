@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Mail, MapPin, CheckCircle2, Send } from 'lucide-react';
+import { X, CheckCircle2, Send } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -8,13 +8,20 @@ interface ContactModalProps {
 
 export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: 'Endowment & Major Giving',
+    message: '',
+  });
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    if (!formData.firstName || !formData.lastName || !formData.email) return;
     setSubmitted(true);
   };
 
@@ -33,7 +40,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
             <span className="font-tech-mono text-[10px] font-bold tracking-[0.2em] text-[#C5A253] uppercase block mb-1">
               COMMUNICATIONS // INQUIRY
             </span>
-            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-black uppercase tracking-tight">
+            <h3 className="font-display-title text-2xl sm:text-3xl text-[#1B365D] font-bold uppercase tracking-tight">
               Contact The Foundation
             </h3>
           </div>
@@ -52,9 +59,9 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               <div className="w-12 h-12 bg-[#F8FAFC] border border-[#C5A253] mx-auto flex items-center justify-center text-[#C5A253]">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <h4 className="font-display-title text-2xl text-[#1B365D] font-black uppercase">Message Dispatched</h4>
+              <h4 className="font-display-title text-2xl text-[#1B365D] font-bold uppercase">Message Dispatched</h4>
               <p className="font-body-text text-sm text-[#1B365D]/75 max-w-sm mx-auto font-normal">
-                Thank you for reaching out. A representative from the Godfrey Family &amp; Selection Board will respond promptly.
+                Thank you for reaching out, {formData.firstName}. A representative from the Godfrey Family &amp; Selection Board will respond promptly.
               </p>
               <button
                 onClick={() => {
@@ -71,17 +78,33 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
-                    NAME *
+                    FIRST NAME *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    LAST NAME *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
                     EMAIL *
@@ -92,6 +115,18 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                     placeholder="name@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
+                  />
+                </div>
+                <div>
+                  <label className="font-tech-mono text-[10px] font-bold tracking-widest text-[#1B365D]/70 uppercase block mb-1">
+                    PHONE NUMBER
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="(404) 555-0123"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full bg-[#F8FAFC] border border-[#1B365D]/15 p-3 font-body-text text-sm text-[#1B365D] focus:border-[#C5A253] focus:outline-hidden"
                   />
                 </div>
@@ -138,17 +173,6 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               </div>
             </form>
           )}
-
-          <div className="pt-4 border-t border-[#1B365D]/10 grid grid-cols-1 sm:grid-cols-2 gap-3 font-tech-mono text-xs text-[#1B365D]/60">
-            <div className="flex items-center gap-2">
-              <Mail className="w-3.5 h-3.5 text-[#C5A253]" />
-              <span>info@wbglegacy.org</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-[#C5A253]" />
-              <span>DECATUR &amp; ATLANTA, GA</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
