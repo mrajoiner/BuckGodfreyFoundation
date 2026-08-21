@@ -72,7 +72,7 @@ export const FamilyQuoteSection: React.FC = () => {
               />
             </div>
             <div className="mt-3 text-right font-tech-mono text-[9px] sm:text-[10px] tracking-widest text-[#0A1B36]/70 uppercase">
-              Coach Godfrey &amp; DeKalb Community
+              Coach Godfrey, wife Joyce &amp; The SWD Community
             </div>
           </motion.div>
         </div>

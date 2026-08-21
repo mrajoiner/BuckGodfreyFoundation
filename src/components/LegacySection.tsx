@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ArrowRight, BookOpen, MapPin } from 'lucide-react';
+import { ArrowRight, BookOpen, MapPin, Award } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import { CareerMilestone } from '../types';
@@ -30,15 +30,15 @@ const MILESTONES: CareerMilestone[] = [
     category: 'coaching',
   },
   {
-    year: '2014',
-    title: 'Georgia Athletic Coaches Hall of Fame',
-    description: 'Inducted into the Georgia Athletic Coaches Association Hall of Fame and Atlanta Sports Hall of Fame.',
+    year: 'Hall of Fame',
+    title: 'Quadruple Hall of Fame Inductee',
+    description: 'Inducted into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.',
     category: 'honor',
   },
   {
-    year: '2022',
-    title: 'William Buck Godfrey Stadium Dedication',
-    description: 'DeKalb County officially rededicated Panthersville Stadium as William Buck Godfrey Stadium to honor his monumental civic contribution.',
+    year: '2015',
+    title: 'William "Buck" Godfrey Stadium Dedication',
+    description: 'In 2015, Southwest DeKalb\'s home field was permanently renamed William "Buck" Godfrey Stadium, ensuring that generations of athletes would continue to walk in the shadow of his legacy.',
     category: 'honor',
   },
 ];
@@ -128,7 +128,7 @@ export const LegacySection: React.FC = () => {
                   id="legacy-headline"
                   className="font-display-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] sm:leading-[0.92] text-[#0A1B36] mb-6 sm:mb-8 font-bold uppercase tracking-[-0.03em]"
                 >
-                  Greatness is more than just victories.
+                  Greatness is “More Than Victories”
                 </h2>
               </FadeInView>
 
@@ -210,11 +210,27 @@ export const LegacySection: React.FC = () => {
                 <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
                   Coach Godfrey was far more than an athletic icon; he was a master educator. As an English teacher and published author, he insisted that intellect, articulate communication, and civic consciousness were the true hallmarks of a champion.
                 </p>
+                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
+                  His remarkable career earned induction into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.
+                </p>
                 <div className="flex items-center gap-2 font-tech-mono text-xs text-[#0A1B36]/70 pt-2">
                   <MapPin className="w-4 h-4 text-[#C5A253]" />
                   <span>Southwest DeKalb High School // Decatur, GA</span>
                 </div>
               </div>
+            </div>
+
+            {/* Hall of Fame Inductions Callout Box */}
+            <div className="p-6 bg-[#ffffff] border border-[#0A1B36]/15 shadow-xs space-y-3">
+              <div className="flex items-center gap-2">
+                <Award className="w-5 h-5 text-[#C5A253]" />
+                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
+                  Hall of Fame Honors &amp; Distinctions
+                </span>
+              </div>
+              <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
+                His remarkable career earned induction into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.
+              </p>
             </div>
 
             {/* Timeline Milestones (No all-caps in chronology) */}

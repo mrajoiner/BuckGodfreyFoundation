@@ -4,7 +4,6 @@ import { HeroSection } from './components/HeroSection';
 import { LegacySection } from './components/LegacySection';
 import { VisionSection } from './components/VisionSection';
 import { ScholarCriteriaSection } from './components/ScholarCriteriaSection';
-import { ApplicationSection } from './components/ApplicationSection';
 import { DonationSection } from './components/DonationSection';
 import { FamilyQuoteSection } from './components/FamilyQuoteSection';
 import { ContactSection } from './components/ContactSection';
@@ -41,9 +40,6 @@ export default function App() {
 
         {/* 7 Criteria: The Scholar We Seek */}
         <ScholarCriteriaSection />
-
-        {/* Inline Application & Nomination Portal */}
-        <ApplicationSection />
 
         {/* Dedicated Persuasive Donation & PayPal Console */}
         <DonationSection />

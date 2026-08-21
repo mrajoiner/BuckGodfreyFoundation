@@ -41,13 +41,6 @@ export const Footer: React.FC = () => {
             THE SCHOLAR
           </button>
           <button
-            id="footer-link-apply"
-            onClick={() => scrollToSection('apply')}
-            className="text-[#0A1B36]/80 hover:text-[#0A1B36] transition-colors cursor-pointer border-b border-transparent hover:border-[#0A1B36] pb-0.5"
-          >
-            APPLY
-          </button>
-          <button
             id="footer-link-donate"
             onClick={() => scrollToSection('donate')}
             className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] pb-0.5 font-bold"

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,12 +64,6 @@ export const Navigation: React.FC = () => {
             className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#0A1B36] transition-colors py-2 uppercase cursor-pointer"
           >
             THE SCHOLAR
-          </button>
-          <button
-            onClick={() => scrollToSection('apply')}
-            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors py-2 uppercase flex items-center gap-1 cursor-pointer"
-          >
-            APPLY <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={() => scrollToSection('donate')}
@@ -140,12 +134,6 @@ export const Navigation: React.FC = () => {
             className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3 px-2 border-b border-[#0A1B36]/10 uppercase"
           >
             THE SCHOLAR
-          </button>
-          <button
-            onClick={() => scrollToSection('apply')}
-            className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3 px-2 border-b border-[#0A1B36]/10 uppercase"
-          >
-            APPLY FOR SCHOLARSHIP
           </button>
           <button
             onClick={() => scrollToSection('contact')}

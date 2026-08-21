@@ -101,12 +101,6 @@ export const VisionSection: React.FC = () => {
             >
               CONTRIBUTE TO SCHOLARSHIP FUND
             </button>
-            <button
-              onClick={() => scrollToSection('apply')}
-              className="font-body-text text-xs font-bold tracking-[0.2em] border border-[#0A1B36]/25 text-[#0A1B36] py-4 px-8 hover:border-[#0A1B36] hover:bg-[#ffffff] transition-all uppercase cursor-pointer"
-            >
-              REVIEW SCHOLAR APPLICATION
-            </button>
           </div>
         </FadeInView>
       </div>

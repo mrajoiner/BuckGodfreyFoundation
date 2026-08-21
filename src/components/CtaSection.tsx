@@ -34,12 +34,6 @@ export const CtaSection: React.FC = () => {
               <span>SUPPORT THE LEGACY</span>
               <ArrowRight className="w-4 h-4" />
             </button>
-            <button
-              onClick={() => scrollToSection('apply')}
-              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] border border-white/30 text-white py-4 px-10 hover:border-white hover:bg-white/10 transition-all uppercase cursor-pointer w-full sm:w-auto"
-            >
-              SUBMIT APPLICATION
-            </button>
           </div>
         </FadeInView>
 

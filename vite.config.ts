@@ -5,8 +5,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-base: '/BuckGodfreyFoundation/',
-  plugins: [react(), tailwindcss()],
+    base: process.env.GITHUB_ACTIONS ? '/BuckGodfreyFoundation/' : '/',
+    plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
