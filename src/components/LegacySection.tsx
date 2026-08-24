@@ -8,8 +8,8 @@ import buckStadiumImg from '../assets/images/regenerated_image_1787587209260.png
 const MILESTONES: CareerMilestone[] = [
   {
     year: '1960s',
-    title: 'HBCU Collegiate Roots at Delaware State',
-    description: 'A standout multi-sport collegiate student-athlete, earning his degree with distinction in English and Physical Education.',
+    title: 'HBCU Collegiate Roots & Graduate Studies',
+    description: 'A standout multi-sport collegiate student-athlete at Delaware State, earning his degree with distinction in English, receiving his master\'s in Linguistics from Atlanta University.',
     category: 'academic',
   },
   {
@@ -21,7 +21,7 @@ const MILESTONES: CareerMilestone[] = [
   {
     year: '1995',
     title: 'Class AAAA Georgia State Championship',
-    description: 'Guided the Panthers to an undefeated season and state title while graduating 100% of seniors with college or vocational placement.',
+    description: 'Guided the Panthers to a 14-1 season and state title while graduating 100% of seniors with college or vocational placement.',
     category: 'honor',
   },
   {
