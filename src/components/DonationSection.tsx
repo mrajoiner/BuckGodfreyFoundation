@@ -7,19 +7,19 @@ import {
   RefreshCw,
   Lock,
   Printer,
-  RotateCcw,
-  Check
+  RotateCcw
 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 
 // ============================================================================
-// PAYPAL NATIVE BUTTON CONFIGURATION
-// Loads the standard PayPal SDK to seamlessly pass the selected/custom amount
-// directly into native PayPal & Card buttons without PayPal's generic prompt.
+// OFFICIAL PAYPAL HOSTED DONATION BUTTON CONFIGURATION
+// Renders the official PayPal hosted donation console (Button ID: TTQHDUE3H6G5G)
+// allowing donors to choose their donation amount directly through PayPal.
 // ============================================================================
 const PAYPAL_CLIENT_ID = 'BAAC2eSKrOyLlkK6hZzifFcXmWBhYKxNdu2r19GxaIFs78rFQ3ZXy9CQgH3MLCNbh0GPImjXGyMPlM5Jbg';
-const PAYPAL_SDK_URL = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&enable-funding=venmo`;
+const PAYPAL_HOSTED_BUTTON_ID = 'TTQHDUE3H6G5G';
+const PAYPAL_SDK_URL = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&components=hosted-buttons&enable-funding=venmo&currency=USD`;
 
 interface DonationSuccessData {
   transactionId: string;
@@ -29,107 +29,25 @@ interface DonationSuccessData {
   timestamp: string;
 }
 
-// Global TypeScript declarations for the standard PayPal Buttons SDK
+// Global TypeScript declarations for the PayPal HostedButtons SDK
 declare global {
   interface Window {
     paypal?: {
-      Buttons?: (options: {
-        style?: {
-          layout?: 'vertical' | 'horizontal';
-          color?: 'gold' | 'blue' | 'silver' | 'white' | 'black';
-          shape?: 'rect' | 'pill';
-          label?: 'paypal' | 'checkout' | 'buynow' | 'pay' | 'donate';
-          tagline?: boolean;
-          height?: number;
-        };
-        createOrder: (
-          data: Record<string, unknown>,
-          actions: {
-            order: {
-              create: (payload: {
-                purchase_units: Array<{
-                  description?: string;
-                  amount: {
-                    currency_code: string;
-                    value: string;
-                  };
-                }>;
-                application_context?: {
-                  shipping_preference?: string;
-                  brand_name?: string;
-                };
-              }) => Promise<string>;
-            };
-          }
-        ) => Promise<string>;
-        onApprove: (
-          data: { orderID: string; payerID?: string },
-          actions: {
-            order: {
-              capture: () => Promise<{
-                id: string;
-                status: string;
-                payer?: {
-                  name?: {
-                    given_name?: string;
-                    surname?: string;
-                  };
-                  email_address?: string;
-                };
-              }>;
-            };
-          }
-        ) => Promise<void>;
-        onCancel?: (data: Record<string, unknown>) => void;
-        onError?: (err: unknown) => void;
+      HostedButtons?: (options: { 
+        hostedButtonId: string;
+        onApprove?: (data: { orderID: string; payerID?: string }) => void;
       }) => {
         render: (selectorOrElement: string | HTMLElement) => Promise<void>;
       };
-      HostedButtons?: (options: { hostedButtonId: string }) => {
+      Buttons?: (options: unknown) => {
         render: (selectorOrElement: string | HTMLElement) => Promise<void>;
       };
     };
   }
 }
 
-interface SuggestedTier {
-  amount: number;
-  label: string;
-  badge?: string;
-}
-
-const SUGGESTED_TIERS: SuggestedTier[] = [
-  {
-    amount: 25,
-    label: 'Course Materials',
-  },
-  {
-    amount: 50,
-    label: 'Campus Technology',
-  },
-  {
-    amount: 100,
-    label: 'Scholar Sustainer',
-    badge: 'MOST POPULAR',
-  },
-  {
-    amount: 250,
-    label: 'STEM & Academic Grant',
-  },
-  {
-    amount: 500,
-    label: 'Semester Fellow',
-    badge: 'HIGH IMPACT',
-  },
-];
-
 export const DonationSection: React.FC = () => {
-  // Donation selection state
-  const [selectedPreset, setSelectedPreset] = useState<number | 'other'>(100);
-  const [customAmountInput, setCustomAmountInput] = useState<string>('');
-  const [customAmountError, setCustomAmountError] = useState<string | null>(null);
-
-  // Completed donation state
+  // Completed donation state (if captured)
   const [completedDonation, setCompletedDonation] = useState<DonationSuccessData | null>(null);
 
   // PayPal SDK loading & rendering state
@@ -138,7 +56,6 @@ export const DonationSection: React.FC = () => {
 
   const containerRef = useRef<HTMLElement>(null);
   const paypalHostRef = useRef<HTMLDivElement>(null);
-  const effectiveAmountRef = useRef<number | null>(100);
 
   // Parallax scroll effects
   const { scrollYProgress } = useScroll({
@@ -154,47 +71,10 @@ export const DonationSection: React.FC = () => {
 
   const watermarkY = useTransform(smoothProgress, [0, 1], ['-15%', '25%']);
 
-  // Validate custom amount
-  const handleCustomAmountChange = (value: string) => {
-    // Strip dollar sign or spaces if pasted
-    const cleanValue = value.replace(/^\$/, '').trim();
-    setCustomAmountInput(cleanValue);
-
-    if (cleanValue === '') {
-      setCustomAmountError('Please enter a valid contribution amount.');
-      return;
-    }
-
-    // Must be a valid positive number
-    const num = Number(cleanValue);
-    if (isNaN(num)) {
-      setCustomAmountError('Please enter numbers only (e.g. 150).');
-    } else if (num <= 0) {
-      setCustomAmountError('Donation amount must be greater than $0.');
-    } else if (!/^\d+(\.\d{1,2})?$/.test(cleanValue)) {
-      setCustomAmountError('Please enter a valid dollar amount (up to 2 decimal places).');
-    } else {
-      setCustomAmountError(null);
-    }
-  };
-
-  // Compute active effective dollar amount
-  const effectiveAmount: number | null = 
-    selectedPreset === 'other'
-      ? customAmountError || !customAmountInput
-        ? null
-        : parseFloat(customAmountInput)
-      : selectedPreset;
-
-  // Keep ref up to date for PayPal order creation
-  useEffect(() => {
-    effectiveAmountRef.current = effectiveAmount;
-  }, [effectiveAmount]);
-
   // ==========================================================================
-  // NATIVE PAYPAL SDK LOADER & RENDERER
-  // Loads standard PayPal Buttons so selected/custom amount links seamlessly
-  // without displaying PayPal's generic "Enter your own amount" section.
+  // PAYPAL HOSTED BUTTONS LOADER & RENDERER
+  // Loads the official PayPal HostedButtons SDK so donors can select their
+  // desired gift amount and complete payments directly through PayPal.
   // ==========================================================================
   const loadAndRenderPayPal = () => {
     setSdkStatus('loading');
@@ -205,103 +85,36 @@ export const DonationSection: React.FC = () => {
         const hostEl = paypalHostRef.current;
         if (!hostEl) return;
 
-        // Clear existing child elements to prevent duplicate buttons
+        // Clear existing child elements before mounting
         hostEl.innerHTML = '';
 
-        if (!window.paypal?.Buttons) {
-          throw new Error('PayPal Buttons SDK not found on window object.');
+        if (!window.paypal?.HostedButtons) {
+          throw new Error('PayPal HostedButtons SDK not initialized.');
         }
 
         window.paypal
-          .Buttons({
-            style: {
-              layout: 'vertical',
-              color: 'gold',
-              shape: 'rect',
-              label: 'donate',
-              tagline: false,
-              height: 48,
-            },
-            createOrder: (_data, actions) => {
-              const currentVal = effectiveAmountRef.current;
-              if (!currentVal || currentVal <= 0) {
-                return Promise.reject(new Error('Please choose or enter a valid contribution amount.'));
-              }
-
-              return actions.order.create({
-                purchase_units: [
-                  {
-                    description: 'William Buck Godfrey Legacy Scholarship Contribution (In Partnership with Sporty Girls, Inc.)',
-                    amount: {
-                      currency_code: 'USD',
-                      value: currentVal.toFixed(2),
-                    },
-                  },
-                ],
-                application_context: {
-                  shipping_preference: 'NO_SHIPPING',
-                  brand_name: 'William Buck Godfrey Legacy Scholarship',
-                },
-              });
-            },
-            onApprove: async (data, actions) => {
-              try {
-                const details = await actions.order.capture();
-                const firstName = details.payer?.name?.given_name || '';
-                const lastName = details.payer?.name?.surname || '';
-                const fullName = `${firstName} ${lastName}`.trim() || 'Generous Donor';
-
-                setCompletedDonation({
-                  transactionId: details.id || data.orderID || `WBG-${Date.now().toString(36).toUpperCase()}`,
-                  donorName: fullName,
-                  email: details.payer?.email_address || '',
-                  amount: effectiveAmountRef.current || 100,
-                  timestamp: new Date().toLocaleString('en-US', {
-                    dateStyle: 'full',
-                    timeStyle: 'short',
-                  }),
-                });
-              } catch (err) {
-                console.error('PayPal capture error:', err);
-                setCompletedDonation({
-                  transactionId: data.orderID || `WBG-${Date.now().toString(36).toUpperCase()}`,
-                  donorName: 'Generous Donor',
-                  email: '',
-                  amount: effectiveAmountRef.current || 100,
-                  timestamp: new Date().toLocaleString('en-US', {
-                    dateStyle: 'full',
-                    timeStyle: 'short',
-                  }),
-                });
-              }
-            },
-            onCancel: () => {
-              console.log('PayPal checkout window cancelled by donor.');
-            },
-            onError: (err) => {
-              console.error('PayPal button error:', err);
-              setSdkErrorMessage('PayPal payment window encountered an error. Please try again.');
-            },
+          .HostedButtons({
+            hostedButtonId: PAYPAL_HOSTED_BUTTON_ID,
           })
           .render(hostEl)
           .then(() => {
             setSdkStatus('ready');
           })
           .catch((err: Error) => {
-            console.error('PayPal button render error:', err);
-            setSdkErrorMessage(err.message || 'Unable to render PayPal payment options.');
+            console.error('PayPal HostedButtons render error:', err);
+            setSdkErrorMessage(err.message || 'Unable to load PayPal donation console.');
             setSdkStatus('error');
           });
       } catch (err: unknown) {
         const error = err as Error;
         console.error('PayPal initialization error:', error);
-        setSdkErrorMessage(error.message || 'Failed to initialize PayPal checkout.');
+        setSdkErrorMessage(error.message || 'Failed to initialize PayPal donation console.');
         setSdkStatus('error');
       }
     };
 
     // If SDK is already ready on window
-    if (window.paypal?.Buttons) {
+    if (window.paypal?.HostedButtons) {
       renderButtons();
       return;
     }
@@ -316,7 +129,7 @@ export const DonationSection: React.FC = () => {
       existingScript.addEventListener(
         'error',
         () => {
-          setSdkErrorMessage('Could not load PayPal SDK. Please check your connection.');
+          setSdkErrorMessage('Could not load PayPal SDK. Please check your internet connection.');
           setSdkStatus('error');
         },
         { once: true }
@@ -356,9 +169,6 @@ export const DonationSection: React.FC = () => {
 
   const handleResetDonation = () => {
     setCompletedDonation(null);
-    setSelectedPreset(100);
-    setCustomAmountInput('');
-    setCustomAmountError(null);
     setTimeout(() => {
       loadAndRenderPayPal();
     }, 100);
@@ -468,7 +278,7 @@ export const DonationSection: React.FC = () => {
                 </div>
               </div>
             ) : (
-              /* ACTIVE DONATION SELECTION & CHECKOUT VIEW */
+              /* ACTIVE PAYPAL DONATION VIEW */
               <>
                 {/* Header / Sub-banner */}
                 <div className="border-b border-[#0A1B36]/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -477,7 +287,7 @@ export const DonationSection: React.FC = () => {
                       OFFICIAL SCHOLARSHIP CONTRIBUTION • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
                     </span>
                     <h3 className="font-display-title text-xl sm:text-2xl font-bold uppercase text-[#0A1B36]">
-                      Select Donation Amount
+                      Make a Contribution
                     </h3>
                   </div>
 
@@ -487,206 +297,53 @@ export const DonationSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Suggested Amounts Grid */}
-                <div className="space-y-3" role="group" aria-label="Suggested donation amounts">
-                  <div className="flex justify-between items-center">
-                    <label 
-                      id="amount-selection-label"
-                      className="font-tech-mono text-[10px] sm:text-[11px] font-bold tracking-widest text-[#0A1B36]/80 uppercase block"
-                    >
-                      GIFT AMOUNT (USD)
-                    </label>
-                    {effectiveAmount && (
-                      <span className="font-tech-mono text-xs font-bold text-[#0A1B36] bg-[#C5A253]/20 border border-[#C5A253] px-2.5 py-0.5">
-                        Selected: ${effectiveAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {SUGGESTED_TIERS.map((tier) => {
-                      const isSelected = selectedPreset === tier.amount;
-                      return (
-                        <button
-                          key={tier.amount}
-                          id={`preset-btn-${tier.amount}`}
-                          type="button"
-                          aria-pressed={isSelected}
-                          onClick={() => {
-                            setSelectedPreset(tier.amount);
-                            setCustomAmountError(null);
-                          }}
-                          className={`p-3.5 sm:p-4 text-center border-2 transition-all cursor-pointer flex flex-col justify-center items-center relative focus:outline-none focus:ring-2 focus:ring-[#C5A253] min-h-[72px] ${
-                            isSelected
-                              ? 'border-[#C5A253] bg-[#0A1B36]/5 text-[#0A1B36] shadow-sm font-bold ring-1 ring-[#C5A253]'
-                              : 'border-[#0A1B36]/15 bg-[#ffffff] text-[#0A1B36]/90 hover:border-[#0A1B36]/50'
-                          }`}
-                        >
-                          {tier.badge && (
-                            <span className="absolute -top-2.5 right-2 bg-[#C5A253] text-[#0A1B36] text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 shadow-xs">
-                              {tier.badge}
-                            </span>
-                          )}
-                          <span className="font-display-title text-xl sm:text-2xl font-bold">
-                            ${tier.amount}
-                          </span>
-                          <span className="font-tech-mono text-[9px] text-[#0A1B36]/70 uppercase tracking-tight mt-0.5 font-medium">
-                            {tier.label}
-                          </span>
-                        </button>
-                      );
-                    })}
-
-                    {/* Other / Custom Amount Button */}
-                    <button
-                      id="preset-btn-other"
-                      type="button"
-                      aria-pressed={selectedPreset === 'other'}
-                      onClick={() => {
-                        setSelectedPreset('other');
-                        if (!customAmountInput) {
-                          setCustomAmountInput('150');
-                          setCustomAmountError(null);
-                        }
-                      }}
-                      className={`p-3.5 sm:p-4 text-center border-2 transition-all cursor-pointer flex flex-col justify-center items-center relative focus:outline-none focus:ring-2 focus:ring-[#C5A253] min-h-[72px] ${
-                        selectedPreset === 'other'
-                          ? 'border-[#C5A253] bg-[#0A1B36]/5 text-[#0A1B36] shadow-sm font-bold ring-1 ring-[#C5A253]'
-                          : 'border-[#0A1B36]/15 bg-[#ffffff] text-[#0A1B36]/90 hover:border-[#0A1B36]/50'
-                      }`}
-                    >
-                      <span className="font-display-title text-lg sm:text-xl font-bold uppercase">
-                        Other Amount
-                      </span>
-                      <span className="font-tech-mono text-[9px] text-[#0A1B36]/70 uppercase tracking-tight mt-0.5 font-medium">
-                        Custom Gift
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Custom Amount Input Field (Native on landing page, connected directly to PayPal) */}
-                {selectedPreset === 'other' && (
-                  <div className="space-y-2 animate-in fade-in duration-200 bg-[#0A1B36]/5 p-5 border-2 border-[#C5A253]">
-                    <div className="flex justify-between items-center">
-                      <label 
-                        htmlFor="custom-donation-amount-input"
-                        className="font-tech-mono text-[10px] font-bold tracking-widest text-[#0A1B36] uppercase block"
-                      >
-                        ENTER YOUR CUSTOM AMOUNT (USD)
-                      </label>
-                      <span className="font-tech-mono text-[9px] text-[#0A1B36]/70 uppercase font-medium">
-                        Processed Directly via PayPal
-                      </span>
-                    </div>
-
-                    <div className="relative">
-                      <span 
-                        className="absolute left-3.5 top-1/2 -translate-y-1/2 font-tech-mono text-lg text-[#0A1B36] font-bold"
-                        aria-hidden="true"
-                      >
-                        $
-                      </span>
-                      <input
-                        id="custom-donation-amount-input"
-                        type="text"
-                        inputMode="decimal"
-                        autoComplete="off"
-                        placeholder="e.g. 150.00"
-                        value={customAmountInput}
-                        onChange={(e) => handleCustomAmountChange(e.target.value)}
-                        aria-invalid={!!customAmountError}
-                        aria-describedby={customAmountError ? 'custom-amount-error-msg' : undefined}
-                        className={`w-full bg-[#ffffff] border-2 pl-9 pr-4 py-3 font-tech-mono text-lg text-[#0A1B36] focus:outline-none focus:ring-2 focus:ring-[#C5A253] font-bold ${
-                          customAmountError ? 'border-red-600' : 'border-[#0A1B36]/30 focus:border-[#C5A253]'
-                        }`}
-                      />
-                    </div>
-
-                    {customAmountError ? (
-                      <p 
-                        id="custom-amount-error-msg" 
-                        role="alert"
-                        className="font-tech-mono text-xs text-red-700 font-bold flex items-center gap-1.5 pt-1"
-                      >
-                        <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                        <span>{customAmountError}</span>
-                      </p>
-                    ) : (
-                      <p className="font-tech-mono text-[10px] text-[#0A1B36]/80 flex items-center gap-1.5 pt-1">
-                        <Check className="w-3 h-3 text-[#C5A253]" />
-                        <span>Your exact custom amount of ${effectiveAmount ? effectiveAmount.toFixed(2) : '0.00'} will be charged securely below.</span>
-                      </p>
-                    )}
-                  </div>
-                )}
+                {/* Introductory Narrative */}
+                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 leading-relaxed font-medium">
+                  Select your gift amount and payment method directly through PayPal&apos;s secure donation portal below. You can contribute using a PayPal account, Venmo, or any major debit/credit card.
+                </p>
 
                 {/* ============================================================== */}
-                {/* NATIVE PAYPAL PAYMENT ACTION BUTTONS                           */}
+                {/* OFFICIAL PAYPAL HOSTED BUTTON CONTAINER                        */}
                 {/* ============================================================== */}
-                <div className="space-y-4 pt-2 border-t border-[#0A1B36]/10">
-                  <div className="flex items-center justify-between">
-                    <span className="font-tech-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#C5A253]">
-                      CHOOSE PAYMENT METHOD
-                    </span>
-                    {effectiveAmount && (
-                      <span className="font-tech-mono text-xs font-bold text-[#0A1B36]">
-                        Gift: ${effectiveAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
+                <div className="w-full flex flex-col items-center justify-center min-h-[160px] bg-[#ffffff] p-2">
+                  {/* Loading State Spinner */}
+                  {sdkStatus === 'loading' && (
+                    <div className="flex flex-col items-center justify-center py-8 space-y-3">
+                      <RefreshCw className="w-6 h-6 text-[#C5A253] animate-spin" />
+                      <span className="font-tech-mono text-xs text-[#0A1B36]/70 uppercase tracking-wider">
+                        Loading Secure PayPal Donation Console...
                       </span>
-                    )}
-                  </div>
-
-                  {/* Prevent checkout if custom amount is invalid */}
-                  {selectedPreset === 'other' && customAmountError ? (
-                    <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs font-tech-mono text-center space-y-1">
-                      <div className="font-bold flex items-center justify-center gap-1.5">
-                        <AlertCircle className="w-4 h-4" />
-                        <span>Valid Donation Amount Required</span>
-                      </div>
-                      <p className="text-[11px]">Please enter a valid dollar amount above to enable PayPal and card payments.</p>
-                    </div>
-                  ) : (
-                    <div className="w-full flex flex-col items-center justify-center min-h-[140px] bg-[#ffffff] p-2">
-                      {/* Loading State Spinner */}
-                      {sdkStatus === 'loading' && (
-                        <div className="flex flex-col items-center justify-center py-6 space-y-3">
-                          <RefreshCw className="w-6 h-6 text-[#C5A253] animate-spin" />
-                          <span className="font-tech-mono text-xs text-[#0A1B36]/70 uppercase tracking-wider">
-                            Connecting to Secure PayPal Checkout...
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Error State with Retry Button */}
-                      {sdkStatus === 'error' && (
-                        <div className="w-full p-4 bg-red-50 border border-red-200 text-center space-y-3">
-                          <div className="flex items-center justify-center gap-2 text-red-700 font-bold text-xs font-tech-mono">
-                            <AlertCircle className="w-4 h-4" />
-                            <span>{sdkErrorMessage || 'Unable to load PayPal checkout buttons.'}</span>
-                          </div>
-                          <p className="font-body-text text-xs text-red-600">
-                            Please check your network connection or browser settings and retry.
-                          </p>
-                          <button
-                            type="button"
-                            onClick={loadAndRenderPayPal}
-                            className="font-body-text text-xs font-bold tracking-wider bg-[#0A1B36] text-white py-2 px-6 hover:bg-[#C5A253] hover:text-[#0A1B36] uppercase transition-all cursor-pointer shadow-xs"
-                          >
-                            RETRY CONNECTION
-                          </button>
-                        </div>
-                      )}
-
-                      {/* Official PayPal Buttons Mount Container */}
-                      <div className="w-full max-w-md mx-auto">
-                        <div
-                          id="paypal-buttons-container"
-                          ref={paypalHostRef}
-                          className={`w-full ${sdkStatus === 'ready' ? 'block' : 'hidden'}`}
-                        />
-                      </div>
                     </div>
                   )}
+
+                  {/* Error State with Retry Button */}
+                  {sdkStatus === 'error' && (
+                    <div className="w-full max-w-md p-5 bg-red-50 border border-red-200 text-center space-y-3">
+                      <div className="flex items-center justify-center gap-2 text-red-700 font-bold text-xs font-tech-mono">
+                        <AlertCircle className="w-4 h-4" />
+                        <span>{sdkErrorMessage || 'Unable to load PayPal donation console.'}</span>
+                      </div>
+                      <p className="font-body-text text-xs text-red-600">
+                        Please check your network connection and retry.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={loadAndRenderPayPal}
+                        className="font-body-text text-xs font-bold tracking-wider bg-[#0A1B36] text-white py-2.5 px-6 hover:bg-[#C5A253] hover:text-[#0A1B36] uppercase transition-all cursor-pointer shadow-xs"
+                      >
+                        RETRY CONNECTION
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Official PayPal Hosted Buttons Mount Target */}
+                  <div className="w-full max-w-md mx-auto">
+                    <div
+                      id="paypal-container-TTQHDUE3H6G5G"
+                      ref={paypalHostRef}
+                      className={`w-full ${sdkStatus === 'ready' ? 'block' : 'hidden'}`}
+                    />
+                  </div>
                 </div>
 
                 {/* Post-Checkout Information & Policy */}
@@ -696,7 +353,7 @@ export const DonationSection: React.FC = () => {
                     <span>Thank You for Investing in Their Future</span>
                   </div>
                   <p>
-                    Your contribution helps carry Coach William Buck Godfrey’s legacy forward by investing in the next generation. Your payment is processed securely with end-to-end encryption. An official electronic tax receipt will be issued immediately upon completion.
+                    Your contribution helps carry Coach William Buck Godfrey’s legacy forward by investing in the next generation. Your payment is processed securely with end-to-end encryption. All contributions are 100% tax-deductible.
                   </p>
                 </div>
               </>
@@ -719,3 +376,4 @@ export const DonationSection: React.FC = () => {
     </section>
   );
 };
+
