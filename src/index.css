@@ -88,6 +88,26 @@
   font-family: 'Playfair Display', serif;
 }
 
+/* PayPal Hosted Button container layout fixes */
+[id^="paypal-container-"],
+#paypal-container-TTQHDUE3H6G5G {
+  width: 100% !important;
+  max-width: 460px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+[id^="paypal-container-"] > div,
+[id^="paypal-container-"] iframe,
+.paypal-hosted-button-container {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

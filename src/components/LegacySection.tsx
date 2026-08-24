@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import { ArrowRight, BookOpen, MapPin, Award } from 'lucide-react';
+import { ArrowRight, BookOpen, MapPin, Award, Landmark } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import { CareerMilestone } from '../types';
+import buckStadiumImg from '../assets/images/buck_godfrey_stadium_1787345925743.jpg';
 
 const MILESTONES: CareerMilestone[] = [
   {
@@ -231,6 +232,35 @@ export const LegacySection: React.FC = () => {
               <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                 His remarkable career earned induction into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.
               </p>
+            </div>
+
+            {/* Stadium Dedication Landmark Card */}
+            <div className="border border-[#0A1B36]/15 bg-[#ffffff] shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-12">
+              <div className="md:col-span-6 relative aspect-[16/10] md:aspect-auto overflow-hidden bg-[#0A1B36] group">
+                <img
+                  src={buckStadiumImg}
+                  alt="Coach William Buck Godfrey smiling in front of the William Buck Godfrey Stadium scoreboard"
+                  className="w-full h-full object-cover contrast-105 group-hover:scale-105 transition-all duration-700 ease-out"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-center space-y-3 border-t md:border-t-0 md:border-l border-[#0A1B36]/10">
+                <div className="flex items-center gap-2">
+                  <Landmark className="w-4 h-4 text-[#C5A253]" />
+                  <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
+                    Stadium Dedication // 2015
+                  </span>
+                </div>
+                <h4 className="font-display-title text-xl sm:text-2xl text-[#0A1B36] font-bold uppercase tracking-tight">
+                  William "Buck" Godfrey Stadium
+                </h4>
+                <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
+                  In 2015, Southwest DeKalb's home field was permanently renamed William "Buck" Godfrey Stadium, ensuring that generations of athletes would continue to walk in the shadow of his legacy.
+                </p>
+                <div className="font-tech-mono text-[10px] text-[#0A1B36]/60 uppercase tracking-wider pt-1">
+                  Decatur, Georgia • DeKalb County Athletics
+                </div>
+              </div>
             </div>
 
             {/* Timeline Milestones (No all-caps in chronology) */}
