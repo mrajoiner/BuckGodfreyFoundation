@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
             THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP
           </div>
           <p className="font-tech-mono text-[11px] text-[#C5A253] font-bold uppercase tracking-[0.2em] mt-1">
-            IN PARTNERSHIP WITH SPORTY GIRLS • EMPOWERING THE NEXT GENERATION
+            IN PARTNERSHIP WITH SPORTY GIRLS, INC. • EMPOWERING THE NEXT GENERATION
           </p>
         </div>
 
@@ -58,7 +58,7 @@ export const Footer: React.FC = () => {
 
         {/* Copyright */}
         <div className="font-tech-mono text-[10px] text-[#0A1B36]/60 tracking-widest uppercase text-center md:text-right">
-          © 2024 THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP &amp; SPORTY GIRLS.
+          © 2024 THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP &amp; SPORTY GIRLS, INC.
         </div>
       </div>
     </footer>

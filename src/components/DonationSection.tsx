@@ -231,7 +231,7 @@ export const DonationSection: React.FC = () => {
               return actions.order.create({
                 purchase_units: [
                   {
-                    description: 'William Buck Godfrey Legacy Scholarship Contribution (In Partnership with Sporty Girls)',
+                    description: 'William Buck Godfrey Legacy Scholarship Contribution (In Partnership with Sporty Girls, Inc.)',
                     amount: {
                       currency_code: 'USD',
                       value: currentVal.toFixed(2),
@@ -385,7 +385,7 @@ export const DonationSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
-              501(C)(3) SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS
+              501(C)(3) SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
             </span>
             <h2
               id="donation-section-title"
@@ -474,7 +474,7 @@ export const DonationSection: React.FC = () => {
                 <div className="border-b border-[#0A1B36]/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <span className="font-tech-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#C5A253] block mb-1">
-                      OFFICIAL SCHOLARSHIP CONTRIBUTION • IN PARTNERSHIP WITH SPORTY GIRLS
+                      OFFICIAL SCHOLARSHIP CONTRIBUTION • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
                     </span>
                     <h3 className="font-display-title text-xl sm:text-2xl font-bold uppercase text-[#0A1B36]">
                       Select Donation Amount
@@ -706,7 +706,7 @@ export const DonationSection: React.FC = () => {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between text-[10px] font-tech-mono text-[#0A1B36]/70 gap-2 border-t border-[#0A1B36]/10">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#C5A253]" />
-                <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls</span>
+                <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls, Inc.</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A253]" />

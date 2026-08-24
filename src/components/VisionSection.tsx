@@ -44,7 +44,7 @@ export const VisionSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
-              HBCU SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS
+              HBCU SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
               OUR VISION

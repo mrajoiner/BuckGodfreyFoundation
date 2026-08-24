@@ -58,7 +58,7 @@ export const HeroSection: React.FC = () => {
           <FadeInView direction="up" delay={0.1} distance={20}>
             <div className="inline-flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6 flex-wrap">
               <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#C5A253] font-bold">
-                THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP • IN PARTNERSHIP WITH SPORTY GIRLS
+                THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
               </span>
             </div>
           </FadeInView>

@@ -103,7 +103,7 @@ app.post('/api/contact', async (req, res) => {
         </div>
 
         <div style="text-align: center; border-top: 1px solid #eee; padding-top: 16px; font-size: 12px; color: #888;">
-          <p style="margin: 0;">William Buck Godfrey Legacy Scholarship in Partnership with Sporty Girls • Automated Inquiry Notification</p>
+          <p style="margin: 0;">William Buck Godfrey Legacy Scholarship in Partnership with Sporty Girls, Inc. • Automated Inquiry Notification</p>
         </div>
       </div>
     `;
@@ -120,7 +120,7 @@ app.post('/api/contact', async (req, res) => {
         <p style="font-size: 15px; line-height: 1.6; color: #0A1B36;">Dear <strong>${firstName}</strong>,</p>
 
         <p style="font-size: 14px; line-height: 1.6; color: #333;">
-          Thank you for reaching out to the <strong>William Buck Godfrey Legacy Scholarship</strong> (in partnership with Sporty Girls). We have successfully received your inquiry and our foundation team at <a href="mailto:${FOUNDATION_EMAIL}" style="color: #C5A253; font-weight: bold; text-decoration: none;">${FOUNDATION_EMAIL}</a> has been dispatched your message.
+          Thank you for reaching out to the <strong>William Buck Godfrey Legacy Scholarship</strong> (in partnership with Sporty Girls, Inc.). We have successfully received your inquiry and our foundation team at <a href="mailto:${FOUNDATION_EMAIL}" style="color: #C5A253; font-weight: bold; text-decoration: none;">${FOUNDATION_EMAIL}</a> has been dispatched your message.
         </p>
 
         <div style="background-color: #f7f8fa; border: 1px solid #0A1B36; padding: 18px; margin: 20px 0;">
@@ -162,7 +162,7 @@ app.post('/api/contact', async (req, res) => {
 
         <div style="border-top: 1px solid #eee; padding-top: 14px; font-size: 12px; color: #777; line-height: 1.5;">
           <p style="margin: 0 0 6px 0;">If you have any further questions, you may reply directly to this email or contact us at <a href="mailto:${FOUNDATION_EMAIL}" style="color: #0A1B36; font-weight: bold;">${FOUNDATION_EMAIL}</a>.</p>
-          <p style="margin: 0;">William Buck Godfrey Legacy Scholarship Foundation in Partnership with Sporty Girls • Decatur, GA • 501(c)(3) Organization</p>
+          <p style="margin: 0;">William Buck Godfrey Legacy Scholarship Foundation in Partnership with Sporty Girls, Inc. • Decatur, GA • 501(c)(3) Organization</p>
         </div>
       </div>
     `;

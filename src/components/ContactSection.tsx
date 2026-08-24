@@ -124,13 +124,13 @@ export const ContactSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block mb-2">
-              COMMUNICATIONS // IN PARTNERSHIP WITH SPORTY GIRLS
+              COMMUNICATIONS // IN PARTNERSHIP WITH SPORTY GIRLS, INC.
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl text-[#0A1B36] font-bold uppercase tracking-tight">
               Contact The Foundation
             </h2>
             <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 mt-3 font-medium">
-              In partnership with Sporty Girls, reach out regarding major gifts, scholar nominations, or alumni community initiatives.
+              In partnership with Sporty Girls, Inc., reach out regarding major gifts, scholar nominations, or alumni community initiatives.
             </p>
           </div>
         </FadeInView>

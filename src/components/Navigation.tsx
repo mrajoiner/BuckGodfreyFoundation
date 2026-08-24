@@ -41,7 +41,7 @@ export const Navigation: React.FC = () => {
             WBG LEGACY SCHOLARSHIP
           </span>
           <span className="font-tech-mono text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-[#0A1B36]/70 hidden sm:block font-medium">
-            IN HONOR OF COACH WILLIAM 'BUCK' GODFREY • IN PARTNERSHIP WITH SPORTY GIRLS
+            IN HONOR OF COACH WILLIAM 'BUCK' GODFREY • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
           </span>
         </button>
 

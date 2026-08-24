@@ -15,7 +15,7 @@ export const CtaSection: React.FC = () => {
       <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
         <FadeInView direction="up" delay={0.1}>
           <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
-            HONOR THE LEGACY • IN PARTNERSHIP WITH SPORTY GIRLS
+            HONOR THE LEGACY • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
           </span>
           <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight mt-3 text-white">
             HELP SHAPE THE NEXT GENERATION
@@ -40,7 +40,7 @@ export const CtaSection: React.FC = () => {
         <FadeInView direction="up" delay={0.3}>
           <div className="pt-4 flex items-center justify-center gap-2 text-xs font-tech-mono text-white/70">
             <ShieldCheck className="w-4 h-4 text-[#C5A253]" />
-            <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls • All Contributions Tax-Deductible</span>
+            <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls, Inc. • All Contributions Tax-Deductible</span>
           </div>
         </FadeInView>
       </div>
