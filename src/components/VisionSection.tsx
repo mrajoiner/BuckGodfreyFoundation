@@ -44,13 +44,13 @@ export const VisionSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
-              HBCU SCHOLARSHIP FUND
+              HBCU SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
               OUR VISION
             </h2>
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
-              The William Buck Godfrey Legacy Scholarship will annually award a deserving student attending a Historically Black College or University with scholarship support, including semester stipends to foster educational and personal success.
+              The William Buck Godfrey Legacy Scholarship, in partnership with Sporty Girls, Inc., will annually award a deserving student attending a Historically Black College or University with scholarship support, including semester stipends to foster educational and personal success.
             </p>
           </div>
         </FadeInView>

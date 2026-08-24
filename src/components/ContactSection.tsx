@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { 
   Send, 
   CheckCircle2, 
-  MapPin, 
   Mail, 
-  Phone, 
   RefreshCw, 
   AlertCircle, 
   Receipt, 
-  FileText,
-  ExternalLink,
-  Copy,
-  Check
+  Copy, 
+  Check 
 } from 'lucide-react';
 import { FadeInView } from './FadeInView';
 
@@ -128,13 +124,13 @@ export const ContactSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block mb-2">
-              COMMUNICATIONS // INQUIRIES
+              COMMUNICATIONS // IN PARTNERSHIP WITH SPORTY GIRLS
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl text-[#0A1B36] font-bold uppercase tracking-tight">
               Contact The Foundation
             </h2>
             <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 mt-3 font-medium">
-              Reach out regarding major gifts, scholar nominations, or alumni community initiatives.
+              In partnership with Sporty Girls, reach out regarding major gifts, scholar nominations, or alumni community initiatives.
             </p>
           </div>
         </FadeInView>
@@ -385,24 +381,6 @@ export const ContactSection: React.FC = () => {
                 </button>
               </form>
             )}
-
-            {/* Direct Contact Info Footer */}
-            <div className="mt-8 pt-6 border-t border-[#0A1B36]/10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-tech-mono text-[#0A1B36]/80">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#C5A253] shrink-0" />
-                <span>Decatur, GA</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#C5A253] shrink-0" />
-                <a href="mailto:info@rashanali.com" className="hover:text-[#C5A253] transition-colors font-bold">
-                  info@rashanali.com
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#C5A253] shrink-0" />
-                <span>(404) 378-4300</span>
-              </div>
-            </div>
           </div>
         </FadeInView>
       </div>

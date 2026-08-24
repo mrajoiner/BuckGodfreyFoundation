@@ -40,8 +40,8 @@ export const Navigation: React.FC = () => {
           <span className="font-display-title text-base sm:text-xl font-bold tracking-tight uppercase text-[#0A1B36] transition-colors group-hover:text-[#C5A253]">
             WBG LEGACY SCHOLARSHIP
           </span>
-          <span className="font-tech-mono text-[10px] tracking-[0.2em] uppercase text-[#0A1B36]/70 hidden sm:block font-medium">
-            IN HONOR OF COACH WILLIAM 'BUCK' GODFREY
+          <span className="font-tech-mono text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-[#0A1B36]/70 hidden sm:block font-medium">
+            IN HONOR OF COACH WILLIAM 'BUCK' GODFREY • IN PARTNERSHIP WITH SPORTY GIRLS
           </span>
         </button>
 
