@@ -57,7 +57,7 @@ export const PersistentDonateButton: React.FC<PersistentDonateButtonProps> = ({ 
             DONATE TO SCHOLARSHIP
           </span>
           <span className="font-tech-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-widest text-[#C5A253] group-hover:text-[#0A1B36]/80 font-bold uppercase">
-            HBCU ENDOWMENT
+            HBCU SCHOLARSHIP
           </span>
         </div>
 

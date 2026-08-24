@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { GraduationCap, Users, HeartHandshake } from 'lucide-react';
+import { Users, HeartHandshake } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 
@@ -44,32 +44,20 @@ export const VisionSection: React.FC = () => {
         <FadeInView direction="up" delay={0.1}>
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">
-              FOUR-YEAR HBCU ENDOWMENT
+              HBCU SCHOLARSHIP FUND
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
               OUR VISION
             </h2>
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
-              The William Buck Godfrey Legacy Scholarship will annually award a deserving student attending a Historically Black College or University with a full four-year scholarship, including semester stipends to support educational and personal success.
+              The William Buck Godfrey Legacy Scholarship will annually award a deserving student attending a Historically Black College or University with scholarship support, including semester stipends to foster educational and personal success.
             </p>
           </div>
         </FadeInView>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
           <FadeInView direction="up" delay={0.15}>
-            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
-              <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Four-Year HBCU Tuition</h3>
-              <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
-                Multi-year financial stipends covering tuition, housing, and instructional technology across all 4 years of college.
-              </p>
-            </div>
-          </FadeInView>
-
-          <FadeInView direction="up" delay={0.25}>
-            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
+            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all h-full">
               <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <Users className="w-6 h-6" />
               </div>
@@ -80,8 +68,8 @@ export const VisionSection: React.FC = () => {
             </div>
           </FadeInView>
 
-          <FadeInView direction="up" delay={0.35}>
-            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all">
+          <FadeInView direction="up" delay={0.25}>
+            <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all h-full">
               <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <HeartHandshake className="w-6 h-6" />
               </div>

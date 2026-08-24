@@ -117,7 +117,7 @@ export const HeroSection: React.FC = () => {
                 <div className="font-display-title text-4xl font-light italic text-[#0A1B36]/30">01</div>
                 <div className="w-12 xl:w-16 h-[1px] bg-[#0A1B36]/20 mb-2"></div>
                 <div className="font-tech-mono text-[10px] uppercase tracking-widest text-[#C5A253] font-bold">
-                  ACTIVE HBCU ENDOWMENT
+                  ACTIVE HBCU SCHOLARSHIP
                 </div>
               </div>
             </div>

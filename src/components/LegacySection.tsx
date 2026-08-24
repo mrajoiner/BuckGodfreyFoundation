@@ -3,7 +3,7 @@ import { ArrowRight, BookOpen, MapPin, Award, Landmark } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import { CareerMilestone } from '../types';
-import buckStadiumImg from '../assets/images/buck_godfrey_stadium_1787345925743.jpg';
+import buckStadiumImg from '../assets/images/regenerated_image_1787587209260.png';
 
 const MILESTONES: CareerMilestone[] = [
   {

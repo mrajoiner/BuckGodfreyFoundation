@@ -40,7 +40,7 @@ export const CtaSection: React.FC = () => {
         <FadeInView direction="up" delay={0.3}>
           <div className="pt-4 flex items-center justify-center gap-2 text-xs font-tech-mono text-white/70">
             <ShieldCheck className="w-4 h-4 text-[#C5A253]" />
-            <span>Official 501(c)(3) Charitable Endowment • All Contributions Tax-Deductible</span>
+            <span>Official 501(c)(3) Charitable Organization • All Contributions Tax-Deductible</span>
           </div>
         </FadeInView>
       </div>

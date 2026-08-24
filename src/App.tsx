@@ -35,7 +35,7 @@ export default function App() {
         {/* Legacy Section with Inline Bio & Milestones */}
         <LegacySection />
 
-        {/* Vision / 4-Year HBCU Impact Pillars */}
+        {/* Vision / HBCU Impact Pillars */}
         <VisionSection />
 
         {/* 7 Criteria: The Scholar We Seek */}
