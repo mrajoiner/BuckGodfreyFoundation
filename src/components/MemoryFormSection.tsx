@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageSquareHeart, Sparkles, ExternalLink, RefreshCw } from 'lucide-react';
+import { MessageSquareHeart, Sparkles, RefreshCw } from 'lucide-react';
 import { FadeInView } from './FadeInView';
 
 export const MemoryFormSection: React.FC = () => {
@@ -66,16 +66,6 @@ export const MemoryFormSection: React.FC = () => {
                   Official Memorial Tribute Book
                 </span>
               </div>
-              
-              <a
-                href="https://form.jotform.com/262364039457159"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-tech-mono text-[11px] font-bold text-[#C5A253] hover:text-[#0A1B36] transition-colors inline-flex items-center gap-1 uppercase"
-              >
-                <span>Open in New Tab</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
             </div>
 
             {/* Loading Indicator */}
