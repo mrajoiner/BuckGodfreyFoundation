@@ -184,7 +184,7 @@ export const DonationSection: React.FC = () => {
       {/* Editorial Background Watermark */}
       <motion.div
         style={{ y: watermarkY }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-15 sm:opacity-25 select-none transform-gpu"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-[0.025] sm:opacity-[0.035] select-none transform-gpu"
         aria-hidden="true"
       >
         LEGACY
@@ -233,7 +233,7 @@ export const DonationSection: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-[#0A1B36]/5 p-5 border border-[#0A1B36]/15 space-y-3 font-tech-mono text-xs text-[#0A1B36]">
+                <div className="bg-[#ffffff] p-5 border border-[#0A1B36]/15 space-y-3 font-tech-mono text-xs text-[#0A1B36]">
                   <div className="flex justify-between items-center border-b border-[#0A1B36]/10 pb-2">
                     <span className="text-[#0A1B36]/70 uppercase font-medium">Transaction ID:</span>
                     <span className="font-bold">{completedDonation.transactionId}</span>
@@ -291,7 +291,7 @@ export const DonationSection: React.FC = () => {
                     </h3>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs font-tech-mono text-[#0A1B36]/80 self-start sm:self-auto bg-[#0A1B36]/5 px-3 py-1.5 border border-[#0A1B36]/10">
+                  <div className="flex items-center gap-1.5 text-xs font-tech-mono text-[#0A1B36]/80 self-start sm:self-auto bg-[#ffffff] px-3 py-1.5 border border-[#0A1B36]/15">
                     <Lock className="w-3.5 h-3.5 text-[#C5A253]" />
                     <span>SSL Encrypted Checkout</span>
                   </div>
@@ -347,7 +347,7 @@ export const DonationSection: React.FC = () => {
                 </div>
 
                 {/* Post-Checkout Information & Policy */}
-                <div className="p-4 bg-[#0A1B36]/5 border border-[#0A1B36]/10 space-y-2 text-xs font-body-text text-[#0A1B36]/80 leading-relaxed font-medium">
+                <div className="p-4 bg-[#ffffff] border border-[#0A1B36]/15 space-y-2 text-xs font-body-text text-[#0A1B36]/80 leading-relaxed font-medium">
                   <div className="flex items-center gap-2 font-tech-mono text-[10px] font-bold text-[#0A1B36] uppercase tracking-wider">
                     <HeartHandshake className="w-4 h-4 text-[#C5A253]" />
                     <span>Thank You for Investing in Their Future</span>

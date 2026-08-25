@@ -156,7 +156,7 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Formal Receipt Card */}
-                <div className="bg-[#0A1B36]/5 border border-[#0A1B36]/15 p-5 sm:p-6 space-y-4">
+                <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-5 sm:p-6 space-y-4 shadow-sm">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#0A1B36]/15 pb-3">
                     <div className="flex items-center gap-2">
                       <Receipt className="w-4 h-4 text-[#C5A253]" />

@@ -78,7 +78,7 @@
 .bg-text-massive {
   font-size: clamp(5rem, 18vw, 18rem);
   line-height: 0.85;
-  color: rgba(10, 27, 54, 0.04);
+  color: rgba(10, 27, 54, 0.025);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.04em;

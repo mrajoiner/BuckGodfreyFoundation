@@ -35,7 +35,7 @@ export const VisionSection: React.FC = () => {
       {/* Background Watermark */}
       <motion.div
         style={{ y: watermarkY }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-15 sm:opacity-25 select-none transform-gpu"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-text-massive pointer-events-none opacity-[0.025] sm:opacity-[0.035] select-none transform-gpu"
       >
         VISION
       </motion.div>

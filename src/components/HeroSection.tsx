@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, ArrowRight, MessageSquareHeart } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import buckHallOfFameImg from '../assets/images/buck_hall_of_fame_1787153220868.jpg';
@@ -36,14 +36,14 @@ export const HeroSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-28 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex items-center bg-[#ffffff]"
+      className="relative min-h-[90vh] md:min-h-[94vh] pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-24 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
         style={{ y: bgWatermarkY }}
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
       >
-        <span className="bg-text-massive opacity-[0.035] sm:opacity-5 transform-gpu">
+        <span className="bg-text-massive opacity-[0.03] sm:opacity-[0.04] transform-gpu">
           GODFREY
         </span>
       </motion.div>
@@ -156,6 +156,37 @@ export const HeroSection: React.FC = () => {
           </FadeInView>
         </div>
       </div>
+
+      {/* Just Below The Fold: Branded Tribute Callout Ribbon */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full pt-10 sm:pt-14 mt-4">
+        <FadeInView direction="up" delay={0.45}>
+          <div className="bg-[#ffffff] border-2 border-[#0A1B36] p-5 sm:p-6 md:p-7 shadow-lg flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6">
+            <div className="flex items-center gap-4 text-left w-full md:w-auto">
+              <div className="w-12 h-12 shrink-0 bg-[#ffffff] border-2 border-[#C5A253] flex items-center justify-center text-[#C5A253]">
+                <MessageSquareHeart className="w-6 h-6" />
+              </div>
+              <div className="space-y-0.5">
+                <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C5A253] font-bold block">
+                  COMMUNITY REMEMBRANCE &amp; TRIBUTES
+                </span>
+                <p className="font-display-title text-base sm:text-lg md:text-xl font-bold text-[#0A1B36] uppercase tracking-tight">
+                  Tributes &amp; Stories Celebrating Coach Godfrey
+                </p>
+              </div>
+            </div>
+
+            <button
+              id="hero-share-memories-btn"
+              onClick={() => scrollToSection('memories')}
+              className="w-full md:w-auto shrink-0 font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-6 sm:px-8 md:px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase cursor-pointer shadow-md flex items-center justify-center gap-2.5 border-2 border-[#0A1B36] hover:border-[#C5A253]"
+            >
+              <span>Share Your Memories with Coach Godfrey</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </FadeInView>
+      </div>
     </section>
   );
 };
+

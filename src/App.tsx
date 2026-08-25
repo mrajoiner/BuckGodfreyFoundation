@@ -6,6 +6,7 @@ import { VisionSection } from './components/VisionSection';
 import { ScholarCriteriaSection } from './components/ScholarCriteriaSection';
 import { DonationSection } from './components/DonationSection';
 import { FamilyQuoteSection } from './components/FamilyQuoteSection';
+import { MemoryFormSection } from './components/MemoryFormSection';
 import { ContactSection } from './components/ContactSection';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
@@ -17,12 +18,12 @@ export default function App() {
       {/* Sticky Editorial Navigation */}
       <Navigation />
 
-      {/* Persistent Flashing Donate Button */}
+      {/* Persistent Floating 'Leave a Memory' Button */}
       <PersistentDonateButton
-        onDonateClick={() => {
-          const donateSection = document.getElementById('donate');
-          if (donateSection) {
-            donateSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        onMemoryClick={() => {
+          const memorySection = document.getElementById('memories');
+          if (memorySection) {
+            memorySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }}
       />
@@ -46,6 +47,9 @@ export default function App() {
 
         {/* Godfrey Family Quote & Photo */}
         <FamilyQuoteSection />
+
+        {/* Official Memorial Tribute & JotForm Embed Section */}
+        <MemoryFormSection />
 
         {/* Inline Contact & Inquiry Section */}
         <ContactSection />

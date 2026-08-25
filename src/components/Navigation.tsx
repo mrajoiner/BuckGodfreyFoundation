@@ -66,6 +66,12 @@ export const Navigation: React.FC = () => {
             THE SCHOLAR
           </button>
           <button
+            onClick={() => scrollToSection('memories')}
+            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors py-2 uppercase cursor-pointer"
+          >
+            MEMORIES
+          </button>
+          <button
             onClick={() => scrollToSection('donate')}
             className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#0A1B36] transition-colors py-2 uppercase flex items-center gap-1.5 cursor-pointer"
           >
@@ -134,6 +140,12 @@ export const Navigation: React.FC = () => {
             className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3 px-2 border-b border-[#0A1B36]/10 uppercase"
           >
             THE SCHOLAR
+          </button>
+          <button
+            onClick={() => scrollToSection('memories')}
+            className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#C5A253] py-3 px-2 border-b border-[#0A1B36]/10 uppercase"
+          >
+            MEMORIES
           </button>
           <button
             onClick={() => scrollToSection('contact')}
