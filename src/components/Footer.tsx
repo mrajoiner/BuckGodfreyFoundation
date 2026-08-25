@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
             THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP
           </div>
           <p className="font-tech-mono text-[11px] text-[#C5A253] font-bold uppercase tracking-[0.2em] mt-1">
-            IN PARTNERSHIP WITH SPORTY GIRLS, INC. • EMPOWERING THE NEXT GENERATION
+            IN PARTNERSHIP WITH SPORTY GIRLS, INC. • 501(C)(3) HBCU SCHOLARSHIP FUND
           </p>
         </div>
 
@@ -41,18 +41,18 @@ export const Footer: React.FC = () => {
             THE SCHOLAR
           </button>
           <button
+            id="footer-link-memories"
+            onClick={() => scrollToSection('memories')}
+            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] pb-0.5"
+          >
+            MEMORIES
+          </button>
+          <button
             id="footer-link-donate"
             onClick={() => scrollToSection('donate')}
             className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] pb-0.5 font-bold"
           >
             DONATE
-          </button>
-          <button
-            id="footer-link-contact"
-            onClick={() => scrollToSection('contact')}
-            className="text-[#0A1B36]/80 hover:text-[#0A1B36] transition-colors cursor-pointer border-b border-transparent hover:border-[#0A1B36] pb-0.5"
-          >
-            CONTACT
           </button>
         </div>
 

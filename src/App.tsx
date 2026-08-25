@@ -7,7 +7,6 @@ import { ScholarCriteriaSection } from './components/ScholarCriteriaSection';
 import { DonationSection } from './components/DonationSection';
 import { FamilyQuoteSection } from './components/FamilyQuoteSection';
 import { MemoryFormSection } from './components/MemoryFormSection';
-import { ContactSection } from './components/ContactSection';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
 import { PersistentDonateButton } from './components/PersistentDonateButton';
@@ -50,9 +49,6 @@ export default function App() {
 
         {/* Official Memorial Tribute & JotForm Embed Section */}
         <MemoryFormSection />
-
-        {/* Inline Contact & Inquiry Section */}
-        <ContactSection />
 
         {/* Final Dark Navy Support Banner */}
         <CtaSection />

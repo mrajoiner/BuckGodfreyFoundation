@@ -16,7 +16,8 @@ export const MemoryFormSection: React.FC = () => {
       if (args.length > 0 && args[0] === 'setHeight' && iframeRef.current) {
         const height = parseInt(args[1], 10);
         if (!isNaN(height) && height > 200) {
-          iframeRef.current.style.height = `${height + 20}px`;
+          // Adjust iframe height so the form body and submit button are fully visible
+          iframeRef.current.style.height = `${height}px`;
         }
       }
     };
@@ -40,16 +41,16 @@ export const MemoryFormSection: React.FC = () => {
             <div className="inline-flex items-center gap-2 bg-[#ffffff] px-4 py-1.5 border border-[#C5A253]">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A253]" />
               <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold">
-                COMMUNITY TRIBUTES &amp; REFLECTIONS
+                COMMUNITY TRIBUTES &amp; MEMORIES
               </span>
             </div>
 
             <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
-              Share Your Memories with Coach Godfrey
+              Share Your Memories of Coach Godfrey
             </h2>
 
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium pt-2">
-              Whether you were one of his championship student-athletes at Southwest DeKalb, a student in his classroom, a fellow educator, an athletic peer, or a friend blessed by his wisdom — we invite you to share your memories, reflections, and photographs below to honor his life and enduring impact.
+              Whether you played football for Coach Godfrey at Southwest DeKalb, learned in his English classroom, coached with him, or knew him as a mentor and friend — we welcome your stories, reflections, and photographs below to honor his life and memory.
             </p>
           </div>
         </FadeInView>
@@ -87,24 +88,26 @@ export const MemoryFormSection: React.FC = () => {
               </div>
             )}
 
-            {/* JotForm Embed Frame */}
-            <div className="w-full overflow-hidden bg-[#ffffff] min-h-[600px]">
-              <iframe
-                id="JotFormIFrame-262364039457159"
-                ref={iframeRef}
-                title="Share Your Memories with Coach Godfrey"
-                src="https://form.jotform.com/262364039457159"
-                onLoad={() => setIframeLoaded(true)}
-                allow="geolocation; microphone; camera; fullscreen"
-                style={{
-                  width: '100%',
-                  minWidth: '100%',
-                  minHeight: '680px',
-                  border: 'none',
-                  display: iframeLoaded ? 'block' : 'block',
-                }}
-                className="w-full bg-[#ffffff] transition-opacity duration-300"
-              />
+            {/* JotForm Embed Frame with Bottom Branding Crop Mask */}
+            <div className="w-full overflow-hidden bg-[#ffffff] min-h-[600px] relative pb-0">
+              <div className="overflow-hidden w-full -mb-14">
+                <iframe
+                  id="JotFormIFrame-262364039457159"
+                  ref={iframeRef}
+                  title="Share Your Memories of Coach Godfrey"
+                  src="https://form.jotform.com/262364039457159"
+                  onLoad={() => setIframeLoaded(true)}
+                  allow="geolocation; microphone; camera; fullscreen"
+                  style={{
+                    width: '100%',
+                    minWidth: '100%',
+                    minHeight: '680px',
+                    border: 'none',
+                    display: iframeLoaded ? 'block' : 'block',
+                  }}
+                  className="w-full bg-[#ffffff] transition-opacity duration-300"
+                />
+              </div>
             </div>
 
             {/* Form Footer Note */}

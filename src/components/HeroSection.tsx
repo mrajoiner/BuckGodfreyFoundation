@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-40 md:pb-24 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
+      className="relative min-h-[90vh] md:min-h-[94vh] pt-32 pb-16 sm:pt-40 sm:pb-20 md:pt-44 md:pb-24 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
@@ -69,11 +69,11 @@ export const HeroSection: React.FC = () => {
               id="hero-main-title"
               className="font-display-title text-3xl sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[84px] leading-[0.94] sm:leading-[0.9] tracking-[-0.03em] text-[#0A1B36] uppercase mb-6 sm:mb-8 max-w-2xl font-bold"
             >
-              BUILDING A LEGACY.
+              HONORING A LEGEND.
               <br />
-              EMPOWERING THE{' '}
+              SUPPORTING{' '}
               <span className="text-[#C5A253]">
-                NEXT GENERATION.
+                HBCU SCHOLARS.
               </span>
             </h1>
           </FadeInView>
@@ -85,7 +85,7 @@ export const HeroSection: React.FC = () => {
                 id="hero-subtext"
                 className="font-body-text text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-[#0A1B36]/90 font-medium"
               >
-                Coach William 'Buck' Godfrey dedicated his life to developing champions in the classroom, on the field, and in life. As an educator, coach, mentor, author, and community leader, he believed that greatness was cultivated through discipline, character, service, and an unwavering commitment to excellence.
+                Coach William 'Buck' Godfrey spent more than three decades at Southwest DeKalb High School as a head football coach, English teacher, and author. He led his teams to 273 victories and a state championship, while sending hundreds of student-athletes to college on scholarship. This fund carries his work forward by supporting students attending Historically Black Colleges and Universities.
               </p>
             </div>
           </FadeInView>
@@ -99,7 +99,7 @@ export const HeroSection: React.FC = () => {
                   onClick={() => scrollToSection('donate')}
                   className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-6 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center"
                 >
-                  SUPPORT THE LEGACY
+                  SUPPORT THE SCHOLARSHIP
                 </button>
 
                 <button
@@ -107,7 +107,7 @@ export const HeroSection: React.FC = () => {
                   onClick={() => scrollToSection('legacy')}
                   className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] border border-[#0A1B36]/25 text-[#0A1B36] hover:border-[#0A1B36] hover:bg-[#ffffff] transition-all py-4 px-5 sm:px-6 flex items-center justify-center gap-2 uppercase cursor-pointer min-h-[48px]"
                 >
-                  DISCOVER HIS LEGACY{' '}
+                  COACH GODFREY'S CAREER{' '}
                   <ArrowDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-1 text-[#C5A253]" />
                 </button>
               </div>
@@ -117,7 +117,7 @@ export const HeroSection: React.FC = () => {
                 <div className="font-display-title text-4xl font-light italic text-[#0A1B36]/30">01</div>
                 <div className="w-12 xl:w-16 h-[1px] bg-[#0A1B36]/20 mb-2"></div>
                 <div className="font-tech-mono text-[10px] uppercase tracking-widest text-[#C5A253] font-bold">
-                  ACTIVE HBCU SCHOLARSHIP
+                  HBCU SCHOLARSHIP FUND
                 </div>
               </div>
             </div>

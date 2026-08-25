@@ -47,10 +47,10 @@ export const VisionSection: React.FC = () => {
               HBCU SCHOLARSHIP FUND • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
             </span>
             <h2 className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]">
-              OUR VISION
+              THE SCHOLARSHIP
             </h2>
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
-              The William Buck Godfrey Legacy Scholarship, in partnership with Sporty Girls, Inc., annually awards deserving students attending a Historically Black College or University with scholarship support to foster educational and personal success.
+              The William Buck Godfrey Legacy Scholarship, established in partnership with Sporty Girls, Inc., provides annual financial awards to students attending Historically Black Colleges and Universities. The scholarship assists students who demonstrate academic focus, leadership, and a commitment to their community.
             </p>
           </div>
         </FadeInView>
@@ -61,9 +61,9 @@ export const VisionSection: React.FC = () => {
               <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Executive Mentorship</h3>
+              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Alumni Mentorship</h3>
               <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
-                Direct pairing with Godfrey alumni mentors in engineering, healthcare, public policy, athletics, and business.
+                Scholars are connected with Southwest DeKalb alumni and professionals in education, athletics, engineering, healthcare, and business.
               </p>
             </div>
           </FadeInView>
@@ -73,9 +73,9 @@ export const VisionSection: React.FC = () => {
               <div className="w-12 h-12 bg-[#ffffff] border border-[#C5A253] flex items-center justify-center text-[#C5A253]">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Civic Leadership</h3>
+              <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36]">Community Service</h3>
               <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
-                Scholars complete youth athletic mentorship and community tutoring projects, continuing Coach Godfrey's legacy of service.
+                Scholars take part in youth sports clinics, academic tutoring, and local volunteer initiatives, reflecting Coach Godfrey's lifelong commitment to giving back.
               </p>
             </div>
           </FadeInView>
@@ -87,7 +87,7 @@ export const VisionSection: React.FC = () => {
               onClick={() => scrollToSection('donate')}
               className="font-body-text text-xs font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase cursor-pointer shadow-md"
             >
-              CONTRIBUTE TO SCHOLARSHIP FUND
+              DONATE TO THE SCHOLARSHIP FUND
             </button>
           </div>
         </FadeInView>

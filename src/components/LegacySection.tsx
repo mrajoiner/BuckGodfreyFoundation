@@ -120,7 +120,7 @@ export const LegacySection: React.FC = () => {
             <div className="border-l-2 border-[#C5A253] pl-5 sm:pl-8 md:pl-12 py-2">
               <FadeInView direction="up" delay={0.1} distance={20}>
                 <span className="font-tech-mono text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#C5A253] font-bold block mb-3">
-                  The Coach's Creed
+                  A Standard of Excellence
                 </span>
               </FadeInView>
 
@@ -129,19 +129,19 @@ export const LegacySection: React.FC = () => {
                   id="legacy-headline"
                   className="font-display-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[0.95] sm:leading-[0.92] text-[#0A1B36] mb-6 sm:mb-8 font-bold uppercase tracking-[-0.03em]"
                 >
-                  Greatness is “More Than Victories”
+                  “More Than Victories”
                 </h2>
               </FadeInView>
 
               <FadeInView direction="up" delay={0.3} distance={20}>
                 <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 mb-4 sm:mb-6 leading-relaxed font-medium">
-                  For decades, Coach Godfrey built more than just winning teams; he built men of character. He understood that true excellence extends far beyond the final whistle.
+                  Across 30 seasons at Southwest DeKalb High School, Coach Godfrey proved that sports and academic excellence go hand in hand. To Coach Godfrey, athletics was a vehicle to prepare young men for college and adult life.
                 </p>
               </FadeInView>
 
               <FadeInView direction="up" delay={0.4} distance={20}>
                 <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 mb-8 sm:mb-10 leading-relaxed font-medium">
-                  His approach to mentorship was rigorous, demanding, and profoundly compassionate. As an English teacher, published poet, and hall of fame coach, he demanded that students cultivate intellectual discipline and character for collegiate and life success.
+                  As an English literature teacher and published writer, he instituted mandatory study tables and expected the same discipline in the classroom as on the gridiron. He helped more than 250 players earn college athletic scholarships and inspired hundreds more to pursue higher education.
                 </p>
               </FadeInView>
 
@@ -150,7 +150,7 @@ export const LegacySection: React.FC = () => {
                   onClick={() => scrollToSection('scholar')}
                   className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#0A1B36] transition-colors flex items-center justify-center sm:justify-start gap-2 uppercase py-2 sm:py-1 border-b border-[#C5A253] hover:border-[#0A1B36] min-h-[44px] cursor-pointer"
                 >
-                  THE SCHOLAR WE SEEK{' '}
+                  THE SCHOLARSHIP CRITERIA{' '}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </FadeInView>

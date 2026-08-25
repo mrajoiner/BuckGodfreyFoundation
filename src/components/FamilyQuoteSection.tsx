@@ -43,7 +43,7 @@ export const FamilyQuoteSection: React.FC = () => {
               id="family-quote-text"
               className="font-display-title text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#0A1B36] font-bold leading-snug sm:leading-tight mb-4 sm:mb-6"
             >
-              "This scholarship is a continuation of Coach Godfrey's life's work. Every contribution helps ensure that future generations have the opportunity to learn, lead, and leave their own lasting legacy."
+              "This scholarship carries forward what Coach Godfrey dedicated his life to: helping young people earn their college degrees, build strong character, and give back to their communities."
             </h3>
 
             <p

@@ -201,10 +201,10 @@ export const DonationSection: React.FC = () => {
               id="donation-section-title"
               className="font-display-title text-3xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0A1B36]"
             >
-              Invest in the Next Generation
+              Support the Scholarship Fund
             </h2>
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed max-w-2xl mx-auto font-medium">
-              Your contribution helps carry Coach William Buck Godfrey’s legacy forward by investing in the next generation of scholars, student-athletes, and leaders attending Historically Black Colleges &amp; Universities.
+              Your contribution directly funds scholarships for students attending Historically Black Colleges and Universities, continuing Coach Godfrey’s legacy of educational opportunity.
             </p>
           </div>
         </FadeInView>

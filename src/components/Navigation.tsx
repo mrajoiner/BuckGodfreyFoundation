@@ -30,18 +30,28 @@ export const Navigation: React.FC = () => {
           : 'bg-[#ffffff] border-b border-[#0A1B36]/10'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 h-20 flex items-center justify-between">
+      {/* Top Banner Line above navigation */}
+      <div
+        id="nav-top-banner"
+        className="w-full bg-[#ffffff] border-b border-[#0A1B36]/10 py-1.5 sm:py-2 px-3 sm:px-6 md:px-10 text-center"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-center">
+          <p className="font-tech-mono text-[8.5px] sm:text-[10px] md:text-[11px] uppercase tracking-[0.12em] sm:tracking-[0.18em] text-[#0A1B36] font-bold">
+            WBG LEGACY SCHOLARSHIP IN HONOR OF COACH WILLIAM 'BUCK' GODFREY{' '}
+            <span className="text-[#C5A253] font-black mx-1">•</span> IN PARTNERSHIP WITH SPORTY GIRLS, INC.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 h-16 sm:h-18 flex items-center justify-between">
         {/* Brand Logo */}
         <button
           id="nav-brand-link"
           onClick={() => scrollToSection('about')}
           className="group flex flex-col items-start focus:outline-hidden text-left cursor-pointer"
         >
-          <span className="font-display-title text-base sm:text-xl font-bold tracking-tight uppercase text-[#0A1B36] transition-colors group-hover:text-[#C5A253]">
+          <span className="font-display-title text-base sm:text-lg md:text-xl font-bold tracking-tight uppercase text-[#0A1B36] transition-colors group-hover:text-[#C5A253]">
             WBG LEGACY SCHOLARSHIP
-          </span>
-          <span className="font-tech-mono text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-[#0A1B36]/70 hidden sm:block font-medium">
-            IN HONOR OF COACH WILLIAM 'BUCK' GODFREY • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
           </span>
         </button>
 
@@ -71,30 +81,14 @@ export const Navigation: React.FC = () => {
           >
             MEMORIES
           </button>
-          <button
-            onClick={() => scrollToSection('donate')}
-            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#C5A253] hover:text-[#0A1B36] transition-colors py-2 uppercase flex items-center gap-1.5 cursor-pointer"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C5A253] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C5A253]"></span>
-            </span>
-            DONATE
-          </button>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#0A1B36] transition-colors py-2 uppercase cursor-pointer"
-          >
-            CONTACT
-          </button>
 
           {/* Primary Action Button */}
           <button
-            id="nav-btn-support-legacy"
+            id="nav-btn-donate"
             onClick={() => scrollToSection('donate')}
             className="font-body-text text-[11px] font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-2.5 px-6 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase cursor-pointer shadow-xs"
           >
-            SUPPORT THE LEGACY
+            DONATE
           </button>
         </nav>
 
@@ -104,7 +98,7 @@ export const Navigation: React.FC = () => {
             onClick={() => scrollToSection('donate')}
             className="font-body-text text-[10px] font-bold tracking-widest bg-[#C5A253] text-[#0A1B36] py-1.5 px-3 uppercase"
           >
-            SUPPORT
+            DONATE
           </button>
           <button
             id="mobile-menu-toggle-btn"
@@ -148,16 +142,10 @@ export const Navigation: React.FC = () => {
             MEMORIES
           </button>
           <button
-            onClick={() => scrollToSection('contact')}
-            className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3 px-2 border-b border-[#0A1B36]/10 uppercase"
-          >
-            CONTACT
-          </button>
-          <button
             onClick={() => scrollToSection('donate')}
             className="w-full font-body-text text-xs font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-3.5 uppercase mt-2"
           >
-            SUPPORT THE LEGACY
+            DONATE
           </button>
         </div>
       )}
