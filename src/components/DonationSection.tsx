@@ -15,7 +15,7 @@ import { FadeInView } from './FadeInView';
 // ============================================================================
 // OFFICIAL PAYPAL HOSTED DONATION BUTTON CONFIGURATION
 // Renders the official PayPal hosted donation console (Button ID: TTQHDUE3H6G5G)
-// allowing donors to choose their donation amount directly through PayPal.
+// allowing donors to contribute directly through PayPal.
 // ============================================================================
 const PAYPAL_CLIENT_ID = 'BAAC2eSKrOyLlkK6hZzifFcXmWBhYKxNdu2r19GxaIFs78rFQ3ZXy9CQgH3MLCNbh0GPImjXGyMPlM5Jbg';
 const PAYPAL_HOSTED_BUTTON_ID = 'TTQHDUE3H6G5G';
@@ -73,8 +73,8 @@ export const DonationSection: React.FC = () => {
 
   // ==========================================================================
   // PAYPAL HOSTED BUTTONS LOADER & RENDERER
-  // Loads the official PayPal HostedButtons SDK so donors can select their
-  // desired gift amount and complete payments directly through PayPal.
+  // Loads the official PayPal HostedButtons SDK so donors can complete payments
+  // directly through PayPal.
   // ==========================================================================
   const loadAndRenderPayPal = () => {
     setSdkStatus('loading');
@@ -299,7 +299,7 @@ export const DonationSection: React.FC = () => {
 
                 {/* Introductory Narrative */}
                 <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 leading-relaxed font-medium">
-                  Select your gift amount and payment method directly through PayPal&apos;s secure donation portal below. You can contribute using a PayPal account, Venmo, or any major debit/credit card.
+                  Complete your contribution securely through PayPal&apos;s donation portal below. You can contribute using a PayPal account, Venmo, or any major debit/credit card.
                 </p>
 
                 {/* ============================================================== */}

@@ -15,11 +15,3 @@ export interface CareerMilestone {
   description: string;
   category: 'coaching' | 'academic' | 'honor';
 }
-
-export interface PledgeTier {
-  id: string;
-  amount: number;
-  label: string;
-  impact: string;
-  isPopular?: boolean;
-}
