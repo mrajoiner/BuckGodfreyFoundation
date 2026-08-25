@@ -50,7 +50,7 @@ export const VisionSection: React.FC = () => {
               OUR VISION
             </h2>
             <p className="font-body-text text-sm sm:text-base md:text-lg text-[#0A1B36]/90 leading-relaxed font-medium">
-              The William Buck Godfrey Legacy Scholarship, in partnership with Sporty Girls, Inc., will annually award deserving students attending a Historically Black College or University with scholarship support to foster educational and personal success.
+              The William Buck Godfrey Legacy Scholarship, in partnership with Sporty Girls, Inc., annually awards deserving students attending a Historically Black College or University with scholarship support to foster educational and personal success.
             </p>
           </div>
         </FadeInView>

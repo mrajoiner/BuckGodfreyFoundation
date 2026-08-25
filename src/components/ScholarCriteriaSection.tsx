@@ -121,7 +121,7 @@ export const ScholarCriteriaSection: React.FC = () => {
               onClick={scrollToDonate}
               className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase inline-flex items-center gap-2 cursor-pointer shadow-md"
             >
-              <span>SUPPORT FUTURE SCHOLARS</span>
+              <span>SUPPORT SCHOLARSHIP RECIPIENTS</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
