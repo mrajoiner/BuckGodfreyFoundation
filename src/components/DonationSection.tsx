@@ -384,6 +384,23 @@ export const DonationSection: React.FC = () => {
                   <p>
                     Your contribution helps carry Coach William Buck Godfrey’s legacy forward by investing in the next generation. Your payment is processed securely with end-to-end encryption. All contributions are 100% tax-deductible.
                   </p>
+                  <div className="pt-2 border-t border-[#0A1B36]/10 text-center">
+                    <a
+                      href="/thank-you"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        try {
+                          window.history.pushState(null, '', '/thank-you');
+                          window.dispatchEvent(new PopStateEvent('popstate'));
+                        } catch {
+                          window.location.hash = 'thank-you';
+                        }
+                      }}
+                      className="font-tech-mono text-[11px] uppercase tracking-wider text-[#0A1B36] hover:text-[#C5A253] font-bold underline transition-colors"
+                    >
+                      Already completed your donation? View Official Thank You &amp; Acknowledgment Page &rarr;
+                    </a>
+                  </div>
                 </div>
               </>
             )}

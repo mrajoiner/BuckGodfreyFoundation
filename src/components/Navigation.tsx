@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-export const Navigation: React.FC = () => {
+interface NavigationProps {
+  onNavigateSection?: (sectionId: string) => void;
+  isThankYouPage?: boolean;
+}
+
+export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isThankYouPage = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,6 +20,10 @@ export const Navigation: React.FC = () => {
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
+    if (onNavigateSection) {
+      onNavigateSection(sectionId);
+      return;
+    }
     const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });

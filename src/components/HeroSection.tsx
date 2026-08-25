@@ -96,10 +96,10 @@ export const HeroSection: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
                 <button
                   id="hero-cta-support"
-                  onClick={() => scrollToSection('donate')}
+                  onClick={() => scrollToSection('memories')}
                   className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-6 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center"
                 >
-                  SUPPORT THE SCHOLARSHIP
+                  SHARE YOUR MEMORY ABOUT COACH GODFREY
                 </button>
 
                 <button

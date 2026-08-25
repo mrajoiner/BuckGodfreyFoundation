@@ -1,7 +1,15 @@
 import React from 'react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateSection?: (sectionId: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
   const scrollToSection = (sectionId: string) => {
+    if (onNavigateSection) {
+      onNavigateSection(sectionId);
+      return;
+    }
     const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
