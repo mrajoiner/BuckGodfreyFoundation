@@ -76,7 +76,7 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
   };
 
   return (
-    <div id="thank-you-page-container" className="min-h-screen bg-[#ffffff] pt-28 sm:pt-36 md:pt-40 pb-20 px-4 sm:px-8 md:px-14 lg:px-20 text-[#0A1B36]">
+    <div id="thank-you-page-container" className="min-h-screen bg-[#ffffff] pt-36 sm:pt-44 md:pt-48 pb-20 px-4 sm:px-8 md:px-14 lg:px-20 text-[#0A1B36]">
       <div className="max-w-4xl mx-auto space-y-12 sm:space-y-16">
         
         {/* Top Navigation / Breadcrumb */}

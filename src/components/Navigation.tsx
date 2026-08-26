@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { ScholarshipAnnouncementBar } from './ScholarshipAnnouncementBar';
 
 interface NavigationProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -158,6 +159,11 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
           </button>
         </div>
       )}
+
+      {/* Prominent Announcement Bar with Live Countdown */}
+      <ScholarshipAnnouncementBar
+        onApplyClick={() => scrollToSection('scholar')}
+      />
     </header>
   );
 };

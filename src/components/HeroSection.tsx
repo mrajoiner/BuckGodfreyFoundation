@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-32 pb-16 sm:pt-40 sm:pb-20 md:pt-44 md:pb-24 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
+      className="relative min-h-[90vh] md:min-h-[94vh] pt-36 pb-16 sm:pt-44 sm:pb-20 md:pt-48 md:pb-24 lg:pt-52 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
