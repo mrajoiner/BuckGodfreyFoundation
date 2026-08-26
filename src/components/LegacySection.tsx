@@ -36,12 +36,6 @@ const MILESTONES: CareerMilestone[] = [
     description: 'Inducted into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.',
     category: 'honor',
   },
-  {
-    year: '2015',
-    title: 'William "Buck" Godfrey Stadium Dedication',
-    description: 'In 2015, Southwest DeKalb\'s home field was permanently renamed William "Buck" Godfrey Stadium, ensuring that generations of athletes would continue to walk in the shadow of his legacy.',
-    category: 'honor',
-  },
 ];
 
 export const LegacySection: React.FC = () => {
