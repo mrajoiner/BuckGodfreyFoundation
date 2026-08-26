@@ -7,27 +7,35 @@ interface ScholarshipAnnouncementBarProps {
 
 interface TimeLeft {
   isExpired: boolean;
+  months: number;
   days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
 }
 
 // Target: March 1, 2027 at 12:00 AM (00:00:00)
-const TARGET_DATE = new Date(2027, 2, 1, 0, 0, 0).getTime();
+const TARGET_DATE = new Date(2027, 2, 1, 0, 0, 0);
 
 function calculateTimeLeft(): TimeLeft {
-  const difference = TARGET_DATE - Date.now();
-  if (difference <= 0) {
-    return { isExpired: true, days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const now = new Date();
+  if (now.getTime() >= TARGET_DATE.getTime()) {
+    return { isExpired: true, months: 0, days: 0 };
   }
+
+  // Calculate full calendar months
+  let months = (TARGET_DATE.getFullYear() - now.getFullYear()) * 12 + (TARGET_DATE.getMonth() - now.getMonth());
+
+  let anchor = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+  if (anchor.getTime() > TARGET_DATE.getTime()) {
+    months--;
+    anchor = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+  }
+
+  const diffMs = TARGET_DATE.getTime() - anchor.getTime();
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
   return {
     isExpired: false,
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / 1000 / 60) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
+    months: Math.max(0, months),
+    days: Math.max(0, days),
   };
 }
 
@@ -37,7 +45,7 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    }, 60000); // Updated every minute since we only display months and days
 
     return () => clearInterval(timer);
   }, []);
@@ -56,74 +64,69 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
   return (
     <div
       id="scholarship-announcement-bar"
-      className="w-full bg-[#0A1B36] border-t border-b border-[#C5A253]/30 text-white py-2 sm:py-2.5 px-3 sm:px-6 md:px-10 shadow-md select-none transition-all"
+      className="w-full bg-[#C5A253]/25 backdrop-blur-md border-t border-b border-[#C5A253]/50 text-[#0A1B36] py-2 sm:py-2.5 px-3 sm:px-6 md:px-10 shadow-sm select-none transition-all"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 sm:gap-3 text-center md:text-left">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-center sm:text-left">
         {timeLeft.isExpired ? (
           /* Expired State: Replaced with prominent Apply Now CTA */
           <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 animate-in fade-in duration-300">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#C5A253] shrink-0 animate-pulse" />
-              <span className="font-display-title text-xs sm:text-sm font-bold tracking-wide uppercase text-white">
+              <div className="bg-white p-1 sm:p-1.5 border-2 border-[#0A1B36]/20 shadow-xs flex items-center justify-center text-[#0A1B36] shrink-0">
+                <Sparkles className="w-4 h-4 text-[#C5A253] shrink-0 animate-pulse" />
+              </div>
+              <span className="font-display-title text-xs sm:text-sm font-bold tracking-wide uppercase text-[#0A1B36]">
                 Applications Are Now Open for the WBG Legacy Scholarship!
               </span>
             </div>
             <button
               id="announcement-apply-now-btn"
               onClick={handleApply}
-              className="font-display-title text-xs sm:text-sm font-bold tracking-[0.18em] bg-[#C5A253] text-[#0A1B36] hover:bg-white hover:text-[#0A1B36] py-1.5 sm:py-2 px-6 sm:px-8 uppercase transition-all duration-200 shadow-md active:scale-95 cursor-pointer flex items-center gap-2 min-h-[38px]"
+              className="font-display-title text-xs sm:text-sm font-bold tracking-[0.18em] bg-[#0A1B36] text-white hover:bg-white hover:text-[#0A1B36] py-2 px-6 sm:px-8 uppercase transition-all duration-200 shadow-md active:scale-95 cursor-pointer flex items-center gap-2 min-h-[38px] border-2 border-[#0A1B36]"
             >
               <span>APPLY NOW</span>
-              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+              <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#C5A253]" />
             </button>
           </div>
         ) : (
           /* Active Countdown State */
           <>
-            {/* Announcement Message */}
-            <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap text-center md:text-left">
-              <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C5A253] shrink-0" />
-              <p className="font-display-title text-[11px] xs:text-xs sm:text-sm font-semibold tracking-wide text-white leading-tight">
+            {/* Announcement Message (Blue verbiage contrasting transparent gold) */}
+            <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5 flex-wrap text-center sm:text-left">
+              <div className="bg-white p-1 sm:p-1.5 border-2 border-[#0A1B36]/25 shadow-xs flex items-center justify-center text-[#0A1B36] shrink-0">
+                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0A1B36]" />
+              </div>
+              <p className="font-display-title text-xs sm:text-sm font-bold tracking-wide text-[#0A1B36] leading-tight">
                 Want to apply for the scholarship?{' '}
-                <span className="text-[#C5A253] font-bold">Applications open in March 2027.</span>
+                <span className="font-extrabold underline decoration-[#0A1B36]/35 underline-offset-2">
+                  Applications open in March 2027.
+                </span>
               </p>
             </div>
 
-            {/* Live Countdown Timer */}
+            {/* Live Countdown: Months and Days in Bold White Contrast Boxes */}
             <div
               id="scholarship-countdown-timer"
-              className="flex items-center justify-center gap-1 sm:gap-1.5 font-tech-mono text-[10px] sm:text-xs"
-              aria-label={`Countdown: ${timeLeft.days} days, ${timeLeft.hours} hours, ${timeLeft.minutes} minutes, ${timeLeft.seconds} seconds until applications open`}
+              className="flex items-center justify-center gap-2 sm:gap-3"
+              aria-label={`${timeLeft.months} Months and ${timeLeft.days} Days until applications open`}
             >
-              <span className="text-[#C5A253] text-[9px] uppercase tracking-wider font-bold mr-1 hidden lg:inline">
-                COUNTDOWN:
-              </span>
-
-              {/* Days */}
-              <div className="flex items-baseline gap-0.5 bg-[#ffffff]/10 px-1.5 sm:px-2 py-0.5 sm:py-1 border border-[#C5A253]/30 min-w-[42px] sm:min-w-[48px] justify-center">
-                <span className="font-bold text-white text-xs sm:text-sm">{timeLeft.days}</span>
-                <span className="text-[#C5A253] text-[8px] sm:text-[9px] uppercase font-bold">d</span>
+              {/* Months Box */}
+              <div className="flex items-center gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2.5 sm:px-3 py-1 shadow-xs">
+                <span className="font-display-title font-black text-sm sm:text-base text-[#0A1B36] leading-none">
+                  {timeLeft.months}
+                </span>
+                <span className="font-display-title font-bold text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
+                  MONTHS
+                </span>
               </div>
-              <span className="text-[#C5A253] font-bold text-xs">:</span>
 
-              {/* Hours */}
-              <div className="flex items-baseline gap-0.5 bg-[#ffffff]/10 px-1.5 sm:px-2 py-0.5 sm:py-1 border border-[#C5A253]/30 min-w-[36px] sm:min-w-[42px] justify-center">
-                <span className="font-bold text-white text-xs sm:text-sm">{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className="text-[#C5A253] text-[8px] sm:text-[9px] uppercase font-bold">h</span>
-              </div>
-              <span className="text-[#C5A253] font-bold text-xs">:</span>
-
-              {/* Minutes */}
-              <div className="flex items-baseline gap-0.5 bg-[#ffffff]/10 px-1.5 sm:px-2 py-0.5 sm:py-1 border border-[#C5A253]/30 min-w-[36px] sm:min-w-[42px] justify-center">
-                <span className="font-bold text-white text-xs sm:text-sm">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className="text-[#C5A253] text-[8px] sm:text-[9px] uppercase font-bold">m</span>
-              </div>
-              <span className="text-[#C5A253] font-bold text-xs">:</span>
-
-              {/* Seconds */}
-              <div className="flex items-baseline gap-0.5 bg-[#ffffff]/10 px-1.5 sm:px-2 py-0.5 sm:py-1 border border-[#C5A253]/30 min-w-[36px] sm:min-w-[42px] justify-center">
-                <span className="font-bold text-[#C5A253] text-xs sm:text-sm">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className="text-[#C5A253] text-[8px] sm:text-[9px] uppercase font-bold">s</span>
+              {/* Days Box */}
+              <div className="flex items-center gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2.5 sm:px-3 py-1 shadow-xs">
+                <span className="font-display-title font-black text-sm sm:text-base text-[#0A1B36] leading-none">
+                  {timeLeft.days}
+                </span>
+                <span className="font-display-title font-bold text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
+                  DAYS
+                </span>
               </div>
             </div>
           </>
