@@ -162,33 +162,33 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
 
             {/* Social Share Action Buttons */}
             <div className="pt-2 flex flex-wrap items-center gap-2 sm:gap-3">
-              <span className="font-tech-mono text-[11px] uppercase tracking-wider text-[#0A1B36]/70 font-semibold mr-1">
+              <span className="font-tech-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#0A1B36]/70 font-semibold mr-1 w-full sm:w-auto">
                 SPREAD THE WORD:
               </span>
               <button
                 onClick={handleShareTwitter}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer min-h-[40px]"
               >
                 <Share2 className="w-3.5 h-3.5 text-[#0A1B36]" />
                 <span>X / Twitter</span>
               </button>
               <button
                 onClick={handleShareFacebook}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer min-h-[40px]"
               >
                 <Share2 className="w-3.5 h-3.5 text-[#0A1B36]" />
                 <span>Facebook</span>
               </button>
               <button
                 onClick={handleShareLinkedIn}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer min-h-[40px]"
               >
                 <Share2 className="w-3.5 h-3.5 text-[#0A1B36]" />
                 <span>LinkedIn</span>
               </button>
               <button
                 onClick={handleShareEmail}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-[#0A1B36]/20 hover:border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider transition-colors cursor-pointer min-h-[40px]"
               >
                 <Mail className="w-3.5 h-3.5 text-[#0A1B36]" />
                 <span>Email</span>
@@ -209,9 +209,9 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {/* Card 1 */}
-              <div className="p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors">
+              <div className="p-5 sm:p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors">
                 <div className="w-10 h-10 bg-[#0A1B36] text-[#C5A253] flex items-center justify-center">
                   <GraduationCap className="w-5 h-5" />
                 </div>
@@ -224,7 +224,7 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
               </div>
 
               {/* Card 2 */}
-              <div className="p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors">
+              <div className="p-5 sm:p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors">
                 <div className="w-10 h-10 bg-[#0A1B36] text-[#C5A253] flex items-center justify-center">
                   <BookOpen className="w-5 h-5" />
                 </div>
@@ -237,7 +237,7 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
               </div>
 
               {/* Card 3 */}
-              <div className="p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors">
+              <div className="p-5 sm:p-6 border border-[#0A1B36]/15 bg-white space-y-3 relative hover:border-[#C5A253] transition-colors sm:col-span-2 md:col-span-1">
                 <div className="w-10 h-10 bg-[#0A1B36] text-[#C5A253] flex items-center justify-center">
                   <Award className="w-5 h-5" />
                 </div>
@@ -254,7 +254,7 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
 
         {/* Official Receipt & Tax Information */}
         <FadeInView direction="up" delay={0.25}>
-          <div className="p-6 sm:p-8 bg-[#ffffff] border border-[#0A1B36]/20 space-y-5">
+          <div className="p-5 sm:p-8 bg-[#ffffff] border border-[#0A1B36]/20 space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#0A1B36]/10 pb-4">
               <div className="space-y-1">
                 <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#C5A253] font-bold block">
@@ -267,7 +267,7 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
 
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-2 px-4 py-2 border border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider hover:bg-[#0A1B36] hover:text-white transition-colors cursor-pointer self-start sm:self-auto"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#0A1B36] text-xs font-tech-mono uppercase font-bold tracking-wider hover:bg-[#0A1B36] hover:text-white transition-colors cursor-pointer self-start sm:self-auto min-h-[44px]"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>PRINT CONFIRMATION</span>
@@ -290,21 +290,21 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
 
         {/* Secondary Call to Action: Share a Memory */}
         <FadeInView direction="up" delay={0.3}>
-          <div className="p-8 bg-[#0A1B36] text-white text-center space-y-5">
+          <div className="p-6 sm:p-8 bg-[#0A1B36] text-white text-center space-y-4 sm:space-y-5">
             <div className="inline-flex items-center gap-2 bg-[#C5A253] text-[#0A1B36] px-3.5 py-1 font-tech-mono text-[10px] sm:text-xs uppercase font-bold tracking-widest">
               <Sparkles className="w-3.5 h-3.5" />
               <span>HAVE A STORY TO SHARE?</span>
             </div>
 
-            <h3 className="font-display-title text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
+            <h3 className="font-display-title text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-white">
               SHARE YOUR MEMORIES OF COACH GODFREY
             </h3>
 
-            <p className="font-body-text text-xs sm:text-base text-white/85 max-w-xl mx-auto leading-relaxed">
+            <p className="font-body-text text-xs sm:text-base text-white/85 max-w-xl mx-auto leading-relaxed font-medium">
               If you haven&apos;t yet submitted a story, tribute message, or photograph from your time with Coach Godfrey at Southwest DeKalb, we welcome you to leave your memory for his family and the community.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-2">
               <button
                 onClick={() => {
                   onNavigateHome();
@@ -313,15 +313,15 @@ export const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigateHome }) =>
                     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }, 100);
                 }}
-                className="inline-flex items-center justify-center gap-2 bg-[#C5A253] text-[#0A1B36] hover:bg-white hover:text-[#0A1B36] font-body-text text-xs sm:text-sm font-bold py-3.5 px-8 uppercase tracking-[0.15em] transition-all cursor-pointer shadow-md"
+                className="inline-flex items-center justify-center gap-2 bg-[#C5A253] text-[#0A1B36] hover:bg-white hover:text-[#0A1B36] font-body-text text-xs sm:text-sm font-bold py-3.5 px-6 sm:px-8 uppercase tracking-[0.15em] transition-all cursor-pointer shadow-md min-h-[48px]"
               >
                 <span>LEAVE A MEMORY OR TRIBUTE</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 shrink-0" />
               </button>
 
               <button
                 onClick={onNavigateHome}
-                className="inline-flex items-center justify-center gap-2 bg-transparent text-white border border-white/30 hover:border-white font-body-text text-xs sm:text-sm font-bold py-3.5 px-8 uppercase tracking-[0.15em] transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-transparent text-white border border-white/30 hover:border-white font-body-text text-xs sm:text-sm font-bold py-3.5 px-6 sm:px-8 uppercase tracking-[0.15em] transition-all cursor-pointer min-h-[48px]"
               >
                 <span>RETURN TO HOME</span>
               </button>

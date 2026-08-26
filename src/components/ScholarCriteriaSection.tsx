@@ -95,15 +95,15 @@ export const ScholarCriteriaSection: React.FC = () => {
         </FadeInView>
 
         {/* 7 Core Criteria Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {CRITERIA_DATA.map((item, index) => (
             <FadeInView key={item.number} direction="up" delay={0.08 * (index + 1)}>
-              <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-8 space-y-4 shadow-sm hover:border-[#C5A253] transition-all h-full flex flex-col justify-between">
+              <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-5 sm:p-7 md:p-8 space-y-3 sm:space-y-4 shadow-xs hover:border-[#C5A253] transition-all h-full flex flex-col justify-between">
                 <div>
-                  <span className="font-display-title text-3xl font-bold text-[#C5A253] block mb-2">
+                  <span className="font-display-title text-2xl sm:text-3xl font-bold text-[#C5A253] block mb-1.5 sm:mb-2">
                     {item.number}
                   </span>
-                  <h3 className="font-display-title text-xl font-bold uppercase text-[#0A1B36] mb-2">
+                  <h3 className="font-display-title text-lg sm:text-xl font-bold uppercase text-[#0A1B36] mb-1.5 sm:mb-2">
                     {item.title}
                   </h3>
                   <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
@@ -116,13 +116,13 @@ export const ScholarCriteriaSection: React.FC = () => {
         </div>
 
         <FadeInView direction="up" delay={0.4}>
-          <div className="text-center pt-6">
+          <div className="text-center pt-4 sm:pt-6">
             <button
               onClick={scrollToDonate}
-              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase inline-flex items-center gap-2 cursor-pointer shadow-md"
+              className="w-full sm:w-auto font-body-text text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-6 sm:px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase inline-flex items-center justify-center gap-2 cursor-pointer shadow-md min-h-[48px]"
             >
               <span>SUPPORT SCHOLARSHIP RECIPIENTS</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </button>
           </div>
         </FadeInView>

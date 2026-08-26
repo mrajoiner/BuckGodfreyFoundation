@@ -160,39 +160,39 @@ export const LegacySection: React.FC = () => {
 
         {/* Persistent Full Biography, Career Timeline & Writings */}
         <FadeInView direction="up" delay={0.2}>
-          <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-6 sm:p-10 shadow-lg space-y-10">
+          <div className="bg-[#ffffff] border border-[#0A1B36]/15 p-4 sm:p-8 md:p-10 shadow-lg space-y-8 sm:space-y-10">
             {/* Career Numbers Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#0A1B36]/10 border border-[#0A1B36]/10 text-center">
-              <div className="bg-[#ffffff] p-6">
-                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">273+</div>
-                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+              <div className="bg-[#ffffff] p-4 sm:p-6">
+                <div className="font-display-title text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A1B36]">273+</div>
+                <div className="font-tech-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Victories
                 </div>
               </div>
-              <div className="bg-[#ffffff] p-6">
-                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">250+</div>
-                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+              <div className="bg-[#ffffff] p-4 sm:p-6">
+                <div className="font-display-title text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A1B36]">250+</div>
+                <div className="font-tech-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Scholarships
                 </div>
               </div>
-              <div className="bg-[#ffffff] p-6">
-                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">30 Yrs</div>
-                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+              <div className="bg-[#ffffff] p-4 sm:p-6">
+                <div className="font-display-title text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A1B36]">30 Yrs</div>
+                <div className="font-tech-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Dynasty
                 </div>
               </div>
-              <div className="bg-[#ffffff] p-6">
-                <div className="font-display-title text-3xl font-bold text-[#0A1B36]">100%</div>
-                <div className="font-tech-mono text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
+              <div className="bg-[#ffffff] p-4 sm:p-6">
+                <div className="font-display-title text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A1B36]">100%</div>
+                <div className="font-tech-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#C5A253] mt-1">
                   Graduation Focus
                 </div>
               </div>
             </div>
 
             {/* Biography Detailed Text */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              <div className="md:col-span-5">
-                <div className="border border-[#0A1B36]/15 p-2 bg-[#ffffff] group">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
+              <div className="md:col-span-5 flex justify-center">
+                <div className="border border-[#0A1B36]/15 p-2 bg-[#ffffff] group w-full max-w-[260px] sm:max-w-xs md:max-w-none">
                   <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKjLJPx0bWhTcZfH2Oq7mqtwVyAo6AFwOc5EeauzLywQbr2JIvsFoh_HNDvClIXcdzzplgGmywAUu6SZG8j92p8AHkK4CJPvaAPAfKBRJgh-7RusInmibzCH5WJQgKtb6HspgZO79JTFZOulAlRfdLiKazY7S5E_sDaIiydxuzqZXw_pvsKueILm27H9ODTAZQNPgaO3cMvsO3KpSLFD0UpzJYuygzgqZqLh-l2MNW-QnV1sk-bBOib-sZjBlrjFi9dw"
                     alt="Coach William Buck Godfrey portrait"
@@ -201,42 +201,42 @@ export const LegacySection: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="md:col-span-7 space-y-4">
-                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
+              <div className="md:col-span-7 space-y-3 sm:space-y-4">
+                <span className="font-tech-mono text-[10px] sm:text-xs font-bold tracking-widest text-[#C5A253] uppercase">
                   Educator • Poet • Hall of Fame Coach
                 </span>
-                <h4 className="font-display-title text-2xl sm:text-3xl text-[#0A1B36] font-bold uppercase tracking-tight leading-snug">
+                <h4 className="font-display-title text-xl sm:text-2xl md:text-3xl text-[#0A1B36] font-bold uppercase tracking-tight leading-snug">
                   "The measure of our season is not our trophy case, but where our young men stand twenty years from today."
                 </h4>
-                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
+                <p className="font-body-text text-xs sm:text-sm md:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
                   Coach Godfrey was far more than an athletic icon; he was a master educator. As an English teacher and published author, he insisted that intellect, articulate communication, and civic consciousness were the true hallmarks of a champion.
                 </p>
-                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
+                <p className="font-body-text text-xs sm:text-sm md:text-base text-[#0A1B36]/90 leading-relaxed font-medium">
                   His remarkable career earned induction into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.
                 </p>
-                <div className="flex items-center gap-2 font-tech-mono text-xs text-[#0A1B36]/70 pt-2">
-                  <MapPin className="w-4 h-4 text-[#C5A253]" />
+                <div className="flex items-center gap-2 font-tech-mono text-[10px] sm:text-xs text-[#0A1B36]/70 pt-1">
+                  <MapPin className="w-4 h-4 text-[#C5A253] shrink-0" />
                   <span>Southwest DeKalb High School // Decatur, GA</span>
                 </div>
               </div>
             </div>
 
             {/* Hall of Fame Inductions Callout Box */}
-            <div className="p-6 bg-[#ffffff] border border-[#0A1B36]/15 shadow-xs space-y-3">
+            <div className="p-4 sm:p-6 bg-[#ffffff] border border-[#0A1B36]/15 shadow-xs space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-[#C5A253]" />
-                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
+                <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A253] shrink-0" />
+                <span className="font-tech-mono text-[10px] sm:text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
                   Hall of Fame Honors &amp; Distinctions
                 </span>
               </div>
-              <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
+              <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                 His remarkable career earned induction into the Delaware State Athletic Hall of Fame, the Atlanta Sports Hall of Fame, the Georgia Coaches Association Hall of Fame, and the Georgia Sports Hall of Fame.
               </p>
             </div>
 
             {/* Stadium Dedication Landmark Card */}
             <div className="border border-[#0A1B36]/15 bg-[#ffffff] shadow-md overflow-hidden grid grid-cols-1 md:grid-cols-12">
-              <div className="md:col-span-6 relative aspect-[16/10] md:aspect-auto overflow-hidden bg-[#0A1B36] group">
+              <div className="md:col-span-6 relative aspect-[16/10] sm:aspect-[16/9] md:aspect-auto overflow-hidden bg-[#0A1B36] group">
                 <img
                   src={buckStadiumImg}
                   alt="Coach William Buck Godfrey smiling in front of the William Buck Godfrey Stadium scoreboard"
@@ -244,43 +244,43 @@ export const LegacySection: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-center space-y-3 border-t md:border-t-0 md:border-l border-[#0A1B36]/10">
+              <div className="md:col-span-6 p-5 sm:p-8 flex flex-col justify-center space-y-2.5 sm:space-y-3 border-t md:border-t-0 md:border-l border-[#0A1B36]/10">
                 <div className="flex items-center gap-2">
-                  <Landmark className="w-4 h-4 text-[#C5A253]" />
-                  <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253] uppercase">
+                  <Landmark className="w-4 h-4 text-[#C5A253] shrink-0" />
+                  <span className="font-tech-mono text-[10px] sm:text-xs font-bold tracking-widest text-[#C5A253] uppercase">
                     Stadium Dedication // 2015
                   </span>
                 </div>
-                <h4 className="font-display-title text-xl sm:text-2xl text-[#0A1B36] font-bold uppercase tracking-tight">
+                <h4 className="font-display-title text-lg sm:text-xl md:text-2xl text-[#0A1B36] font-bold uppercase tracking-tight">
                   William "Buck" Godfrey Stadium
                 </h4>
-                <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
+                <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                   In 2015, Southwest DeKalb's home field was permanently renamed William "Buck" Godfrey Stadium, ensuring that generations of athletes would continue to walk in the shadow of his legacy.
                 </p>
-                <div className="font-tech-mono text-[10px] text-[#0A1B36]/60 uppercase tracking-wider pt-1">
+                <div className="font-tech-mono text-[9px] sm:text-[10px] text-[#0A1B36]/60 uppercase tracking-wider pt-1">
                   Decatur, Georgia • DeKalb County Athletics
                 </div>
               </div>
             </div>
 
-            {/* Timeline Milestones (No all-caps in chronology) */}
-            <div className="space-y-6 pt-4 border-t border-[#0A1B36]/10">
-              <span className="font-tech-mono text-xs font-bold tracking-[0.25em] text-[#C5A253] uppercase block">
+            {/* Timeline Milestones */}
+            <div className="space-y-5 sm:space-y-6 pt-4 border-t border-[#0A1B36]/10">
+              <span className="font-tech-mono text-[10px] sm:text-xs font-bold tracking-[0.25em] text-[#C5A253] uppercase block">
                 Chronology // Career Milestones
               </span>
-              <div className="space-y-4 border-l border-[#0A1B36]/20 pl-6 ml-2">
+              <div className="space-y-4 sm:space-y-5 border-l border-[#0A1B36]/20 pl-4 sm:pl-6 ml-2">
                 {MILESTONES.map((m, idx) => (
                   <div key={idx} className="relative group">
-                    <div className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 bg-[#C5A253]" />
-                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-1">
-                      <span className="font-tech-mono text-xs font-bold tracking-widest text-[#C5A253]">
+                    <div className="absolute -left-[21px] sm:-left-[29px] top-1.5 w-2.5 h-2.5 bg-[#C5A253]" />
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 mb-1">
+                      <span className="font-tech-mono text-[11px] sm:text-xs font-bold tracking-widest text-[#C5A253]">
                         {m.year}
                       </span>
-                      <h5 className="font-display-title text-base sm:text-lg text-[#0A1B36] font-bold tracking-tight">
+                      <h5 className="font-display-title text-sm sm:text-base md:text-lg text-[#0A1B36] font-bold tracking-tight">
                         {m.title}
                       </h5>
                     </div>
-                    <p className="font-body-text text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
+                    <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/85 leading-relaxed font-medium">
                       {m.description}
                     </p>
                   </div>
@@ -288,18 +288,18 @@ export const LegacySection: React.FC = () => {
               </div>
             </div>
 
-            {/* Coach's Famous Writing & Creed (No all-caps in quote) */}
-            <div className="p-6 bg-[#ffffff] border-l-4 border-[#C5A253] border border-[#0A1B36]/10">
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="w-4 h-4 text-[#C5A253]" />
-                <span className="font-tech-mono text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
+            {/* Coach's Famous Writing & Creed */}
+            <div className="p-4 sm:p-6 bg-[#ffffff] border-l-4 border-[#C5A253] border border-[#0A1B36]/10">
+              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                <BookOpen className="w-4 h-4 text-[#C5A253] shrink-0" />
+                <span className="font-tech-mono text-[10px] sm:text-xs font-bold tracking-widest text-[#0A1B36] uppercase">
                   The Literary Coach
                 </span>
               </div>
-              <p className="font-display-title text-base sm:text-lg text-[#0A1B36] font-bold leading-relaxed mb-3">
+              <p className="font-display-title text-sm sm:text-base md:text-lg text-[#0A1B36] font-bold leading-relaxed mb-2 sm:mb-3">
                 "We run not only to score points against our opponents, but to outrun ignorance, outrun poverty, and outrun the low expectations others might have set for us."
               </p>
-              <p className="font-tech-mono text-[10px] text-[#0A1B36]/70 uppercase tracking-widest">
+              <p className="font-tech-mono text-[9px] sm:text-[10px] text-[#0A1B36]/70 uppercase tracking-widest">
                 — Coach Godfrey's Essays &amp; Speeches
               </p>
             </div>

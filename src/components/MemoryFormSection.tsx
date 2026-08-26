@@ -57,12 +57,12 @@ export const MemoryFormSection: React.FC = () => {
 
         {/* Embedded JotForm Container */}
         <FadeInView direction="up" delay={0.2}>
-          <div className="bg-[#ffffff] border-2 border-[#0A1B36] shadow-2xl p-4 sm:p-8 md:p-10 relative">
+          <div className="bg-[#ffffff] border-2 border-[#0A1B36] shadow-2xl p-3.5 xs:p-5 sm:p-8 md:p-10 relative">
             {/* Top Frame Accents */}
-            <div className="flex items-center justify-between border-b border-[#0A1B36]/10 pb-4 mb-6">
+            <div className="flex items-center justify-between border-b border-[#0A1B36]/10 pb-3 sm:pb-4 mb-4 sm:mb-6">
               <div className="flex items-center gap-2">
-                <MessageSquareHeart className="w-5 h-5 text-[#C5A253]" />
-                <span className="font-tech-mono text-xs font-bold uppercase tracking-wider text-[#0A1B36]">
+                <MessageSquareHeart className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A253] shrink-0" />
+                <span className="font-tech-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0A1B36]">
                   Official Memorial Tribute Book
                 </span>
               </div>
@@ -70,8 +70,8 @@ export const MemoryFormSection: React.FC = () => {
 
             {/* Loading Indicator */}
             {!iframeLoaded && (
-              <div className="w-full flex flex-col items-center justify-center py-16 space-y-3 bg-[#ffffff]">
-                <RefreshCw className="w-7 h-7 text-[#C5A253] animate-spin" />
+              <div className="w-full flex flex-col items-center justify-center py-12 sm:py-16 space-y-3 bg-[#ffffff]">
+                <RefreshCw className="w-6 h-6 sm:w-7 sm:h-7 text-[#C5A253] animate-spin" />
                 <span className="font-tech-mono text-xs text-[#0A1B36]/70 uppercase tracking-wider">
                   Loading Memory Submission Form...
                 </span>
@@ -79,7 +79,7 @@ export const MemoryFormSection: React.FC = () => {
             )}
 
             {/* JotForm Embed Frame with Bottom Branding Crop Mask */}
-            <div className="w-full overflow-hidden bg-[#ffffff] min-h-[600px] relative pb-0">
+            <div className="w-full overflow-hidden bg-[#ffffff] min-h-[540px] xs:min-h-[600px] relative pb-0">
               <div className="overflow-hidden w-full -mb-14">
                 <iframe
                   id="JotFormIFrame-262364039457159"
@@ -91,7 +91,7 @@ export const MemoryFormSection: React.FC = () => {
                   style={{
                     width: '100%',
                     minWidth: '100%',
-                    minHeight: '680px',
+                    minHeight: '620px',
                     border: 'none',
                     display: iframeLoaded ? 'block' : 'block',
                   }}
@@ -101,7 +101,7 @@ export const MemoryFormSection: React.FC = () => {
             </div>
 
             {/* Form Footer Note */}
-            <div className="mt-6 pt-4 border-t border-[#0A1B36]/10 flex flex-col sm:flex-row items-center justify-between text-xs font-tech-mono text-[#0A1B36]/70 gap-2">
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-[#0A1B36]/10 flex flex-col sm:flex-row items-center justify-between text-[10px] sm:text-xs font-tech-mono text-[#0A1B36]/70 gap-1.5 sm:gap-2 text-center sm:text-left">
               <span>Submitted tributes will be preserved with the Godfrey Family Archive.</span>
               <span className="text-[#C5A253] font-bold">WILLIAM BUCK GODFREY LEGACY</span>
             </div>

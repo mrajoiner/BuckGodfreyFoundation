@@ -29,18 +29,22 @@ export const CtaSection: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={() => scrollToSection('donate')}
-              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase flex items-center justify-center gap-2 cursor-pointer shadow-lg w-full sm:w-auto"
+              className="font-body-text text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-4 px-8 sm:px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] transition-all uppercase flex items-center justify-center gap-2 cursor-pointer shadow-lg w-full sm:w-auto min-h-[48px]"
             >
               <span>DONATE TO THE FUND</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </button>
           </div>
         </FadeInView>
 
         <FadeInView direction="up" delay={0.3}>
-          <div className="pt-4 flex items-center justify-center gap-2 text-xs font-tech-mono text-[#0A1B36]/70">
-            <ShieldCheck className="w-4 h-4 text-[#C5A253]" />
-            <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls, Inc. • All Contributions Tax-Deductible</span>
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs font-tech-mono text-[#0A1B36]/70 text-center">
+            <div className="flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-[#C5A253] shrink-0" />
+              <span>Official 501(c)(3) Charitable Organization in Partnership with Sporty Girls, Inc.</span>
+            </div>
+            <span className="hidden sm:inline">•</span>
+            <span>All Contributions Tax-Deductible</span>
           </div>
         </FadeInView>
       </div>

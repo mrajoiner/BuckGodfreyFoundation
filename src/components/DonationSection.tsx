@@ -216,39 +216,39 @@ export const DonationSection: React.FC = () => {
         <FadeInView direction="up" delay={0.2}>
           <div
             id="donation-checkout-card"
-            className="bg-[#ffffff] border-2 border-[#0A1B36] p-6 sm:p-8 md:p-10 shadow-2xl space-y-8 relative"
+            className="bg-[#ffffff] border-2 border-[#0A1B36] p-4 xs:p-6 sm:p-8 md:p-10 shadow-2xl space-y-6 sm:space-y-8 relative"
           >
             {/* COMPLETED DONATION RECEIPT VIEW */}
             {completedDonation ? (
-              <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
-                <div className="text-center space-y-2 pb-6 border-b border-[#0A1B36]/15">
-                  <div className="w-16 h-16 bg-[#C5A253]/15 text-[#C5A253] mx-auto flex items-center justify-center border-2 border-[#C5A253] mb-3">
-                    <CheckCircle2 className="w-8 h-8" />
+              <div className="space-y-5 sm:space-y-6 animate-in fade-in zoom-in-95 duration-300">
+                <div className="text-center space-y-2 pb-5 sm:pb-6 border-b border-[#0A1B36]/15">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#C5A253]/15 text-[#C5A253] mx-auto flex items-center justify-center border-2 border-[#C5A253] mb-3">
+                    <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
                   <span className="font-tech-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#C5A253] block">
                     PAYMENT COMPLETED • OFFICIAL RECEIPT
                   </span>
-                  <h3 className="font-display-title text-2xl sm:text-3xl font-bold uppercase text-[#0A1B36]">
+                  <h3 className="font-display-title text-xl sm:text-2xl md:text-3xl font-bold uppercase text-[#0A1B36]">
                     Thank You for Your Generous Contribution
                   </h3>
-                  <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 max-w-lg mx-auto font-medium">
+                  <p className="font-body-text text-xs sm:text-sm md:text-base text-[#0A1B36]/85 max-w-lg mx-auto font-medium">
                     Your tax-deductible gift of <strong>${completedDonation.amount.toFixed(2)} USD</strong> directly fuels our HBCU scholars and keeps Coach Godfrey’s legacy thriving.
                   </p>
                 </div>
 
-                <div className="bg-[#ffffff] p-5 border border-[#0A1B36]/15 space-y-3 font-tech-mono text-xs text-[#0A1B36]">
-                  <div className="flex justify-between items-center border-b border-[#0A1B36]/10 pb-2">
+                <div className="bg-[#ffffff] p-3.5 sm:p-5 border border-[#0A1B36]/15 space-y-2.5 sm:space-y-3 font-tech-mono text-xs text-[#0A1B36]">
+                  <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center border-b border-[#0A1B36]/10 pb-2 gap-0.5">
                     <span className="text-[#0A1B36]/70 uppercase font-medium">Transaction ID:</span>
-                    <span className="font-bold">{completedDonation.transactionId}</span>
+                    <span className="font-bold break-all">{completedDonation.transactionId}</span>
                   </div>
-                  <div className="flex justify-between items-center border-b border-[#0A1B36]/10 pb-2">
+                  <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center border-b border-[#0A1B36]/10 pb-2 gap-0.5">
                     <span className="text-[#0A1B36]/70 uppercase font-medium">Donor Name:</span>
                     <span className="font-bold">{completedDonation.donorName}</span>
                   </div>
                   {completedDonation.email && (
-                    <div className="flex justify-between items-center border-b border-[#0A1B36]/10 pb-2">
+                    <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center border-b border-[#0A1B36]/10 pb-2 gap-0.5">
                       <span className="text-[#0A1B36]/70 uppercase font-medium">Email:</span>
-                      <span className="font-bold">{completedDonation.email}</span>
+                      <span className="font-bold break-all">{completedDonation.email}</span>
                     </div>
                   )}
                   <div className="flex justify-between items-center border-b border-[#0A1B36]/10 pb-2">
@@ -257,7 +257,7 @@ export const DonationSection: React.FC = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-[#0A1B36]/70 uppercase font-medium">Date &amp; Time:</span>
-                    <span>{completedDonation.timestamp}</span>
+                    <span className="text-[11px] sm:text-xs">{completedDonation.timestamp}</span>
                   </div>
                 </div>
 
@@ -265,7 +265,7 @@ export const DonationSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handlePrintReceipt}
-                    className="flex-1 flex items-center justify-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs font-bold py-3.5 px-6 uppercase tracking-wider transition-colors cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs font-bold py-3.5 px-6 uppercase tracking-wider transition-colors cursor-pointer min-h-[44px]"
                   >
                     <Printer className="w-4 h-4" />
                     <span>Print Official Receipt</span>
@@ -273,7 +273,7 @@ export const DonationSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleResetDonation}
-                    className="flex-1 flex items-center justify-center gap-2 border-2 border-[#0A1B36] text-[#0A1B36] hover:bg-[#0A1B36] hover:text-white font-display-title text-xs font-bold py-3.5 px-6 uppercase tracking-wider transition-colors cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2 border-2 border-[#0A1B36] text-[#0A1B36] hover:bg-[#0A1B36] hover:text-white font-display-title text-xs font-bold py-3.5 px-6 uppercase tracking-wider transition-colors cursor-pointer min-h-[44px]"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Make Another Gift</span>
@@ -286,40 +286,40 @@ export const DonationSection: React.FC = () => {
                 {/* Header / Sub-banner */}
                 <div className="border-b border-[#0A1B36]/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <span className="font-tech-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#C5A253] block mb-1">
+                    <span className="font-tech-mono text-[9px] sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#C5A253] block mb-1">
                       OFFICIAL SCHOLARSHIP CONTRIBUTION • IN PARTNERSHIP WITH SPORTY GIRLS, INC.
                     </span>
-                    <h3 className="font-display-title text-xl sm:text-2xl font-bold uppercase text-[#0A1B36]">
+                    <h3 className="font-display-title text-lg sm:text-2xl font-bold uppercase text-[#0A1B36]">
                       Make a Contribution
                     </h3>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs font-tech-mono text-[#0A1B36]/80 self-start sm:self-auto bg-[#ffffff] px-3 py-1.5 border border-[#0A1B36]/15">
-                    <Lock className="w-3.5 h-3.5 text-[#C5A253]" />
+                  <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-tech-mono text-[#0A1B36]/80 self-start sm:self-auto bg-[#ffffff] px-2.5 sm:px-3 py-1.5 border border-[#0A1B36]/15">
+                    <Lock className="w-3.5 h-3.5 text-[#C5A253] shrink-0" />
                     <span>SSL Encrypted Checkout</span>
                   </div>
                 </div>
 
                 {/* Introductory Narrative */}
-                <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/85 leading-relaxed font-medium">
+                <p className="font-body-text text-xs sm:text-sm md:text-base text-[#0A1B36]/85 leading-relaxed font-medium">
                   Complete your contribution securely through PayPal&apos;s donation gateway below. You can contribute using a PayPal account, Venmo, Apple Pay, or any major debit/credit card.
                 </p>
 
                 {/* Direct Action Link / Embedded PayPal Button Console */}
-                <div className="w-full flex flex-col items-center justify-center min-h-[140px] bg-[#ffffff] p-2 space-y-4">
+                <div className="w-full flex flex-col items-center justify-center min-h-[120px] bg-[#ffffff] p-1 sm:p-2 space-y-4">
                   {/* Direct PayPal Checkout Button */}
                   <div className="w-full max-w-md mx-auto text-center space-y-3">
                     <a
                       href={PAYPAL_DIRECT_PAYMENT_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2.5 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-4 px-6 uppercase tracking-[0.15em] transition-all shadow-md active:scale-[0.98] cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-3.5 sm:py-4 px-4 sm:px-6 uppercase tracking-[0.12em] sm:tracking-[0.15em] transition-all shadow-md active:scale-[0.98] cursor-pointer min-h-[48px] text-center"
                     >
-                      <CreditCard className="w-4 h-4" />
+                      <CreditCard className="w-4 h-4 shrink-0" />
                       <span>Proceed to Secure PayPal Checkout</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                     </a>
-                    <p className="font-tech-mono text-[10px] text-[#0A1B36]/70 uppercase tracking-wider">
+                    <p className="font-tech-mono text-[9px] sm:text-[10px] text-[#0A1B36]/70 uppercase tracking-wider">
                       Opens official PayPal payment gateway (Button ID: TTQHDUE3H6G5G)
                     </p>
                   </div>
