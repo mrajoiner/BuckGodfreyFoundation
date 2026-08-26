@@ -99,7 +99,7 @@ export const HeroSection: React.FC = () => {
                   onClick={() => scrollToSection('memories')}
                   className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-3.5 sm:py-4 px-5 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center leading-snug"
                 >
-                  SHARE YOUR MEMORY ABOUT COACH GODFREY
+                  SHARE YOUR MEMORIES OF COACH GODFREY
                 </button>
 
                 <button
@@ -180,7 +180,7 @@ export const HeroSection: React.FC = () => {
               onClick={() => scrollToSection('memories')}
               className="w-full md:w-auto shrink-0 font-body-text text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-3.5 sm:py-4 px-5 sm:px-8 md:px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase cursor-pointer shadow-md flex items-center justify-center gap-2 border-2 border-[#0A1B36] hover:border-[#C5A253] min-h-[48px] text-center"
             >
-              <span>Share Your Memories with Coach Godfrey</span>
+              <span>Share Your Memories of Coach Godfrey</span>
               <ArrowRight className="w-4 h-4 shrink-0" />
             </button>
           </div>

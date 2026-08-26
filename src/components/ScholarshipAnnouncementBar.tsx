@@ -64,7 +64,7 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
   return (
     <div
       id="scholarship-announcement-bar"
-      className="w-full bg-[#C5A253]/25 backdrop-blur-md border-t border-b border-[#C5A253]/50 text-[#0A1B36] py-2 sm:py-2.5 px-3 sm:px-6 md:px-10 shadow-sm select-none transition-all"
+      className="w-full bg-[#B8923F]/45 backdrop-blur-md border-t border-b border-[#A6802C]/60 text-[#0A1B36] py-2 sm:py-2.5 px-3 sm:px-6 md:px-10 shadow-sm select-none transition-all"
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-center sm:text-left">
         {timeLeft.isExpired ? (

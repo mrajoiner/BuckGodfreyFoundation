@@ -31,7 +31,7 @@ export const PersistentDonateButton: React.FC<PersistentMemoryButtonProps> = ({ 
           className="hidden sm:flex bg-[#C5A253] text-[#0A1B36] border-2 border-[#0A1B36] px-3.5 py-1.5 shadow-xl font-tech-mono text-[10px] sm:text-[11px] uppercase tracking-wider items-center gap-1.5 animate-in fade-in slide-in-from-bottom-2 duration-150 font-bold"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#0A1B36]" />
-          <span>Share Your Memory</span>
+          <span>Share Your Memories of Coach Godfrey</span>
         </div>
       )}
 
