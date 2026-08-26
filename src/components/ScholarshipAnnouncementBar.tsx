@@ -66,22 +66,22 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
       id="scholarship-announcement-bar"
       className="w-full bg-[#C5A253]/25 backdrop-blur-md border-t border-b border-[#C5A253]/50 text-[#0A1B36] py-2 sm:py-2.5 px-3 sm:px-6 md:px-10 shadow-sm select-none transition-all"
     >
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-center sm:text-left">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-center sm:text-left">
         {timeLeft.isExpired ? (
           /* Expired State: Replaced with prominent Apply Now CTA */
           <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 animate-in fade-in duration-300">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
               <div className="bg-white p-1 sm:p-1.5 border-2 border-[#0A1B36]/20 shadow-xs flex items-center justify-center text-[#0A1B36] shrink-0">
-                <Sparkles className="w-4 h-4 text-[#C5A253] shrink-0 animate-pulse" />
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C5A253] shrink-0 animate-pulse" />
               </div>
-              <span className="font-display-title text-xs sm:text-sm font-bold tracking-wide uppercase text-[#0A1B36]">
+              <span className="font-display-title text-[11px] xs:text-xs sm:text-sm font-bold tracking-wide uppercase text-[#0A1B36]">
                 Applications Are Now Open for the WBG Legacy Scholarship!
               </span>
             </div>
             <button
               id="announcement-apply-now-btn"
               onClick={handleApply}
-              className="font-display-title text-xs sm:text-sm font-bold tracking-[0.18em] bg-[#0A1B36] text-white hover:bg-white hover:text-[#0A1B36] py-2 px-6 sm:px-8 uppercase transition-all duration-200 shadow-md active:scale-95 cursor-pointer flex items-center gap-2 min-h-[38px] border-2 border-[#0A1B36]"
+              className="font-display-title text-xs sm:text-sm font-bold tracking-[0.18em] bg-[#0A1B36] text-white hover:bg-white hover:text-[#0A1B36] py-1.5 sm:py-2 px-5 sm:px-8 uppercase transition-all duration-200 shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2 min-h-[38px] border-2 border-[#0A1B36] w-full sm:w-auto"
             >
               <span>APPLY NOW</span>
               <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#C5A253]" />
@@ -91,13 +91,13 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
           /* Active Countdown State */
           <>
             {/* Announcement Message (Blue verbiage contrasting transparent gold) */}
-            <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5 flex-wrap text-center sm:text-left">
+            <div className="flex items-center justify-center sm:justify-start gap-1.5 xs:gap-2 sm:gap-2.5 text-center sm:text-left">
               <div className="bg-white p-1 sm:p-1.5 border-2 border-[#0A1B36]/25 shadow-xs flex items-center justify-center text-[#0A1B36] shrink-0">
-                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0A1B36]" />
+                <Clock className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 text-[#0A1B36]" />
               </div>
-              <p className="font-display-title text-xs sm:text-sm font-bold tracking-wide text-[#0A1B36] leading-tight">
+              <p className="font-display-title text-[10.5px] xs:text-xs sm:text-sm font-bold tracking-tight xs:tracking-normal sm:tracking-wide text-[#0A1B36] leading-tight">
                 Want to apply for the scholarship?{' '}
-                <span className="font-extrabold underline decoration-[#0A1B36]/35 underline-offset-2">
+                <span className="font-extrabold underline decoration-[#0A1B36]/35 underline-offset-2 inline-block">
                   Applications open in March 2027.
                 </span>
               </p>
@@ -106,25 +106,25 @@ export const ScholarshipAnnouncementBar: React.FC<ScholarshipAnnouncementBarProp
             {/* Live Countdown: Months and Days in Bold White Contrast Boxes */}
             <div
               id="scholarship-countdown-timer"
-              className="flex items-center justify-center gap-2 sm:gap-3"
+              className="flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-3 shrink-0"
               aria-label={`${timeLeft.months} Months and ${timeLeft.days} Days until applications open`}
             >
               {/* Months Box */}
-              <div className="flex items-center gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2.5 sm:px-3 py-1 shadow-xs">
-                <span className="font-display-title font-black text-sm sm:text-base text-[#0A1B36] leading-none">
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2 xs:px-2.5 sm:px-3 py-0.5 sm:py-1 shadow-xs">
+                <span className="font-display-title font-black text-xs xs:text-sm sm:text-base text-[#0A1B36] leading-none">
                   {timeLeft.months}
                 </span>
-                <span className="font-display-title font-bold text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
+                <span className="font-display-title font-bold text-[9px] xs:text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
                   MONTHS
                 </span>
               </div>
 
               {/* Days Box */}
-              <div className="flex items-center gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2.5 sm:px-3 py-1 shadow-xs">
-                <span className="font-display-title font-black text-sm sm:text-base text-[#0A1B36] leading-none">
+              <div className="flex items-center gap-1 sm:gap-1.5 bg-white border-2 border-[#0A1B36]/30 px-2 xs:px-2.5 sm:px-3 py-0.5 sm:py-1 shadow-xs">
+                <span className="font-display-title font-black text-xs xs:text-sm sm:text-base text-[#0A1B36] leading-none">
                   {timeLeft.days}
                 </span>
-                <span className="font-display-title font-bold text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
+                <span className="font-display-title font-bold text-[9px] xs:text-[10px] sm:text-xs text-[#0A1B36] tracking-wider uppercase">
                   DAYS
                 </span>
               </div>

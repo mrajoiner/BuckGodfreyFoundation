@@ -67,7 +67,7 @@ export const LegacySection: React.FC = () => {
     <section
       ref={containerRef}
       id="legacy"
-      className="relative py-20 sm:py-28 md:py-36 lg:py-40 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden border-t border-[#0A1B36]/10 bg-[#ffffff]"
+      className="relative py-5 sm:py-7 md:py-9 lg:py-10 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden border-t border-[#0A1B36]/10 bg-[#ffffff]"
     >
       {/* Parallax Massive Editorial Watermark */}
       <motion.div

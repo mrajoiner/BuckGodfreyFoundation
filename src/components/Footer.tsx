@@ -19,7 +19,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
   return (
     <footer
       id="main-footer"
-      className="bg-[#ffffff] border-t border-[#0A1B36]/10 py-10 sm:py-16 px-4 xs:px-6 sm:px-10 md:px-16 lg:px-20 text-[#0A1B36]"
+      className="bg-[#ffffff] border-t border-[#0A1B36]/10 py-4 sm:py-6 px-4 xs:px-6 sm:px-10 md:px-16 lg:px-20 text-[#0A1B36]"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8">
         {/* Brand & Slogan */}

@@ -182,7 +182,7 @@ export const DonationSection: React.FC = () => {
       ref={containerRef}
       id="donate"
       aria-labelledby="donation-section-title"
-      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
+      className="relative py-5 sm:py-7 md:py-9 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
     >
       {/* Editorial Background Watermark */}
       <motion.div

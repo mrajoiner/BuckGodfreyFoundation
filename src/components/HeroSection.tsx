@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-36 pb-16 sm:pt-44 sm:pb-20 md:pt-48 md:pb-24 lg:pt-52 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
+      className="relative min-h-[90vh] md:min-h-[94vh] pt-36 pb-4 sm:pt-44 sm:pb-5 md:pt-48 md:pb-6 lg:pt-52 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
@@ -158,7 +158,7 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* Just Below The Fold: Branded Tribute Callout Ribbon */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full pt-8 sm:pt-14 mt-3 sm:mt-4">
+      <div className="relative z-10 max-w-7xl mx-auto w-full pt-2 sm:pt-4 mt-1 sm:mt-2">
         <FadeInView direction="up" delay={0.45}>
           <div className="bg-[#ffffff] border-2 border-[#0A1B36] p-4 sm:p-6 md:p-7 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
             <div className="flex items-center gap-3 sm:gap-4 text-left w-full md:w-auto">

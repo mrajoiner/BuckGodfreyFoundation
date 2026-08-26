@@ -11,7 +11,7 @@ export const CtaSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 bg-[#ffffff] text-[#0A1B36] border-t border-[#0A1B36]/10 relative overflow-hidden">
+    <section className="py-5 sm:py-7 md:py-9 px-4 sm:px-8 md:px-14 lg:px-20 bg-[#ffffff] text-[#0A1B36] border-t border-[#0A1B36]/10 relative overflow-hidden">
       <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
         <FadeInView direction="up" delay={0.1}>
           <span className="font-tech-mono text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold block">

@@ -69,7 +69,7 @@ export const ScholarCriteriaSection: React.FC = () => {
     <section
       ref={containerRef}
       id="scholar"
-      className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
+      className="relative py-5 sm:py-7 md:py-9 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden bg-[#ffffff] border-t border-[#0A1B36]/10"
     >
       {/* Background Watermark */}
       <motion.div
