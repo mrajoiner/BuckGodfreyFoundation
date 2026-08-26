@@ -7,19 +7,15 @@ import {
   RefreshCw,
   Lock,
   Printer,
-  RotateCcw,
-  ExternalLink,
-  CreditCard
+  RotateCcw
 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 
 // ============================================================================
 // OFFICIAL PAYPAL HOSTED DONATION BUTTON CONFIGURATION
-// Embedded PayPal Payment: https://www.paypal.com/ncp/payment/TTQHDUE3H6G5G
 // Button ID: TTQHDUE3H6G5G
 // ============================================================================
-const PAYPAL_DIRECT_PAYMENT_URL = 'https://www.paypal.com/ncp/payment/TTQHDUE3H6G5G';
 const PAYPAL_CLIENT_ID = 'BAAC2eSKrOyLlkK6hZzifFcXmWBhYKxNdu2r19GxaIFs78rFQ3ZXy9CQgH3MLCNbh0GPImjXGyMPlM5Jbg';
 const PAYPAL_HOSTED_BUTTON_ID = 'TTQHDUE3H6G5G';
 const PAYPAL_SDK_URL = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&components=hosted-buttons&enable-funding=venmo&currency=USD`;
@@ -302,70 +298,43 @@ export const DonationSection: React.FC = () => {
 
                 {/* Introductory Narrative */}
                 <p className="font-body-text text-xs sm:text-sm md:text-base text-[#0A1B36]/85 leading-relaxed font-medium">
-                  Complete your contribution securely through PayPal&apos;s donation gateway below. You can contribute using a PayPal account, Venmo, Apple Pay, or any major debit/credit card.
+                  Complete your contribution securely through the donation gateway below. You can contribute using a PayPal account, Venmo, Apple Pay, or any major debit/credit card.
                 </p>
 
-                {/* Direct Action Link / Embedded PayPal Button Console */}
+                {/* Embedded In-Line Payment Console */}
                 <div className="w-full flex flex-col items-center justify-center min-h-[120px] bg-[#ffffff] p-1 sm:p-2 space-y-4">
-                  {/* Direct PayPal Checkout Button */}
-                  <div className="w-full max-w-md mx-auto text-center space-y-3">
-                    <a
-                      href={PAYPAL_DIRECT_PAYMENT_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-3.5 sm:py-4 px-4 sm:px-6 uppercase tracking-[0.12em] sm:tracking-[0.15em] transition-all shadow-md active:scale-[0.98] cursor-pointer min-h-[48px] text-center"
-                    >
-                      <CreditCard className="w-4 h-4 shrink-0" />
-                      <span>Proceed to Secure PayPal Checkout</span>
-                      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
-                    </a>
-                    <p className="font-tech-mono text-[9px] sm:text-[10px] text-[#0A1B36]/70 uppercase tracking-wider">
-                      Opens official PayPal payment gateway (Button ID: TTQHDUE3H6G5G)
-                    </p>
-                  </div>
-
-                  {/* Divider */}
-                  <div className="w-full max-w-md flex items-center gap-3 py-1">
-                    <div className="flex-1 h-px bg-[#0A1B36]/15" />
-                    <span className="font-tech-mono text-[10px] uppercase tracking-widest text-[#0A1B36]/60 font-semibold">
-                      OR PAY IN-LINE
-                    </span>
-                    <div className="flex-1 h-px bg-[#0A1B36]/15" />
-                  </div>
-
                   {/* Loading State Spinner */}
                   {sdkStatus === 'loading' && (
-                    <div className="flex flex-col items-center justify-center py-4 space-y-2">
-                      <RefreshCw className="w-5 h-5 text-[#C5A253] animate-spin" />
+                    <div className="flex flex-col items-center justify-center py-6 space-y-2">
+                      <RefreshCw className="w-6 h-6 text-[#C5A253] animate-spin" />
                       <span className="font-tech-mono text-xs text-[#0A1B36]/70 uppercase tracking-wider">
-                        Loading In-Line PayPal Console...
+                        Loading Payment Options...
                       </span>
                     </div>
                   )}
 
                   {/* Error State with Fallback */}
                   {sdkStatus === 'error' && (
-                    <div className="w-full max-w-md p-4 bg-amber-50 border border-amber-200 text-center space-y-3">
+                    <div className="w-full max-w-md p-4 bg-amber-50 border border-amber-200 text-center space-y-3 mx-auto">
                       <div className="flex items-center justify-center gap-2 text-[#0A1B36] font-bold text-xs font-tech-mono">
                         <AlertCircle className="w-4 h-4 text-[#C5A253]" />
-                        <span>In-line widget blocked by browser privacy settings.</span>
+                        <span>Unable to load payment options.</span>
                       </div>
                       <p className="font-body-text text-xs text-[#0A1B36]/80">
-                        Please use the secure direct link above to complete your donation on PayPal.
+                        {sdkErrorMessage || 'Please check your internet connection and try reloading the console.'}
                       </p>
-                      <a
-                        href={PAYPAL_DIRECT_PAYMENT_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-1.5 font-body-text text-xs font-bold tracking-wider bg-[#0A1B36] text-white py-2.5 px-6 hover:bg-[#C5A253] hover:text-[#0A1B36] uppercase transition-all shadow-xs"
+                      <button
+                        type="button"
+                        onClick={loadAndRenderPayPal}
+                        className="inline-flex items-center justify-center gap-1.5 font-body-text text-xs font-bold tracking-wider bg-[#0A1B36] text-white py-2.5 px-6 hover:bg-[#C5A253] hover:text-[#0A1B36] uppercase transition-all shadow-xs cursor-pointer"
                       >
-                        <span>Open PayPal Portal</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>Reload Payment Options</span>
+                      </button>
                     </div>
                   )}
 
-                  {/* Official PayPal Hosted Buttons Mount Target */}
+                  {/* Official PayPal In-Line Hosted Buttons Mount Target */}
                   <div className="w-full max-w-md mx-auto">
                     <div
                       id="paypal-container-TTQHDUE3H6G5G"
