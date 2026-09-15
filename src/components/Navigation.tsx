@@ -91,6 +91,13 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
           >
             MEMORIES
           </button>
+          <button
+            id="nav-link-faq"
+            onClick={() => scrollToSection('faq')}
+            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#0A1B36] transition-colors py-2 uppercase cursor-pointer min-h-[44px] flex items-center"
+          >
+            FAQ
+          </button>
 
           {/* Primary Action Button */}
           <button
@@ -150,6 +157,12 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
             className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#C5A253] py-3.5 px-3 border-b border-[#0A1B36]/10 uppercase flex items-center min-h-[44px]"
           >
             MEMORIES &amp; TRIBUTES
+          </button>
+          <button
+            onClick={() => scrollToSection('faq')}
+            className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 uppercase flex items-center min-h-[44px]"
+          >
+            CELEBRATION FAQ
           </button>
           <button
             onClick={() => scrollToSection('donate')}

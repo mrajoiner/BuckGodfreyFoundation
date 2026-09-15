@@ -56,6 +56,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             MEMORIES
           </button>
           <button
+            id="footer-link-faq"
+            onClick={() => scrollToSection('faq')}
+            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center"
+          >
+            CELEBRATION FAQ
+          </button>
+          <button
             id="footer-link-donate"
             onClick={() => scrollToSection('donate')}
             className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center font-bold"
