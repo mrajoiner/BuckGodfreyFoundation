@@ -11,7 +11,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ZoomIn,
-  ShieldCheck,
   Image as ImageIcon,
   Check,
 } from 'lucide-react';
@@ -20,7 +19,6 @@ import {
   MemorialDocument,
   COMBINED_MEMORIAL_DOCUMENT,
   downloadBothDocuments,
-  downloadMemorialArchiveZip,
   triggerSingleDownload,
   triggerSingleDownloadByUrl,
 } from '../utils/downloadDocuments';
@@ -77,11 +75,6 @@ export const SingleDocumentViewerCard: React.FC<SingleDocumentViewerCardProps> =
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-tech-mono bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 px-2 py-0.5">
-              <ShieldCheck className="w-3 h-3 text-emerald-400" />
-              <span>NEVER BLOCKED</span>
-            </span>
-
             {/* Quick External Tab Link */}
             <a
               href={currentPage.url}
@@ -100,7 +93,7 @@ export const SingleDocumentViewerCard: React.FC<SingleDocumentViewerCardProps> =
             {doc.title}
           </h3>
           <span className="font-tech-mono text-xs text-white/70 shrink-0">
-            {doc.pages} • High-Res JPEG Embed
+            {doc.pages}
           </span>
         </div>
       </div>
@@ -466,7 +459,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
             </h2>
             <div className="w-20 h-1 bg-[#C5A253] mx-auto my-4"></div>
             <p className="font-body-text text-base sm:text-lg text-[#0A1B36]/80 leading-relaxed">
-              Designed as high-resolution commemoratives and embedded directly below as native images—guaranteed visible on every browser, smartphone, and tablet without being blocked.
+              View and download the official memorial program and obituary honoring the life and legacy of Coach William “Buck” Godfrey.
             </p>
           </div>
         </FadeInView>
@@ -533,20 +526,6 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                   >
                     Obituary PDF
                   </a>
-                  <span>•</span>
-                  <a
-                    href="/api/documents/zip"
-                    download="William_Buck_Godfrey_Memorial_Documents.zip"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      downloadMemorialArchiveZip();
-                    }}
-                    className="hover:text-white underline"
-                  >
-                    All Files (.zip)
-                  </a>
                 </div>
               </div>
             </div>
@@ -557,7 +536,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                 <ArrowDown className="w-3.5 h-3.5 text-[#C5A253] animate-bounce" />
                 <span>DOCUMENT 1: CELEBRATION PROGRAM (BELOW LEFT)</span>
               </div>
-              <span className="text-white/40">• VIEWABLE INDIVIDUALLY BELOW • ZERO PLUGINS NEEDED •</span>
+              <span className="text-white/40">• VIEW OR DOWNLOAD EACH DOCUMENT BELOW •</span>
               <div className="flex items-center gap-2">
                 <span>DOCUMENT 2: OBITUARY & LIFE STORY (BELOW RIGHT)</span>
                 <ArrowDown className="w-3.5 h-3.5 text-[#C5A253] animate-bounce" />
@@ -599,7 +578,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                   Connected to Both Archives
                 </h4>
                 <p className="font-body-text text-xs text-[#0A1B36]/80">
-                  Both documents are viewable inline as high-res JPEGs without browser blocking and downloadable together.
+                  View each document below or download both memorial documents together.
                 </p>
               </div>
             </div>
