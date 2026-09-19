@@ -1,18 +1,37 @@
 import React from 'react';
-import { Download } from 'lucide-react';
+import { Download, Eye } from 'lucide-react';
 import { downloadBothDocuments } from '../utils/downloadDocuments';
 
-export const PersistentDownloadButton: React.FC = () => {
+interface PersistentDownloadButtonProps {
+  onViewClick?: (docId?: 'program' | 'obituary') => void;
+}
+
+export const PersistentDownloadButton: React.FC<PersistentDownloadButtonProps> = ({
+  onViewClick,
+}) => {
   const handleDownloadBoth = (e: React.MouseEvent) => {
     e.preventDefault();
     downloadBothDocuments();
   };
 
+  const handleView = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onViewClick) {
+      onViewClick('program');
+    } else {
+      const el = document.getElementById('documents');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   return (
     <div
       id="persistent-document-download-container"
-      className="fixed bottom-20 left-3 sm:bottom-6 sm:left-6 z-40 flex items-center pointer-events-auto select-none max-w-[calc(100vw-24px)]"
+      className="fixed bottom-20 left-3 sm:bottom-6 sm:left-6 z-40 flex items-center gap-1.5 pointer-events-auto select-none max-w-[calc(100vw-24px)]"
     >
+      {/* Primary Download Link */}
       <a
         href="/api/documents/obituary"
         id="persistent-download-documents-btn"
@@ -25,6 +44,20 @@ export const PersistentDownloadButton: React.FC = () => {
           Download Program and Obituary
         </span>
       </a>
+
+      {/* Companion View Link to view inline */}
+      <button
+        id="persistent-view-documents-btn"
+        onClick={handleView}
+        aria-label="View Program and Obituary inline on website"
+        title="View Program and Obituary inline on website"
+        className="group flex items-center gap-1.5 bg-[#ffffff] text-[#0A1B36] hover:bg-[#C5A253] hover:text-[#0A1B36] border-2 border-[#0A1B36] py-2.5 px-3 sm:py-3 sm:px-3.5 shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer rounded-none min-h-[44px]"
+      >
+        <Eye className="w-4 h-4 text-[#0A1B36]" />
+        <span className="font-display-title text-xs sm:text-sm font-bold tracking-wide">
+          View
+        </span>
+      </button>
     </div>
   );
 };

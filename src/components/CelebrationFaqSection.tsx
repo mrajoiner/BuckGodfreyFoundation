@@ -19,6 +19,7 @@ import {
   Search,
   CheckCircle2,
   Download,
+  Eye,
 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
@@ -38,10 +39,12 @@ interface FaqItem {
 
 interface CelebrationFaqSectionProps {
   onNavigateSection?: (sectionId: string) => void;
+  onOpenDocumentViewer?: (docId: 'program' | 'obituary') => void;
 }
 
 export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
   onNavigateSection,
+  onOpenDocumentViewer,
 }) => {
   const containerRef = useRef<HTMLElement>(null);
   const [openIds, setOpenIds] = useState<string[]>([
@@ -327,11 +330,11 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
       id: 'faq-documents-download',
       category: 'tribute',
       icon: Download,
-      question: 'Where can I download the Celebration Program and Coach Godfrey’s Obituary?',
+      question: 'Where can I view or download the Celebration Program and Coach Godfrey’s Obituary?',
       answer: (
         <div className="space-y-3 font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed">
           <p>
-            You can download <strong>both commemorative memorial documents</strong> directly to your device with one link. They are delivered as two separate PDF files:
+            You can <strong>view both commemorative memorial documents inline</strong> directly on the website, or download them to your device as separate PDF files:
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -353,26 +356,56 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
                     {doc.description}
                   </p>
                 </div>
-                <div className="pt-3 mt-2 border-t border-[#0A1B36]/10">
+                <div className="pt-3 mt-2 border-t border-[#0A1B36]/10 flex flex-wrap items-center justify-between gap-2">
+                  <button
+                    onClick={() => {
+                      if (onOpenDocumentViewer) {
+                        onOpenDocumentViewer(doc.id as 'program' | 'obituary');
+                      } else {
+                        const el = document.getElementById('documents');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                    className="inline-flex items-center gap-1 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-[#C5A253]" />
+                    <span>View Online</span>
+                  </button>
+
                   <button
                     onClick={() => triggerSingleDownload(doc)}
-                    className="inline-flex items-center gap-1.5 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
+                    className="inline-flex items-center gap-1 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5 text-[#C5A253]" />
-                    <span>Download {doc.title} (.pdf)</span>
+                    <span>Download (.pdf)</span>
                   </button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="pt-2">
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <button
               onClick={() => downloadBothDocuments()}
               className="inline-flex items-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-3 px-6 uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
             >
               <Download className="w-4 h-4 text-[#C5A253]" />
               <span>Download Program and Obituary</span>
+            </button>
+
+            <button
+              onClick={() => {
+                if (onOpenDocumentViewer) {
+                  onOpenDocumentViewer('program');
+                } else {
+                  const el = document.getElementById('documents');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="inline-flex items-center gap-2 bg-white border-2 border-[#0A1B36] text-[#0A1B36] hover:bg-[#C5A253] font-display-title text-xs sm:text-sm font-bold py-3 px-5 uppercase tracking-wider transition-all shadow-sm active:scale-95 cursor-pointer"
+            >
+              <Eye className="w-4 h-4 text-[#0A1B36]" />
+              <span>View Inline on Website</span>
             </button>
           </div>
         </div>

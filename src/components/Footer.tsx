@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download } from 'lucide-react';
+import { Download, Eye } from 'lucide-react';
 import { downloadBothDocuments } from '../utils/downloadDocuments';
 
 interface FooterProps {
@@ -63,6 +63,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center"
           >
             CELEBRATION FAQ
+          </button>
+          <button
+            id="footer-link-documents-view"
+            onClick={() => scrollToSection('documents')}
+            title="View Program and Obituary Inline"
+            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center gap-1"
+          >
+            <Eye className="w-3.5 h-3.5 text-[#C5A253]" />
+            <span>View Program & Obituary</span>
           </button>
           <button
             id="footer-link-documents"

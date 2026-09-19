@@ -12,6 +12,8 @@ import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
 import { PersistentDonateButton } from './components/PersistentDonateButton';
 import { PersistentDownloadButton } from './components/PersistentDownloadButton';
+import { MemorialDocumentsSection } from './components/MemorialDocumentsSection';
+import { MemorialDocumentViewerModal } from './components/MemorialDocumentViewerModal';
 import { ThankYouPage } from './components/ThankYouPage';
 
 type ViewMode = 'home' | 'thank-you';
@@ -27,6 +29,22 @@ export default function App() {
     }
     return 'home';
   });
+
+  const [viewerModal, setViewerModal] = useState<{
+    isOpen: boolean;
+    docId: 'program' | 'obituary';
+  }>({
+    isOpen: false,
+    docId: 'program',
+  });
+
+  const handleOpenViewer = (docId: 'program' | 'obituary' = 'program') => {
+    setViewerModal({ isOpen: true, docId });
+  };
+
+  const handleCloseViewer = () => {
+    setViewerModal((prev) => ({ ...prev, isOpen: false }));
+  };
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -109,8 +127,8 @@ export default function App() {
         }}
       />
 
-      {/* Persistent Floating 'Download Memorial Documents' Button (One link, two separate documents) */}
-      <PersistentDownloadButton />
+      {/* Persistent Floating 'Download Memorial Documents' Button with View link */}
+      <PersistentDownloadButton onViewClick={handleOpenViewer} />
 
       {/* Main Content View Switcher */}
       <main id="main-content" className="grow overflow-x-hidden">
@@ -123,6 +141,9 @@ export default function App() {
 
             {/* Legacy Section with Inline Bio & Milestones */}
             <LegacySection />
+
+            {/* Memorial Documents Section (Inline Embeds of Program & Obituary) */}
+            <MemorialDocumentsSection onOpenViewerModal={handleOpenViewer} />
 
             {/* Vision / HBCU Impact Pillars */}
             <VisionSection />
@@ -141,6 +162,7 @@ export default function App() {
 
             {/* Celebration of Life FAQ Section */}
             <CelebrationFaqSection
+              onOpenDocumentViewer={handleOpenViewer}
               onNavigateSection={(sectionId) => {
                 const el = document.getElementById(sectionId);
                 if (el) {
@@ -167,6 +189,13 @@ export default function App() {
             }
           }
         }}
+      />
+
+      {/* Inline Document Viewer Fullscreen/Dialog Modal */}
+      <MemorialDocumentViewerModal
+        isOpen={viewerModal.isOpen}
+        onClose={handleCloseViewer}
+        initialDocId={viewerModal.docId}
       />
     </div>
   );

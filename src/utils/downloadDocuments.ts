@@ -4,6 +4,7 @@ export interface MemorialDocument {
   subtitle: string;
   filename: string;
   downloadUrl: string;
+  viewUrl: string;
   size: string;
   pages: string;
   type: string;
@@ -17,6 +18,7 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
     subtitle: 'Written by Gavin Godfrey • 3-Page Memoir & Biography',
     filename: 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
     downloadUrl: '/api/documents/obituary',
+    viewUrl: '/api/documents/obituary/view',
     size: '17 KB',
     pages: '3 Pages',
     type: 'PDF Document',
@@ -29,6 +31,7 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
     subtitle: 'Official 4-Quarter Memorial Program & Tributes',
     filename: 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
     downloadUrl: '/api/documents/program',
+    viewUrl: '/api/documents/program/view',
     size: '10 KB',
     pages: '2 Pages',
     type: 'PDF Document',

@@ -57,6 +57,21 @@ app.get('/api/documents/program', (req, res) => {
   res.download(filePath, 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
 });
 
+// Dedicated Document Inline View Endpoints (for inline iframes and viewers)
+app.get('/api/documents/obituary/view', (req, res) => {
+  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline; filename="William_Buck_Godfrey_Obituary_and_Life_Story.pdf"');
+  res.sendFile(filePath);
+});
+
+app.get('/api/documents/program/view', (req, res) => {
+  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'inline; filename="William_Buck_Godfrey_Celebration_Order_of_Service.pdf"');
+  res.sendFile(filePath);
+});
+
 // Serve public documents statically
 app.use('/documents', express.static(path.join(process.cwd(), 'public', 'documents')));
 app.use(express.static(path.join(process.cwd(), 'public')));
