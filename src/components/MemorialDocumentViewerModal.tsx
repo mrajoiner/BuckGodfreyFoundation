@@ -126,14 +126,21 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
               <span>NEW TAB</span>
             </a>
 
-            <button
-              onClick={() => triggerSingleDownload(currentDoc)}
+            <a
+              href={currentDoc.downloadUrl}
+              download={currentDoc.filename}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSingleDownload(currentDoc);
+              }}
               title="Download this PDF document"
-              className="inline-flex items-center gap-1 text-[11px] font-tech-mono font-bold text-[#0A1B36] bg-[#C5A253] hover:bg-white px-2.5 sm:px-3 py-1.5 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 text-[11px] font-tech-mono font-bold text-[#0A1B36] bg-[#C5A253] hover:bg-white px-2.5 sm:px-3 py-1.5 transition-colors cursor-pointer no-underline"
             >
               <Download className="w-3.5 h-3.5" />
               <span className="hidden xs:inline">DOWNLOAD PDF</span>
-            </button>
+            </a>
 
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
@@ -426,12 +433,19 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
           </div>
 
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => triggerSingleDownload(currentDoc)}
+            <a
+              href={currentDoc.downloadUrl}
+              download={currentDoc.filename}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSingleDownload(currentDoc);
+              }}
               className="font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
             >
               Download PDF ({currentDoc.size})
-            </button>
+            </a>
             <button
               onClick={onClose}
               className="font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"

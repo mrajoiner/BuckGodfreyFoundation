@@ -187,19 +187,24 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
               VIEW INLINE
             </span>
           </button>
-          <button
+          <a
+            href="/api/documents/combined"
             id="mobile-nav-documents"
-            onClick={() => {
+            download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
               downloadBothDocuments();
               setMobileMenuOpen(false);
             }}
-            className="w-full text-left font-body-text text-xs font-bold tracking-[0.05em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 flex items-center justify-between min-h-[44px] bg-[#0A1B36]/5"
+            className="w-full text-left font-body-text text-xs font-bold tracking-[0.05em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 flex items-center justify-between min-h-[44px] bg-[#0A1B36]/5 no-underline"
           >
             <span className="flex items-center gap-2">
               <Download className="w-4 h-4 text-[#C5A253]" />
               <span>Download Program and Obituary</span>
             </span>
-          </button>
+          </a>
           <button
             onClick={() => scrollToSection('donate')}
             className="w-full font-body-text text-xs font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 uppercase mt-3 flex items-center justify-center min-h-[48px]"

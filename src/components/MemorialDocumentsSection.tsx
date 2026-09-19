@@ -18,7 +18,9 @@ import {
 import {
   MEMORIAL_DOCUMENTS,
   MemorialDocument,
+  COMBINED_MEMORIAL_DOCUMENT,
   downloadBothDocuments,
+  downloadMemorialArchiveZip,
   triggerSingleDownload,
   triggerSingleDownloadByUrl,
 } from '../utils/downloadDocuments';
@@ -182,14 +184,21 @@ export const SingleDocumentViewerCard: React.FC<SingleDocumentViewerCardProps> =
           </button>
 
           {/* Individual PDF download */}
-          <button
-            onClick={() => triggerSingleDownload(doc)}
+          <a
+            href={doc.downloadUrl}
+            download={doc.filename}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              triggerSingleDownload(doc);
+            }}
             title={`Download ${doc.title} PDF`}
-            className="inline-flex items-center gap-1 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] text-[11px] font-tech-mono font-bold px-2.5 py-1 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] text-[11px] font-tech-mono font-bold px-2.5 py-1 transition-colors cursor-pointer no-underline"
           >
             <Download className="w-3 h-3 text-[#C5A253]" />
             <span>PDF</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -361,18 +370,32 @@ export const SingleDocumentViewerCard: React.FC<SingleDocumentViewerCardProps> =
         </div>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => triggerSingleDownloadByUrl(currentPage.url, currentPage.filename)}
+          <a
+            href={currentPage.url}
+            download={currentPage.filename}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              triggerSingleDownloadByUrl(currentPage.url, currentPage.filename);
+            }}
             className="text-[11px] font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
           >
             Save JPEG
-          </button>
-          <button
-            onClick={() => triggerSingleDownload(doc)}
+          </a>
+          <a
+            href={doc.downloadUrl}
+            download={doc.filename}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              triggerSingleDownload(doc);
+            }}
             className="font-display-title text-xs font-bold uppercase text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
           >
             Download Full PDF
-          </button>
+          </a>
         </div>
       </div>
 
@@ -468,28 +491,63 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                   Download Both Memorial Documents
                 </h3>
                 <p className="font-body-text text-xs sm:text-sm text-white/80 leading-relaxed">
-                  One click delivers both separate PDF documents to your device: the official <strong>Celebration Program (Order of Service)</strong> and Coach Godfrey’s complete <strong>Obituary & Life Story</strong>.
+                  One click delivers both official memorial documents: the <strong>Celebration Program (Order of Service)</strong> and Coach Godfrey’s complete <strong>Obituary & Life Story</strong>.
                 </p>
               </div>
 
               {/* Primary Connected Download Action */}
               <div className="shrink-0 flex flex-col items-center md:items-end gap-2">
                 <a
-                  href="/api/documents/obituary"
+                  href="/api/documents/combined"
                   id="section-download-both-documents-link"
+                  download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={(e) => {
                     e.preventDefault();
                     downloadBothDocuments();
                   }}
-                  aria-label="Download Program and Obituary (both separate PDFs in 1 click)"
+                  aria-label="Download Program and Obituary (both in 1 complete PDF)"
                   className="group flex items-center gap-2.5 bg-[#C5A253] hover:bg-white text-[#0A1B36] font-display-title text-sm sm:text-base font-black px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-[#C5A253] hover:border-white shadow-2xl transition-all duration-200 cursor-pointer uppercase tracking-wider active:scale-95 no-underline"
                 >
                   <Download className="w-5 h-5 text-[#0A1B36] group-hover:scale-110 transition-transform" />
                   <span>Download Program and Obituary</span>
                 </a>
-                <span className="font-tech-mono text-[10px] text-[#C5A253] uppercase tracking-wider font-bold">
-                  2 SEPARATE PDFS IN A SINGLE CLICK
-                </span>
+                <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 text-[11px] font-tech-mono text-[#C5A253]">
+                  <a
+                    href="/api/documents/program"
+                    download="William_Buck_Godfrey_Celebration_Order_of_Service.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white underline"
+                  >
+                    Program PDF
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="/api/documents/obituary"
+                    download="William_Buck_Godfrey_Obituary_and_Life_Story.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white underline"
+                  >
+                    Obituary PDF
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="/api/documents/zip"
+                    download="William_Buck_Godfrey_Memorial_Documents.zip"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      downloadMemorialArchiveZip();
+                    }}
+                    className="hover:text-white underline"
+                  >
+                    All Files (.zip)
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -546,13 +604,20 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
               </div>
             </div>
 
-            <button
-              onClick={() => downloadBothDocuments()}
-              className="flex items-center gap-2 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] px-5 py-2.5 font-display-title text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+            <a
+              href="/api/documents/combined"
+              download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                downloadBothDocuments();
+              }}
+              className="flex items-center gap-2 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] px-5 py-2.5 font-display-title text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0 no-underline"
             >
               <Download className="w-4 h-4 text-[#C5A253] group-hover:text-[#0A1B36]" />
               <span>Download Program and Obituary</span>
-            </button>
+            </a>
           </div>
         </FadeInView>
       </div>

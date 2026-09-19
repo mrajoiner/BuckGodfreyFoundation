@@ -33,8 +33,11 @@ export const PersistentDownloadButton: React.FC<PersistentDownloadButtonProps> =
     >
       {/* Primary Download Link */}
       <a
-        href="/api/documents/obituary"
+        href="/api/documents/combined"
         id="persistent-download-documents-btn"
+        download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleDownloadBoth}
         aria-label="Download Program and Obituary"
         className="group flex items-center gap-2 sm:gap-2.5 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] border-2 border-[#0A1B36] py-2.5 px-3.5 sm:py-3 sm:px-5 shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer rounded-none min-h-[44px] no-underline"

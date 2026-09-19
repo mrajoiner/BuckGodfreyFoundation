@@ -73,15 +73,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             <Eye className="w-3.5 h-3.5 text-[#C5A253]" />
             <span>View Program & Obituary</span>
           </button>
-          <button
+          <a
+            href="/api/documents/combined"
             id="footer-link-documents"
-            onClick={() => downloadBothDocuments()}
+            download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              downloadBothDocuments();
+            }}
             title="Download Program and Obituary"
-            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center gap-1"
+            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center gap-1 no-underline"
           >
             <Download className="w-3.5 h-3.5 text-[#C5A253]" />
             <span>Download Program and Obituary</span>
-          </button>
+          </a>
           <button
             id="footer-link-donate"
             onClick={() => scrollToSection('donate')}

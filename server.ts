@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
@@ -46,30 +47,141 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Dedicated Document Download Endpoints
+// Dedicated Document Endpoints with Permissive CORS and Error Handling
+const DOCUMENTS_DIR = path.join(process.cwd(), 'public', 'documents');
+
+const serveDocumentFile = (res: express.Response, filename: string, downloadName: string, asAttachment = true) => {
+  const filePath = path.join(DOCUMENTS_DIR, filename);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: 'Document file not found', filename });
+  }
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Expose-Headers', 'Content-Disposition, Content-Length');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+
+  if (asAttachment) {
+    res.download(filePath, downloadName, (err) => {
+      if (err && !res.headersSent) {
+        console.error(`Error serving download for ${downloadName}:`, err);
+        res.status(500).json({ error: 'Failed to download document', message: err.message });
+      }
+    });
+  } else {
+    const contentType = filename.endsWith('.pdf')
+      ? 'application/pdf'
+      : filename.endsWith('.zip')
+      ? 'application/zip'
+      : filename.endsWith('.jpeg') || filename.endsWith('.jpg')
+      ? 'image/jpeg'
+      : 'application/octet-stream';
+
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Disposition', `inline; filename="${downloadName}"`);
+    res.sendFile(filePath);
+  }
+};
+
+// CORS preflight for all /api/documents routes
+app.options('/api/documents/*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Range');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.sendStatus(204);
+});
+
+// Combined Memorial Document (Both Program & Obituary in 1 PDF)
+app.get('/api/documents/combined', (req, res) => {
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+    req.query.view !== '1'
+  );
+});
+
+// Individual Document 1: Obituary & Life Story PDF
 app.get('/api/documents/obituary', (req, res) => {
-  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
-  res.download(filePath, 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    req.query.view !== '1'
+  );
 });
 
+// Individual Document 2: Order of Service PDF
 app.get('/api/documents/program', (req, res) => {
-  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
-  res.download(filePath, 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    req.query.view !== '1'
+  );
 });
 
-// Dedicated Document Inline View Endpoints (for inline iframes and viewers)
+// Full Memorial Archive ZIP (All PDFs + JPEGs + Tribute)
+app.get('/api/documents/zip', (req, res) => {
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Memorial_Documents.zip',
+    'William_Buck_Godfrey_Memorial_Documents.zip',
+    true
+  );
+});
+
+// Inline view endpoints
+app.get('/api/documents/combined/view', (req, res) => {
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+    false
+  );
+});
+
 app.get('/api/documents/obituary/view', (req, res) => {
-  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline; filename="William_Buck_Godfrey_Obituary_and_Life_Story.pdf"');
-  res.sendFile(filePath);
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    false
+  );
 });
 
 app.get('/api/documents/program/view', (req, res) => {
-  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline; filename="William_Buck_Godfrey_Celebration_Order_of_Service.pdf"');
-  res.sendFile(filePath);
+  serveDocumentFile(
+    res,
+    'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    false
+  );
+});
+
+// Generic download router for any allowed document file
+app.get('/api/documents/download', (req, res) => {
+  const requestedFile = req.query.file as string;
+  const allowedFiles: Record<string, string> = {
+    'combined-pdf': 'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+    'program-pdf': 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    'obituary-pdf': 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    'archive-zip': 'William_Buck_Godfrey_Memorial_Documents.zip',
+    'program-p1-jpeg': 'William_Buck_Godfrey_Program_Page_1.jpeg',
+    'program-p2-jpeg': 'William_Buck_Godfrey_Program_Page_2.jpeg',
+    'obituary-p1-jpeg': 'William_Buck_Godfrey_Obituary_Page_1.jpeg',
+    'obituary-p2-jpeg': 'William_Buck_Godfrey_Obituary_Page_2.jpeg',
+    'obituary-p3-jpeg': 'William_Buck_Godfrey_Obituary_Page_3.jpeg',
+  };
+
+  const filename = allowedFiles[requestedFile];
+  if (!filename) {
+    return res.status(400).json({ error: 'Invalid document requested' });
+  }
+
+  serveDocumentFile(res, filename, filename, true);
 });
 
 // Serve public documents statically with permissive cross-origin headers so images are never blocked
