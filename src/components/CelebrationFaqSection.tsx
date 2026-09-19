@@ -17,10 +17,16 @@ import {
   ChevronDown,
   Sparkles,
   Search,
-  CheckCircle2
+  CheckCircle2,
+  Download,
 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
+import {
+  MEMORIAL_DOCUMENTS,
+  downloadBothDocuments,
+  triggerSingleDownload,
+} from '../utils/downloadDocuments';
 
 interface FaqItem {
   id: string;
@@ -95,7 +101,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
       answer: (
         <div className="space-y-3">
           <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed">
-            The celebration will be held <strong>Saturday</strong> at the <strong>College Football Hall of Fame</strong>.
+            The celebration will be held <strong>Saturday, September 19th</strong> at the <strong>College Football Hall of Fame</strong>.
           </p>
           <div className="bg-[#0A1B36]/5 border-l-4 border-[#C5A253] p-3.5 sm:p-4 text-xs sm:text-sm space-y-2">
             <div className="font-display-title font-bold text-[#0A1B36] uppercase tracking-wide">
@@ -128,7 +134,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
       answer: (
         <div className="space-y-2.5 font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed">
           <p>
-            Access to the College Football Hall of Fame and the pre-reception begins at <strong>5:00 PM</strong>.
+            On <strong>Saturday, September 19th</strong>, access to the College Football Hall of Fame and the pre-reception begins at <strong>5:00 PM</strong>.
           </p>
           <p>
             The hall will open at <strong>5:30 PM</strong>.
@@ -195,7 +201,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
             <strong>Yes!</strong> We strongly encourage guests to use Uber, Lyft, or another rideshare service if possible.
           </p>
           <div className="p-3 bg-amber-50 border border-amber-200 text-xs sm:text-sm text-[#0A1B36]">
-            <strong>Travel Advisory:</strong> An Atlanta Dream game begins at <strong>7:00 PM</strong>, so downtown traffic and parking may be busier than usual.
+            <strong>Travel Advisory:</strong> An Atlanta Dream game begins at <strong>7:00 PM on Saturday, September 19th</strong>, so downtown traffic and parking may be busier than usual.
           </div>
         </div>
       ),
@@ -318,6 +324,61 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
       ),
     },
     {
+      id: 'faq-documents-download',
+      category: 'tribute',
+      icon: Download,
+      question: 'Where can I download the Celebration Program and Coach Godfrey’s Obituary?',
+      answer: (
+        <div className="space-y-3 font-body-text text-sm sm:text-base text-[#0A1B36]/90 leading-relaxed">
+          <p>
+            You can download <strong>both commemorative memorial documents</strong> directly to your device with one link. They are delivered as two separate PDF files:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            {MEMORIAL_DOCUMENTS.map((doc, idx) => (
+              <div key={doc.id} className="bg-[#0A1B36]/5 border border-[#0A1B36]/20 p-3 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="font-tech-mono text-[9px] font-bold bg-[#0A1B36] text-white px-1.5 py-0.5">
+                      DOC {idx + 1}
+                    </span>
+                    <span className="font-tech-mono text-[10px] text-[#C5A253] font-bold uppercase">
+                      {doc.pages} • {doc.size}
+                    </span>
+                  </div>
+                  <h4 className="font-display-title text-sm font-bold text-[#0A1B36] uppercase leading-tight">
+                    {doc.title}
+                  </h4>
+                  <p className="text-xs text-[#0A1B36]/75 mt-1 leading-relaxed">
+                    {doc.description}
+                  </p>
+                </div>
+                <div className="pt-3 mt-2 border-t border-[#0A1B36]/10">
+                  <button
+                    onClick={() => triggerSingleDownload(doc)}
+                    className="inline-flex items-center gap-1.5 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5 text-[#C5A253]" />
+                    <span>Download {doc.title} (.pdf)</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-2">
+            <button
+              onClick={() => downloadBothDocuments()}
+              className="inline-flex items-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-3 px-6 uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-[#C5A253]" />
+              <span>Download Program and Obituary</span>
+            </button>
+          </div>
+        </div>
+      ),
+    },
+    {
       id: 'faq-children',
       category: 'attire',
       icon: Smile,
@@ -413,7 +474,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
             <div className="inline-flex items-center gap-2 bg-[#ffffff] px-4 py-1.5 border border-[#C5A253]">
               <Sparkles className="w-3.5 h-3.5 text-[#C5A253]" />
               <span className="font-tech-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#C5A253] font-bold">
-                OFFICIAL EVENT INFORMATION
+                OFFICIAL EVENT INFORMATION • SATURDAY, SEPTEMBER 19TH
               </span>
             </div>
 
@@ -446,13 +507,13 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
             <div className="space-y-1">
               <div className="flex items-center gap-1.5 text-[#C5A253] font-bold text-xs uppercase font-tech-mono">
                 <Clock className="w-3.5 h-3.5 shrink-0" />
-                <span>TIME &amp; RECEPTION</span>
+                <span>DATE &amp; SCHEDULE</span>
               </div>
               <p className="font-display-title text-xs sm:text-sm font-bold text-[#0A1B36]">
-                5:00 PM Reception / 5:30 PM Hall
+                Saturday, September 19th
               </p>
               <p className="font-body-text text-[11px] text-[#0A1B36]/75">
-                No entry before 5:00 PM
+                5:00 PM Reception • 5:30 PM Hall
               </p>
             </div>
 

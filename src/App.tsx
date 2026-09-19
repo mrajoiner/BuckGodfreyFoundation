@@ -11,6 +11,7 @@ import { CelebrationFaqSection } from './components/CelebrationFaqSection';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
 import { PersistentDonateButton } from './components/PersistentDonateButton';
+import { PersistentDownloadButton } from './components/PersistentDownloadButton';
 import { ThankYouPage } from './components/ThankYouPage';
 
 type ViewMode = 'home' | 'thank-you';
@@ -107,6 +108,9 @@ export default function App() {
           }
         }}
       />
+
+      {/* Persistent Floating 'Download Memorial Documents' Button (One link, two separate documents) */}
+      <PersistentDownloadButton />
 
       {/* Main Content View Switcher */}
       <main id="main-content" className="grow overflow-x-hidden">

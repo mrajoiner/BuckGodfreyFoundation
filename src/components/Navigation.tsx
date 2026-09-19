@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { ScholarshipAnnouncementBar } from './ScholarshipAnnouncementBar';
+import { downloadBothDocuments } from '../utils/downloadDocuments';
 
 interface NavigationProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -98,6 +99,15 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
           >
             FAQ
           </button>
+          <button
+            id="nav-link-documents"
+            onClick={() => downloadBothDocuments()}
+            title="Download Program and Obituary"
+            className="font-body-text text-[11px] font-bold tracking-[0.2em] text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors py-2 uppercase cursor-pointer min-h-[44px] flex items-center gap-1"
+          >
+            <Download className="w-3.5 h-3.5 text-[#C5A253]" />
+            <span>DOCUMENTS</span>
+          </button>
 
           {/* Primary Action Button */}
           <button
@@ -163,6 +173,19 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
             className="w-full text-left font-body-text text-xs font-bold tracking-[0.2em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 uppercase flex items-center min-h-[44px]"
           >
             CELEBRATION FAQ
+          </button>
+          <button
+            id="mobile-nav-documents"
+            onClick={() => {
+              downloadBothDocuments();
+              setMobileMenuOpen(false);
+            }}
+            className="w-full text-left font-body-text text-xs font-bold tracking-[0.05em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 flex items-center justify-between min-h-[44px] bg-[#0A1B36]/5"
+          >
+            <span className="flex items-center gap-2">
+              <Download className="w-4 h-4 text-[#C5A253]" />
+              <span>Download Program and Obituary</span>
+            </span>
           </button>
           <button
             onClick={() => scrollToSection('donate')}

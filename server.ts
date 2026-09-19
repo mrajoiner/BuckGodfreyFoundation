@@ -46,6 +46,21 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Dedicated Document Download Endpoints
+app.get('/api/documents/obituary', (req, res) => {
+  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
+  res.download(filePath, 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf');
+});
+
+app.get('/api/documents/program', (req, res) => {
+  const filePath = path.join(process.cwd(), 'public', 'documents', 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
+  res.download(filePath, 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf');
+});
+
+// Serve public documents statically
+app.use('/documents', express.static(path.join(process.cwd(), 'public', 'documents')));
+app.use(express.static(path.join(process.cwd(), 'public')));
+
 // Contact Form & Customer Receipt Dispatch API
 app.post('/api/contact', async (req, res) => {
   try {
