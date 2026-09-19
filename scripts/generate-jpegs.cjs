@@ -282,7 +282,11 @@ function generateObituaryPageSvg(pageNumber) {
       'He pursued professional baseball with the New York Mets organization and competed successfully as a Golden Gloves middleweight boxer. He studied philosophers such as Marcus Aurelius and Epictetus. He loved western films.',
     ];
 
-    let y = 340;
+    const epigraphText = '“The strength of a man is judged by his ability to succeed under overwhelming odds or survive under oppressive circumstances.”';
+    const epigraphLines = wrapText(epigraphText, 75);
+    const epigraphBoxHeight = 112;
+
+    let y = 365;
     const bodyParagraphs = p1.map((p) => {
       const isQuote = p.startsWith('“');
       const lines = wrapText(p, isQuote ? 80 : 86);
@@ -308,10 +312,12 @@ function generateObituaryPageSvg(pageNumber) {
 
       <!-- Epigraph Box -->
       <g transform="translate(${margin}, 225)">
-        <rect x="0" y="0" width="${contentWidth}" height="85" rx="6" fill="#F4EFE6" stroke="#C5A253" stroke-width="1.5"/>
-        <line x1="0" y1="0" x2="6" y2="85" stroke="#C5A253" stroke-width="6"/>
-        <text x="24" y="36" font-family="'Georgia', serif" font-size="17" font-style="italic" fill="#0A1B36">“The strength of a man is judged by his ability to succeed under overwhelming odds or survive under oppressive circumstances.”</text>
-        <text x="24" y="65" font-family="'Arial', sans-serif" font-size="14" font-weight="bold" fill="#C5A253">— W.H. Godfrey, from Songs For My Father</text>
+        <rect x="0" y="0" width="${contentWidth}" height="${epigraphBoxHeight}" rx="6" fill="#F4EFE6" stroke="#C5A253" stroke-width="1.5"/>
+        <line x1="0" y1="0" x2="6" y2="${epigraphBoxHeight}" stroke="#C5A253" stroke-width="6"/>
+        ${epigraphLines.map((line, idx) => `
+          <text x="24" y="${34 + idx * 24}" font-family="'Georgia', serif" font-size="17" font-style="italic" fill="#0A1B36">${escapeXml(line)}</text>
+        `).join('')}
+        <text x="24" y="${epigraphBoxHeight - 20}" font-family="'Arial', sans-serif" font-size="14" font-weight="bold" fill="#C5A253">— W.H. Godfrey, from Songs For My Father</text>
       </g>
 
       ${bodyParagraphs}

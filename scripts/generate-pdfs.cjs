@@ -127,24 +127,26 @@ function drawObituaryPage(doc, pageData, pageIndex, totalPages) {
 
   pageData.sections.forEach((sec) => {
     if (sec.type === 'quote') {
+      const quoteLines = doc.splitTextToSize(sec.text, contentWidth - 28);
+      const quoteBoxHeight = Math.max(54, 42 + (quoteLines.length - 1) * 13);
+
       doc.setFillColor(248, 246, 240);
-      doc.roundedRect(margin, y, contentWidth, 54, 4, 4, 'F');
+      doc.roundedRect(margin, y, contentWidth, quoteBoxHeight, 4, 4, 'F');
       doc.setDrawColor(gold[0], gold[1], gold[2]);
       doc.setLineWidth(1.5);
-      doc.line(margin, y, margin, y + 54);
+      doc.line(margin, y, margin, y + quoteBoxHeight);
 
       doc.setFont('times', 'italic');
       doc.setFontSize(10);
       doc.setTextColor(navy[0], navy[1], navy[2]);
-      const quoteLines = doc.splitTextToSize(sec.text, contentWidth - 28);
-      doc.text(quoteLines, margin + 14, y + 20);
+      doc.text(quoteLines, margin + 14, y + 18, { lineHeightFactor: 1.15 });
 
       doc.setFont('times', 'bold');
       doc.setFontSize(8.5);
       doc.setTextColor(gold[0], gold[1], gold[2]);
-      doc.text(sec.author, margin + 14, y + 42);
+      doc.text(sec.author, margin + 14, y + quoteBoxHeight - 10);
 
-      y += 68;
+      y += quoteBoxHeight + 14;
     }
 
     if (sec.type === 'body') {

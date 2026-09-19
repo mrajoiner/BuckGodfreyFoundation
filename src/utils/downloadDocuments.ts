@@ -20,9 +20,11 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
     id: 'program',
     title: 'Celebration Order of Service',
     subtitle: 'Official 4-Quarter Memorial Program & Tributes',
-    filename: 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
-    downloadUrl: '/documents/William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
-    size: '10 KB',
+    // The public program download should match the Celebration of a Legend
+    // flyer shown in the document viewer, rather than the older generated PDF.
+    filename: 'William_Buck_Godfrey_Celebration_of_a_Legend_Flyer.jpg',
+    downloadUrl: '/1.jpg',
+    size: 'Original flyer',
     pages: '2 Pages',
     pageCount: 2,
     description:
@@ -81,7 +83,7 @@ export async function downloadFileSafe(url: string, filename: string): Promise<b
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        Accept: 'application/pdf, */*',
+        Accept: 'application/pdf, image/jpeg, */*',
       },
     });
 
