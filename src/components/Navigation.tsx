@@ -188,7 +188,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
             </span>
           </button>
           <a
-            href="/api/documents/combined"
+            href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
             id="mobile-nav-documents"
             download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
             target="_blank"

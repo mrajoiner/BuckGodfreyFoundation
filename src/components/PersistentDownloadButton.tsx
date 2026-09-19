@@ -33,7 +33,7 @@ export const PersistentDownloadButton: React.FC<PersistentDownloadButtonProps> =
     >
       {/* Primary Download Link */}
       <a
-        href="/api/documents/combined"
+        href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
         id="persistent-download-documents-btn"
         download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
         target="_blank"

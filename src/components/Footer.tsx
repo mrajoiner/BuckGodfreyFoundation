@@ -74,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             <span>View Program & Obituary</span>
           </button>
           <a
-            href="/api/documents/combined"
+            href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
             id="footer-link-documents"
             download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
             target="_blank"

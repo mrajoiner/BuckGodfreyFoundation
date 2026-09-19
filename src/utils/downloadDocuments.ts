@@ -23,8 +23,8 @@ export const COMBINED_MEMORIAL_DOCUMENT: MemorialDocument = {
   title: 'Complete Memorial Commemorative Edition',
   subtitle: 'Official Celebration Program & Complete Obituary • 5-Page Commemorative Edition',
   filename: 'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
-  downloadUrl: '/api/documents/combined',
-  viewUrl: '/api/documents/combined/view',
+  downloadUrl: '/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
+  viewUrl: '/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
   size: '25 KB',
   pages: '5 Pages (Both Documents)',
   pageCount: 5,
@@ -71,8 +71,8 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
     title: 'Celebration Order of Service',
     subtitle: 'Official 4-Quarter Memorial Program & Tributes',
     filename: 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
-    downloadUrl: '/api/documents/program',
-    viewUrl: '/api/documents/program/view',
+    downloadUrl: '/documents/William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
+    viewUrl: '/documents/William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
     size: '10 KB',
     pages: '2 Pages',
     pageCount: 2,
@@ -99,8 +99,8 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
     title: 'Obituary & Life Story',
     subtitle: 'Written by Gavin Godfrey • 3-Page Memoir & Biography',
     filename: 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
-    downloadUrl: '/api/documents/obituary',
-    viewUrl: '/api/documents/obituary/view',
+    downloadUrl: '/documents/William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
+    viewUrl: '/documents/William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
     size: '17 KB',
     pages: '3 Pages',
     pageCount: 3,
@@ -242,7 +242,10 @@ export const downloadMemorialArchiveZip = async (
   if (onStatusChange) onStatusChange('downloading');
 
   try {
-    await downloadFileSafe('/api/documents/zip', 'William_Buck_Godfrey_Memorial_Documents.zip');
+    await downloadFileSafe(
+      '/documents/William_Buck_Godfrey_Memorial_Documents.zip',
+      'William_Buck_Godfrey_Memorial_Documents.zip'
+    );
     if (onStatusChange) {
       setTimeout(() => onStatusChange('completed'), 800);
     }

@@ -491,7 +491,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
               {/* Primary Connected Download Action */}
               <div className="shrink-0 flex flex-col items-center md:items-end gap-2">
                 <a
-                  href="/api/documents/combined"
+                  href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
                   id="section-download-both-documents-link"
                   download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
                   target="_blank"
@@ -508,7 +508,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                 </a>
                 <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 text-[11px] font-tech-mono text-[#C5A253]">
                   <a
-                    href="/api/documents/program"
+                    href="/documents/William_Buck_Godfrey_Celebration_Order_of_Service.pdf"
                     download="William_Buck_Godfrey_Celebration_Order_of_Service.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -518,7 +518,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
                   </a>
                   <span>•</span>
                   <a
-                    href="/api/documents/obituary"
+                    href="/documents/William_Buck_Godfrey_Obituary_and_Life_Story.pdf"
                     download="William_Buck_Godfrey_Obituary_and_Life_Story.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -584,7 +584,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
             </div>
 
             <a
-              href="/api/documents/combined"
+              href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
               download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
               target="_blank"
               rel="noopener noreferrer"

@@ -393,7 +393,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
             <a
-              href="/api/documents/combined"
+              href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
               download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
               target="_blank"
               rel="noopener noreferrer"
