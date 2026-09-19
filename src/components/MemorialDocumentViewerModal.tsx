@@ -7,11 +7,19 @@ import {
   FileText,
   Maximize2,
   Minimize2,
-  Sparkles,
-  Printer,
+  ChevronLeft,
   ChevronRight,
+  ZoomIn,
+  ZoomOut,
+  ShieldCheck,
+  Image as ImageIcon,
 } from 'lucide-react';
-import { MEMORIAL_DOCUMENTS, MemorialDocument, triggerSingleDownload } from '../utils/downloadDocuments';
+import {
+  MEMORIAL_DOCUMENTS,
+  MemorialDocument,
+  triggerSingleDownload,
+  triggerSingleDownloadByUrl,
+} from '../utils/downloadDocuments';
 import { DOCUMENT_TRANSCRIPTS } from '../data/documentTranscripts';
 
 interface MemorialDocumentViewerModalProps {
@@ -26,12 +34,16 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
   initialDocId = 'program',
 }) => {
   const [activeDocId, setActiveDocId] = useState<'program' | 'obituary'>(initialDocId);
-  const [viewMode, setViewMode] = useState<'pdf' | 'reader'>('pdf');
+  const [activePageIndex, setActivePageIndex] = useState<number>(0);
+  const [viewMode, setViewMode] = useState<'image' | 'reader' | 'all-pages'>('image');
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [zoomScale, setZoomScale] = useState<number>(1);
 
   useEffect(() => {
     if (initialDocId) {
       setActiveDocId(initialDocId);
+      setActivePageIndex(0);
+      setZoomScale(1);
     }
   }, [initialDocId]);
 
@@ -56,6 +68,19 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
 
   const currentDoc = MEMORIAL_DOCUMENTS.find((d) => d.id === activeDocId) || MEMORIAL_DOCUMENTS[0];
   const currentTranscript = DOCUMENT_TRANSCRIPTS[activeDocId];
+  const currentPage = currentDoc.jpegPages[activePageIndex] || currentDoc.jpegPages[0];
+
+  const handlePrevPage = () => {
+    setActivePageIndex((prev) => (prev > 0 ? prev - 1 : currentDoc.jpegPages.length - 1));
+  };
+
+  const handleNextPage = () => {
+    setActivePageIndex((prev) => (prev < currentDoc.jpegPages.length - 1 ? prev + 1 : 0));
+  };
+
+  const zoomIn = () => setZoomScale((prev) => Math.min(prev + 0.25, 2.5));
+  const zoomOut = () => setZoomScale((prev) => Math.max(prev - 0.25, 0.75));
+  const resetZoom = () => setZoomScale(1);
 
   return (
     <div
@@ -63,19 +88,19 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
       role="dialog"
       aria-modal="true"
       aria-label={`${currentDoc.title} Viewer`}
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-[#0A1B36]/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-[#0A1B36]/90 backdrop-blur-md animate-in fade-in duration-200"
     >
       <div
         className={`bg-[#ffffff] border-2 border-[#C5A253] flex flex-col shadow-2xl transition-all duration-300 overflow-hidden ${
           isFullscreen
             ? 'w-full h-full max-w-none'
-            : 'w-full max-w-5xl h-[92vh] max-h-[950px]'
+            : 'w-full max-w-6xl h-[94vh] max-h-[980px]'
         }`}
       >
         {/* Top Header Bar */}
         <div className="bg-[#0A1B36] text-white px-4 py-3 sm:px-6 sm:py-3.5 flex items-center justify-between border-b-2 border-[#C5A253] shrink-0">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-none bg-[#C5A253] text-[#0A1B36] flex items-center justify-center font-display-title font-black text-sm shrink-0">
+            <div className="w-8 h-8 bg-[#C5A253] text-[#0A1B36] flex items-center justify-center font-display-title font-black text-sm shrink-0">
               {activeDocId === 'program' ? 'P' : 'O'}
             </div>
             <div className="min-w-0">
@@ -91,10 +116,10 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
           {/* Quick Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <a
-              href={currentDoc.viewUrl}
+              href={currentPage.url}
               target="_blank"
               rel="noopener noreferrer"
-              title="Open document in new browser tab"
+              title="Open full resolution in new browser tab"
               className="hidden sm:inline-flex items-center gap-1 text-[11px] font-tech-mono font-bold text-white/80 hover:text-[#C5A253] bg-white/10 hover:bg-white/15 px-2.5 py-1.5 transition-colors border border-white/20"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -130,7 +155,7 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
           </div>
         </div>
 
-        {/* Secondary Document Switcher & View Mode Selector */}
+        {/* Secondary Document Switcher & Page Controls */}
         <div className="bg-[#f7f6f2] border-b border-[#0A1B36]/15 px-3 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
           {/* Document Tabs */}
           <div className="flex items-center gap-1 sm:gap-2">
@@ -139,7 +164,11 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
               return (
                 <button
                   key={doc.id}
-                  onClick={() => setActiveDocId(doc.id as 'program' | 'obituary')}
+                  onClick={() => {
+                    setActiveDocId(doc.id as 'program' | 'obituary');
+                    setActivePageIndex(0);
+                    setZoomScale(1);
+                  }}
                   className={`flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm font-display-title uppercase tracking-wider font-bold transition-all cursor-pointer border-b-2 ${
                     isActive
                       ? 'bg-[#0A1B36] text-white border-[#C5A253]'
@@ -153,75 +182,157 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
             })}
           </div>
 
-          {/* View Mode Toggle (PDF Embed vs Formatted Text Reader) */}
-          <div className="flex items-center gap-1 bg-white border border-[#0A1B36]/20 p-0.5">
-            <button
-              onClick={() => setViewMode('pdf')}
-              className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
-                viewMode === 'pdf'
-                  ? 'bg-[#0A1B36] text-white'
-                  : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
-              }`}
-            >
-              <span>Embedded PDF</span>
-            </button>
-            <button
-              onClick={() => setViewMode('reader')}
-              className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
-                viewMode === 'reader'
-                  ? 'bg-[#0A1B36] text-white'
-                  : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
-              }`}
-            >
-              <BookOpen className="w-3 h-3 text-[#C5A253]" />
-              <span>Reader View</span>
-            </button>
+          {/* View Modes & Zoom Controls */}
+          <div className="flex items-center gap-2">
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-1 bg-white border border-[#0A1B36]/20 p-0.5">
+              <button
+                onClick={() => setViewMode('image')}
+                className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
+                  viewMode === 'image'
+                    ? 'bg-[#0A1B36] text-white'
+                    : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
+                }`}
+              >
+                <ImageIcon className="w-3 h-3 text-[#C5A253]" />
+                <span>Single Page</span>
+              </button>
+              <button
+                onClick={() => setViewMode('all-pages')}
+                className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
+                  viewMode === 'all-pages'
+                    ? 'bg-[#0A1B36] text-white'
+                    : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
+                }`}
+              >
+                <span>All Pages</span>
+              </button>
+              <button
+                onClick={() => setViewMode('reader')}
+                className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
+                  viewMode === 'reader'
+                    ? 'bg-[#0A1B36] text-white'
+                    : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
+                }`}
+              >
+                <BookOpen className="w-3 h-3 text-[#C5A253]" />
+                <span>Text</span>
+              </button>
+            </div>
+
+            {/* Zoom Controls */}
+            {viewMode === 'image' && (
+              <div className="hidden sm:flex items-center gap-1 bg-white border border-[#0A1B36]/20 p-0.5">
+                <button
+                  onClick={zoomOut}
+                  title="Zoom Out"
+                  className="p-1 text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
+                >
+                  <ZoomOut className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={resetZoom}
+                  title="Reset Zoom"
+                  className="text-[10px] font-tech-mono font-bold px-1.5 text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
+                >
+                  {Math.round(zoomScale * 100)}%
+                </button>
+                <button
+                  onClick={zoomIn}
+                  title="Zoom In"
+                  className="p-1 text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"
+                >
+                  <ZoomIn className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Content Viewer Body */}
-        <div className="grow overflow-hidden relative bg-[#404040]">
-          {viewMode === 'pdf' ? (
-            <div className="w-full h-full relative">
-              {/* Native PDF Object with Iframe Fallback */}
-              <object
-                data={`${currentDoc.viewUrl}#toolbar=1&navpanes=0`}
-                type="application/pdf"
-                className="w-full h-full border-0"
-                aria-label={`PDF view of ${currentDoc.title}`}
-              >
-                <iframe
-                  src={`${currentDoc.viewUrl}#toolbar=1&navpanes=0`}
-                  className="w-full h-full border-0"
-                  title={currentDoc.title}
-                >
-                  <div className="p-8 text-center text-white bg-[#0A1B36]">
-                    <p className="mb-4">Your browser does not support inline PDF rendering.</p>
-                    <a
-                      href={currentDoc.downloadUrl}
-                      className="inline-block bg-[#C5A253] text-[#0A1B36] font-bold px-4 py-2"
-                    >
-                      Download {currentDoc.title}
-                    </a>
-                  </div>
-                </iframe>
-              </object>
+        <div className="grow overflow-auto relative bg-[#1c2430] p-4 sm:p-6 flex items-center justify-center">
+          {viewMode === 'image' && (
+            <div className="relative w-full h-full flex flex-col items-center justify-center">
+              {/* Page Navigator Floating Bar */}
+              {currentDoc.jpegPages.length > 1 && (
+                <div className="absolute top-2 z-20 flex items-center gap-2 bg-[#0A1B36]/90 text-white px-3 py-1.5 border border-[#C5A253] shadow-lg">
+                  <button
+                    onClick={handlePrevPage}
+                    className="p-1 hover:text-[#C5A253] cursor-pointer"
+                    title="Previous page"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <span className="font-tech-mono text-xs font-bold text-[#C5A253]">
+                    Page {activePageIndex + 1} of {currentDoc.jpegPages.length}
+                  </span>
+                  <button
+                    onClick={handleNextPage}
+                    className="p-1 hover:text-[#C5A253] cursor-pointer"
+                    title="Next page"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
 
-              {/* Mobile notice banner encouraging reader view if preferred */}
-              <div className="absolute bottom-2 right-2 sm:hidden z-10">
+              {/* Native JPEG Image Element (Guaranteed Never Blocked) */}
+              <div
+                className="overflow-auto max-w-full max-h-full flex items-center justify-center p-2"
+                style={{ cursor: zoomScale > 1 ? 'grab' : 'default' }}
+              >
+                <img
+                  src={currentPage.url}
+                  alt={`${currentDoc.title} - ${currentPage.title}`}
+                  referrerPolicy="no-referrer"
+                  style={{ transform: `scale(${zoomScale})`, transformOrigin: 'center top' }}
+                  className="max-h-[75vh] w-auto object-contain shadow-2xl transition-transform duration-150 border-2 border-white/10"
+                />
+              </div>
+
+              <div className="mt-2 text-center text-white/70 font-tech-mono text-xs flex items-center gap-3">
+                <span>{currentPage.title}</span>
+                <span>•</span>
                 <button
-                  onClick={() => setViewMode('reader')}
-                  className="bg-[#0A1B36] text-[#C5A253] border border-[#C5A253] px-2.5 py-1 text-[10px] font-tech-mono shadow-lg cursor-pointer"
+                  onClick={() => triggerSingleDownloadByUrl(currentPage.url, currentPage.filename)}
+                  className="text-[#C5A253] hover:underline cursor-pointer font-bold"
                 >
-                  Switch to Reader View
+                  Save This Page (.jpeg)
                 </button>
               </div>
             </div>
-          ) : (
+          )}
+
+          {viewMode === 'all-pages' && (
+            <div className="w-full max-w-3xl space-y-8 py-4">
+              {currentDoc.jpegPages.map((p) => (
+                <div key={p.pageNumber} className="bg-white/5 p-3 border border-white/15 shadow-2xl text-center">
+                  <div className="text-left font-tech-mono text-xs text-[#C5A253] font-bold mb-2">
+                    PAGE {p.pageNumber}: {p.title}
+                  </div>
+                  <img
+                    src={p.url}
+                    alt={`${currentDoc.title} - ${p.title}`}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-auto max-h-[85vh] object-contain mx-auto shadow-lg"
+                  />
+                  <div className="mt-2 text-right">
+                    <button
+                      onClick={() => triggerSingleDownloadByUrl(p.url, p.filename)}
+                      className="text-xs font-tech-mono text-[#C5A253] hover:underline cursor-pointer"
+                    >
+                      Download Page {p.pageNumber} (.jpeg)
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {viewMode === 'reader' && (
             /* Interactive Formatted Reader View */
             <div className="w-full h-full overflow-y-auto p-4 sm:p-8 md:p-12 bg-[#faf9f5] text-[#0A1B36]">
               <div className="max-w-3xl mx-auto bg-white p-6 sm:p-10 shadow-lg border border-[#0A1B36]/15">
-                {/* Reader Header */}
                 <div className="text-center pb-6 mb-8 border-b-2 border-[#C5A253]">
                   <span className="font-tech-mono text-xs uppercase tracking-widest text-[#C5A253] font-bold block mb-1">
                     {currentTranscript.meta}
@@ -239,7 +350,6 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
                   )}
                 </div>
 
-                {/* Sections */}
                 <div className="space-y-8">
                   {currentTranscript.sections.map((sec, idx) => (
                     <div key={idx} className="space-y-4">
@@ -303,26 +413,6 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
                     </div>
                   ))}
                 </div>
-
-                {/* Reader Footer Notice */}
-                <div className="mt-12 pt-6 border-t-2 border-[#C5A253] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#0A1B36]/70 font-tech-mono">
-                  <span>The William Buck Godfrey Legacy Scholarship Foundation</span>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setViewMode('pdf')}
-                      className="text-[#0A1B36] font-bold hover:text-[#C5A253] underline cursor-pointer"
-                    >
-                      View Original PDF Layout
-                    </button>
-                    <span>•</span>
-                    <button
-                      onClick={() => triggerSingleDownload(currentDoc)}
-                      className="text-[#0A1B36] font-bold hover:text-[#C5A253] underline cursor-pointer"
-                    >
-                      Save PDF
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           )}
@@ -331,12 +421,17 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
         {/* Modal Bottom Status Bar */}
         <div className="bg-[#f0eee6] px-4 py-2 sm:px-6 border-t border-[#0A1B36]/20 flex items-center justify-between text-[11px] font-tech-mono text-[#0A1B36]/80 shrink-0">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>{currentDoc.filename} ({currentDoc.size})</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Native JPEG Image Embed • 100% Browser Compatible</span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline text-[#0A1B36]/60">Press ESC to close</span>
+            <button
+              onClick={() => triggerSingleDownload(currentDoc)}
+              className="font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
+            >
+              Download PDF ({currentDoc.size})
+            </button>
             <button
               onClick={onClose}
               className="font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer"

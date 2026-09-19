@@ -72,8 +72,12 @@ app.get('/api/documents/program/view', (req, res) => {
   res.sendFile(filePath);
 });
 
-// Serve public documents statically
-app.use('/documents', express.static(path.join(process.cwd(), 'public', 'documents')));
+// Serve public documents statically with permissive cross-origin headers so images are never blocked
+app.use('/documents', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  next();
+}, express.static(path.join(process.cwd(), 'public', 'documents')));
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 // Contact Form & Customer Receipt Dispatch API

@@ -359,11 +359,11 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
                 <div className="pt-3 mt-2 border-t border-[#0A1B36]/10 flex flex-wrap items-center justify-between gap-2">
                   <button
                     onClick={() => {
-                      if (onOpenDocumentViewer) {
+                      const el = document.getElementById(`document-card-${doc.id}`) || document.getElementById('documents');
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      } else if (onOpenDocumentViewer) {
                         onOpenDocumentViewer(doc.id as 'program' | 'obituary');
-                      } else {
-                        const el = document.getElementById('documents');
-                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
                     className="inline-flex items-center gap-1 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"

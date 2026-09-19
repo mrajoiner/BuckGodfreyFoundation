@@ -6,11 +6,22 @@ import {
   BookOpen,
   Maximize2,
   Sparkles,
-  Award,
-  Calendar,
   Layers,
+  ArrowDown,
+  ChevronLeft,
+  ChevronRight,
+  ZoomIn,
+  ShieldCheck,
+  Image as ImageIcon,
+  Check,
 } from 'lucide-react';
-import { MEMORIAL_DOCUMENTS, downloadBothDocuments, triggerSingleDownload } from '../utils/downloadDocuments';
+import {
+  MEMORIAL_DOCUMENTS,
+  MemorialDocument,
+  downloadBothDocuments,
+  triggerSingleDownload,
+  triggerSingleDownloadByUrl,
+} from '../utils/downloadDocuments';
 import { DOCUMENT_TRANSCRIPTS } from '../data/documentTranscripts';
 import { FadeInView } from './FadeInView';
 
@@ -18,14 +29,401 @@ interface MemorialDocumentsSectionProps {
   onOpenViewerModal?: (docId: 'program' | 'obituary') => void;
 }
 
+interface SingleDocumentViewerCardProps {
+  doc: MemorialDocument;
+  documentNumber: number;
+  label: string;
+  onOpenModal?: (docId: 'program' | 'obituary') => void;
+}
+
+export const SingleDocumentViewerCard: React.FC<SingleDocumentViewerCardProps> = ({
+  doc,
+  documentNumber,
+  label,
+  onOpenModal,
+}) => {
+  const [activePageIndex, setActivePageIndex] = useState<number>(0);
+  const [viewMode, setViewMode] = useState<'image' | 'reader' | 'all-pages'>('image');
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  const transcript = DOCUMENT_TRANSCRIPTS[doc.id as 'program' | 'obituary'];
+  const currentPage = doc.jpegPages[activePageIndex] || doc.jpegPages[0];
+
+  const handlePrevPage = () => {
+    setActivePageIndex((prev) => (prev > 0 ? prev - 1 : doc.jpegPages.length - 1));
+  };
+
+  const handleNextPage = () => {
+    setActivePageIndex((prev) => (prev < doc.jpegPages.length - 1 ? prev + 1 : 0));
+  };
+
+  return (
+    <div
+      id={`document-card-${doc.id}`}
+      className="bg-white border-2 border-[#0A1B36] shadow-xl flex flex-col h-full overflow-hidden transition-all duration-200 hover:border-[#C5A253]"
+    >
+      {/* Card Header Bar */}
+      <div className="bg-[#0A1B36] text-white p-3.5 sm:p-4 border-b-2 border-[#C5A253] flex flex-col gap-2 shrink-0">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="bg-[#C5A253] text-[#0A1B36] font-display-title font-black text-xs px-2 py-0.5 uppercase tracking-wider shrink-0">
+              DOCUMENT {documentNumber}
+            </span>
+            <span className="font-tech-mono text-[10px] sm:text-xs text-[#C5A253] tracking-wider uppercase truncate">
+              {label}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-tech-mono bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 px-2 py-0.5">
+              <ShieldCheck className="w-3 h-3 text-emerald-400" />
+              <span>NEVER BLOCKED</span>
+            </span>
+
+            {/* Quick External Tab Link */}
+            <a
+              href={currentPage.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Open full-resolution image in new tab"
+              className="text-white/70 hover:text-[#C5A253] p-1 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+          <h3 className="font-display-title text-base sm:text-lg md:text-xl font-black text-white uppercase tracking-wide truncate">
+            {doc.title}
+          </h3>
+          <span className="font-tech-mono text-xs text-white/70 shrink-0">
+            {doc.pages} • High-Res JPEG Embed
+          </span>
+        </div>
+      </div>
+
+      {/* Page Navigation & Display Controls Bar */}
+      <div className="bg-[#FAF9F5] px-3 py-2 sm:px-4 border-b border-[#0A1B36]/15 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        {/* Page Switcher Tabs */}
+        <div className="flex items-center gap-1 bg-white border border-[#0A1B36]/20 p-0.5">
+          {doc.jpegPages.map((p, idx) => (
+            <button
+              key={p.pageNumber}
+              onClick={() => {
+                setActivePageIndex(idx);
+                setViewMode('image');
+              }}
+              className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
+                viewMode === 'image' && activePageIndex === idx
+                  ? 'bg-[#0A1B36] text-white'
+                  : 'text-[#0A1B36]/70 hover:text-[#0A1B36] hover:bg-[#0A1B36]/5'
+              }`}
+            >
+              Page {p.pageNumber}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setViewMode('all-pages')}
+            className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
+              viewMode === 'all-pages'
+                ? 'bg-[#0A1B36] text-white'
+                : 'text-[#0A1B36]/70 hover:text-[#0A1B36] hover:bg-[#0A1B36]/5'
+            }`}
+          >
+            All Pages
+          </button>
+
+          <button
+            onClick={() => setViewMode('reader')}
+            className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer flex items-center gap-1 ${
+              viewMode === 'reader'
+                ? 'bg-[#0A1B36] text-white'
+                : 'text-[#0A1B36]/70 hover:text-[#0A1B36] hover:bg-[#0A1B36]/5'
+            }`}
+          >
+            <BookOpen className="w-3 h-3 text-[#C5A253]" />
+            <span className="hidden sm:inline">Text</span>
+          </button>
+        </div>
+
+        {/* View / Download Actions */}
+        <div className="flex items-center gap-2">
+          {viewMode === 'image' && doc.jpegPages.length > 1 && (
+            <div className="flex items-center gap-1 mr-1">
+              <button
+                onClick={handlePrevPage}
+                title="Previous page"
+                className="p-1 text-[#0A1B36]/80 hover:text-[#C5A253] border border-[#0A1B36]/20 bg-white hover:bg-[#0A1B36]/5 transition-colors cursor-pointer"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <span className="text-[11px] font-tech-mono font-bold px-1 text-[#0A1B36]">
+                {activePageIndex + 1}/{doc.jpegPages.length}
+              </span>
+              <button
+                onClick={handleNextPage}
+                title="Next page"
+                className="p-1 text-[#0A1B36]/80 hover:text-[#C5A253] border border-[#0A1B36]/20 bg-white hover:bg-[#0A1B36]/5 transition-colors cursor-pointer"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+
+          <button
+            onClick={() => setLightboxImage(currentPage.url)}
+            title="Enlarge page to fullscreen zoom"
+            className="hidden xs:inline-flex items-center gap-1 text-[#0A1B36]/80 hover:text-[#C5A253] bg-white border border-[#0A1B36]/20 px-2 py-1 text-[11px] font-tech-mono font-bold transition-colors cursor-pointer"
+          >
+            <ZoomIn className="w-3.5 h-3.5 text-[#C5A253]" />
+            <span>ZOOM</span>
+          </button>
+
+          {/* Individual PDF download */}
+          <button
+            onClick={() => triggerSingleDownload(doc)}
+            title={`Download ${doc.title} PDF`}
+            className="inline-flex items-center gap-1 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] text-[11px] font-tech-mono font-bold px-2.5 py-1 transition-colors cursor-pointer"
+          >
+            <Download className="w-3 h-3 text-[#C5A253]" />
+            <span>PDF</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Embedded Document View Area (Guaranteed Native Image Rendering) */}
+      <div className="relative grow bg-[#1a2332] p-2 sm:p-4 overflow-y-auto max-h-[720px] min-h-[560px] flex items-center justify-center">
+        {viewMode === 'image' && (
+          <div className="relative w-full h-full flex flex-col items-center justify-center">
+            {/* Embedded High-Resolution JPEG */}
+            <div
+              className="relative group cursor-zoom-in max-w-full overflow-hidden shadow-2xl border border-white/10"
+              onClick={() => setLightboxImage(currentPage.url)}
+              title="Click to zoom in full resolution"
+            >
+              <img
+                src={currentPage.url}
+                alt={`${doc.title} - ${currentPage.title}`}
+                loading="eager"
+                referrerPolicy="no-referrer"
+                className="w-full h-auto max-h-[660px] object-contain mx-auto transition-transform duration-200 group-hover:scale-[1.01]"
+              />
+
+              {/* Hover overlay hint */}
+              <div className="absolute bottom-3 right-3 bg-[#0A1B36]/90 text-white text-[10px] font-tech-mono font-bold px-2.5 py-1 border border-[#C5A253] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-lg pointer-events-none">
+                <ZoomIn className="w-3 h-3 text-[#C5A253]" />
+                <span>CLICK TO ENLARGE</span>
+              </div>
+            </div>
+
+            <div className="mt-2 text-center text-white/70 font-tech-mono text-[11px] flex items-center gap-2">
+              <span>{currentPage.title}</span>
+              <span>•</span>
+              <button
+                onClick={() => triggerSingleDownloadByUrl(currentPage.url, currentPage.filename)}
+                className="text-[#C5A253] hover:underline cursor-pointer font-bold"
+              >
+                Save Page Image (.jpeg)
+              </button>
+            </div>
+          </div>
+        )}
+
+        {viewMode === 'all-pages' && (
+          <div className="w-full space-y-6 py-2">
+            {doc.jpegPages.map((p) => (
+              <div
+                key={p.pageNumber}
+                className="bg-white/5 p-2 border border-white/10 shadow-lg text-center"
+              >
+                <div className="mb-2 text-left font-tech-mono text-[11px] text-[#C5A253] font-bold px-1">
+                  PAGE {p.pageNumber}: {p.title}
+                </div>
+                <img
+                  src={p.url}
+                  alt={`${doc.title} - ${p.title}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-auto max-h-[750px] object-contain mx-auto shadow-md cursor-zoom-in"
+                  onClick={() => setLightboxImage(p.url)}
+                  title="Click to enlarge"
+                />
+                <div className="mt-2 text-right px-1">
+                  <button
+                    onClick={() => triggerSingleDownloadByUrl(p.url, p.filename)}
+                    className="text-[11px] font-tech-mono text-[#C5A253] hover:underline cursor-pointer"
+                  >
+                    Download Page {p.pageNumber} (.jpeg)
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {viewMode === 'reader' && (
+          /* Reader Transcript Accessible Fallback View */
+          <div className="w-full h-full overflow-y-auto p-4 sm:p-6 bg-[#FAF9F5] text-[#0A1B36]">
+            <div className="bg-white p-5 sm:p-8 border border-[#0A1B36]/15 shadow-sm max-w-2xl mx-auto">
+              <div className="text-center pb-4 mb-6 border-b-2 border-[#C5A253]">
+                <span className="font-tech-mono text-[10px] uppercase tracking-widest text-[#C5A253] font-bold block mb-1">
+                  {transcript.meta}
+                </span>
+                <h4 className="font-display-title text-xl sm:text-2xl font-black text-[#0A1B36] uppercase tracking-wide">
+                  {transcript.title}
+                </h4>
+                <p className="font-body-text text-xs sm:text-sm text-[#0A1B36]/80 italic mt-1">
+                  {transcript.subtitle}
+                </p>
+                {transcript.dateAndLocation && (
+                  <div className="mt-2 inline-block bg-[#0A1B36]/5 px-2.5 py-0.5 font-tech-mono text-[11px] text-[#0A1B36] font-bold">
+                    {transcript.dateAndLocation}
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-5">
+                {transcript.sections.map((sec, idx) => (
+                  <div key={idx} className="space-y-2.5">
+                    {sec.quarter && (
+                      <div className="bg-[#0A1B36] text-white p-2.5 border-l-4 border-[#C5A253]">
+                        <span className="font-display-title text-xs sm:text-sm font-black tracking-wider uppercase">
+                          {sec.quarter}
+                        </span>
+                      </div>
+                    )}
+
+                    {sec.title && !sec.quarter && (
+                      <h5 className="font-display-title text-sm sm:text-base font-bold text-[#0A1B36] uppercase tracking-wider pb-1 border-b border-[#0A1B36]/20">
+                        {sec.title}
+                      </h5>
+                    )}
+
+                    {sec.quote && (
+                      <blockquote className="bg-[#0A1B36]/5 border-l-4 border-[#C5A253] p-3 my-3">
+                        <p className="font-body-text text-sm italic text-[#0A1B36] leading-relaxed">
+                          {sec.quote.text}
+                        </p>
+                        <footer className="font-tech-mono text-[11px] text-[#C5A253] font-bold mt-1">
+                          {sec.quote.author}
+                        </footer>
+                      </blockquote>
+                    )}
+
+                    {sec.items && (
+                      <div className="space-y-1.5">
+                        {sec.items.map((item, itemIdx) => (
+                          <div
+                            key={itemIdx}
+                            className="p-2 bg-[#faf9f5] border border-[#0A1B36]/10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-0.5"
+                          >
+                            <span className="font-display-title text-xs font-bold text-[#0A1B36]">
+                              {item.role}
+                            </span>
+                            <div className="text-left sm:text-right">
+                              <span className="font-body-text text-xs font-bold text-[#C5A253]">
+                                {item.name}
+                              </span>
+                              {item.detail && (
+                                <span className="block text-[10px] text-[#0A1B36]/70">
+                                  {item.detail}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {sec.paragraphs && (
+                      <div className="space-y-2 font-body-text text-xs sm:text-sm leading-relaxed text-[#0A1B36]/90">
+                        {sec.paragraphs.map((p, pIdx) => (
+                          <p key={pIdx}>{p}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Card Footer Bar */}
+      <div className="bg-[#FAF9F5] p-3 border-t border-[#0A1B36]/15 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div className="flex items-center gap-2 text-xs font-tech-mono text-[#0A1B36]/80 truncate">
+          <span className="font-bold text-[#0A1B36]">{doc.title}</span>
+          <span>•</span>
+          <span>{doc.pages}</span>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => triggerSingleDownloadByUrl(currentPage.url, currentPage.filename)}
+            className="text-[11px] font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
+          >
+            Save JPEG
+          </button>
+          <button
+            onClick={() => triggerSingleDownload(doc)}
+            className="font-display-title text-xs font-bold uppercase text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
+          >
+            Download Full PDF
+          </button>
+        </div>
+      </div>
+
+      {/* Lightbox Zoom Modal */}
+      {lightboxImage && (
+        <div
+          role="dialog"
+          aria-label="Image Zoom Lightbox"
+          className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-2 sm:p-4 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setLightboxImage(null)}
+        >
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                triggerSingleDownloadByUrl(lightboxImage, 'William_Buck_Godfrey_Archive.jpeg');
+              }}
+              className="bg-[#C5A253] hover:bg-white text-[#0A1B36] font-tech-mono text-xs font-bold px-3 py-1.5 flex items-center gap-1.5 shadow-lg cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>DOWNLOAD HIGH-RES</span>
+            </button>
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="bg-white/20 hover:bg-white text-white hover:text-black p-1.5 text-xs font-tech-mono font-bold transition-colors cursor-pointer"
+            >
+              CLOSE ✕
+            </button>
+          </div>
+
+          <div
+            className="max-w-5xl max-h-[92vh] overflow-auto flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightboxImage}
+              alt="High resolution document zoom"
+              className="max-w-full max-h-[90vh] object-contain shadow-2xl border-2 border-[#C5A253]"
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> = ({
   onOpenViewerModal,
 }) => {
-  const [activeTab, setActiveTab] = useState<'program' | 'obituary'>('program');
-  const [viewMode, setViewMode] = useState<'pdf' | 'reader'>('pdf');
-
-  const activeDoc = MEMORIAL_DOCUMENTS.find((d) => d.id === activeTab) || MEMORIAL_DOCUMENTS[0];
-  const activeTranscript = DOCUMENT_TRANSCRIPTS[activeTab];
+  const programDoc = MEMORIAL_DOCUMENTS.find((d) => d.id === 'program') || MEMORIAL_DOCUMENTS[1];
+  const obituaryDoc = MEMORIAL_DOCUMENTS.find((d) => d.id === 'obituary') || MEMORIAL_DOCUMENTS[0];
 
   return (
     <section
@@ -35,7 +433,7 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <FadeInView>
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 bg-[#0A1B36] text-white px-3 py-1 font-tech-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase font-bold mb-4">
               <Layers className="w-3.5 h-3.5 text-[#C5A253]" />
               <span>OFFICIAL COMMEMORATIVE ARCHIVES</span>
@@ -45,257 +443,116 @@ export const MemorialDocumentsSection: React.FC<MemorialDocumentsSectionProps> =
             </h2>
             <div className="w-20 h-1 bg-[#C5A253] mx-auto my-4"></div>
             <p className="font-body-text text-base sm:text-lg text-[#0A1B36]/80 leading-relaxed">
-              Read the complete 4-Quarter Celebration Order of Service and Coach Godfrey’s official biography written by Gavin Godfrey. View them inline below or save them to your device.
+              Designed as high-resolution commemoratives and embedded directly below as native images—guaranteed visible on every browser, smartphone, and tablet without being blocked.
             </p>
           </div>
         </FadeInView>
 
-        {/* Embedded Document Console */}
-        <FadeInView delay={0.1}>
-          <div
-            id="inline-document-viewer-container"
-            className="bg-white border-2 border-[#0A1B36] shadow-2xl overflow-hidden"
-          >
-            {/* Top Document Switcher Bar */}
-            <div className="bg-[#0A1B36] text-white p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3 border-b-2 border-[#C5A253]">
-              {/* Document Selector Tabs */}
-              <div className="flex items-center gap-2">
-                {MEMORIAL_DOCUMENTS.map((doc) => {
-                  const isActive = doc.id === activeTab;
-                  return (
-                    <button
-                      key={doc.id}
-                      id={`tab-btn-${doc.id}`}
-                      onClick={() => setActiveTab(doc.id as 'program' | 'obituary')}
-                      className={`flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-display-title font-black uppercase tracking-wider transition-all cursor-pointer border-b-2 ${
-                        isActive
-                          ? 'bg-[#C5A253] text-[#0A1B36] border-white shadow-md'
-                          : 'bg-white/10 text-white/80 hover:bg-white/20 border-transparent'
-                      }`}
-                    >
-                      <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      <span>{doc.title}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Action Toolbar */}
-              <div className="flex items-center gap-2">
-                {/* View Mode Switcher */}
-                <div className="flex items-center bg-white/10 p-0.5 border border-white/20">
-                  <button
-                    onClick={() => setViewMode('pdf')}
-                    className={`px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
-                      viewMode === 'pdf'
-                        ? 'bg-[#C5A253] text-[#0A1B36]'
-                        : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    PDF View
-                  </button>
-                  <button
-                    onClick={() => setViewMode('reader')}
-                    className={`px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
-                      viewMode === 'reader'
-                        ? 'bg-[#C5A253] text-[#0A1B36]'
-                        : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    Reader View
-                  </button>
-                </div>
-
-                {/* Open in Modal / Fullscreen */}
-                <button
-                  onClick={() => onOpenViewerModal?.(activeTab)}
-                  title="Expand to full screen viewer"
-                  className="hidden sm:inline-flex items-center gap-1 bg-white/10 hover:bg-white/20 text-white text-xs font-tech-mono font-bold px-3 py-1.5 border border-white/20 transition-colors cursor-pointer"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#C5A253]" />
-                  <span>EXPAND</span>
-                </button>
-
-                {/* Direct Download Active */}
-                <button
-                  onClick={() => triggerSingleDownload(activeDoc)}
-                  title={`Download ${activeDoc.title} PDF`}
-                  className="inline-flex items-center gap-1.5 bg-[#C5A253] hover:bg-white text-[#0A1B36] text-xs font-tech-mono font-bold px-3 py-1.5 transition-colors cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span className="hidden xs:inline">SAVE THIS PDF</span>
-                </button>
-              </div>
+        {/* Primary Unified Link Connected to Both Documents */}
+        <FadeInView delay={0.05}>
+          <div className="bg-[#0A1B36] border-2 border-[#C5A253] shadow-2xl p-5 sm:p-7 mb-10 relative overflow-hidden">
+            {/* Background graphic */}
+            <div className="absolute right-0 top-0 bottom-0 opacity-10 pointer-events-none flex items-center pr-6">
+              <Download className="w-48 h-48 text-[#C5A253]" />
             </div>
 
-            {/* Document Info Sub-strip */}
-            <div className="bg-[#FAF9F5] px-4 py-2.5 sm:px-6 border-b border-[#0A1B36]/15 flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-2 text-[#0A1B36]/80 font-tech-mono">
-                <span className="font-bold text-[#0A1B36] uppercase">{activeDoc.title}</span>
-                <span>•</span>
-                <span>{activeDoc.pages}</span>
-                <span>•</span>
-                <span>{activeDoc.size}</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href={activeDoc.viewUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-tech-mono text-xs text-[#0A1B36] hover:text-[#C5A253] inline-flex items-center gap-1 font-bold underline"
-                >
-                  <ExternalLink className="w-3 h-3" />
-                  <span>Open in separate tab</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Embedded Container Frame */}
-            <div className="w-full h-[600px] sm:h-[750px] md:h-[820px] bg-[#3a3a3a] relative overflow-hidden">
-              {viewMode === 'pdf' ? (
-                <div className="w-full h-full relative">
-                  <object
-                    data={`${activeDoc.viewUrl}#toolbar=1&navpanes=0`}
-                    type="application/pdf"
-                    className="w-full h-full border-0"
-                    aria-label={`Inline PDF embed of ${activeDoc.title}`}
-                  >
-                    <iframe
-                      src={`${activeDoc.viewUrl}#toolbar=1&navpanes=0`}
-                      className="w-full h-full border-0"
-                      title={activeDoc.title}
-                    >
-                      <div className="p-10 text-center text-white bg-[#0A1B36] flex flex-col items-center justify-center h-full">
-                        <p className="mb-4 font-body-text text-lg">
-                          Viewing this document requires a PDF-compatible browser.
-                        </p>
-                        <div className="flex gap-3">
-                          <button
-                            onClick={() => setViewMode('reader')}
-                            className="bg-[#C5A253] text-[#0A1B36] font-bold px-4 py-2 uppercase text-xs"
-                          >
-                            Switch to Reader View
-                          </button>
-                          <a
-                            href={activeDoc.downloadUrl}
-                            className="bg-white text-[#0A1B36] font-bold px-4 py-2 uppercase text-xs"
-                          >
-                            Download PDF
-                          </a>
-                        </div>
-                      </div>
-                    </iframe>
-                  </object>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+              <div className="space-y-1.5 max-w-xl">
+                <div className="flex items-center justify-center md:justify-start gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#C5A253] animate-ping"></span>
+                  <span className="font-tech-mono text-[11px] sm:text-xs uppercase tracking-widest text-[#C5A253] font-bold">
+                    CONNECTED COMMEMORATIVE DOWNLOAD
+                  </span>
                 </div>
-              ) : (
-                /* Reader Transcript View */
-                <div className="w-full h-full overflow-y-auto p-4 sm:p-8 md:p-12 bg-[#faf9f5] text-[#0A1B36]">
-                  <div className="max-w-3xl mx-auto bg-white p-6 sm:p-10 shadow-md border border-[#0A1B36]/15">
-                    <div className="text-center pb-6 mb-8 border-b-2 border-[#C5A253]">
-                      <span className="font-tech-mono text-xs uppercase tracking-widest text-[#C5A253] font-bold block mb-1">
-                        {activeTranscript.meta}
-                      </span>
-                      <h3 className="font-display-title text-2xl sm:text-3xl md:text-4xl font-black text-[#0A1B36] uppercase tracking-wide">
-                        {activeTranscript.title}
-                      </h3>
-                      <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/80 italic mt-2">
-                        {activeTranscript.subtitle}
-                      </p>
-                      {activeTranscript.dateAndLocation && (
-                        <div className="mt-3 inline-block bg-[#0A1B36]/5 px-3 py-1 font-tech-mono text-xs text-[#0A1B36] font-bold">
-                          {activeTranscript.dateAndLocation}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-6">
-                      {activeTranscript.sections.map((sec, idx) => (
-                        <div key={idx} className="space-y-3">
-                          {sec.quarter && (
-                            <div className="bg-[#0A1B36] text-white p-3 border-l-4 border-[#C5A253]">
-                              <span className="font-display-title text-sm sm:text-base font-black tracking-wider uppercase">
-                                {sec.quarter}
-                              </span>
-                            </div>
-                          )}
-
-                          {sec.title && !sec.quarter && (
-                            <h4 className="font-display-title text-base sm:text-lg font-bold text-[#0A1B36] uppercase tracking-wider pb-1 border-b border-[#0A1B36]/20">
-                              {sec.title}
-                            </h4>
-                          )}
-
-                          {sec.quote && (
-                            <blockquote className="bg-[#0A1B36]/5 border-l-4 border-[#C5A253] p-4 my-4">
-                              <p className="font-body-text text-base italic text-[#0A1B36] leading-relaxed">
-                                {sec.quote.text}
-                              </p>
-                              <footer className="font-tech-mono text-xs text-[#C5A253] font-bold mt-2">
-                                {sec.quote.author}
-                              </footer>
-                            </blockquote>
-                          )}
-
-                          {sec.items && (
-                            <div className="space-y-2">
-                              {sec.items.map((item, itemIdx) => (
-                                <div
-                                  key={itemIdx}
-                                  className="p-2.5 bg-[#faf9f5] border border-[#0A1B36]/10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1"
-                                >
-                                  <span className="font-display-title text-xs sm:text-sm font-bold text-[#0A1B36]">
-                                    {item.role}
-                                  </span>
-                                  <div className="text-left sm:text-right">
-                                    <span className="font-body-text text-xs sm:text-sm font-bold text-[#C5A253]">
-                                      {item.name}
-                                    </span>
-                                    {item.detail && (
-                                      <span className="block text-[11px] text-[#0A1B36]/70">
-                                        {item.detail}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {sec.paragraphs && (
-                            <div className="space-y-3 font-body-text text-sm sm:text-base leading-relaxed text-[#0A1B36]/90">
-                              {sec.paragraphs.map((p, pIdx) => (
-                                <p key={pIdx}>{p}</p>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Bottom Callout Bar */}
-            <div className="bg-[#0A1B36] text-white p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <Sparkles className="w-5 h-5 text-[#C5A253] shrink-0" />
-                <p className="font-body-text text-xs sm:text-sm text-white/90 text-center sm:text-left">
-                  Preserve these historic documents for your personal archives and family.
+                <h3 className="font-display-title text-xl sm:text-2xl md:text-3xl font-black text-white uppercase tracking-wide">
+                  Download Both Memorial Documents
+                </h3>
+                <p className="font-body-text text-xs sm:text-sm text-white/80 leading-relaxed">
+                  One click delivers both separate PDF documents to your device: the official <strong>Celebration Program (Order of Service)</strong> and Coach Godfrey’s complete <strong>Obituary & Life Story</strong>.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                <button
-                  onClick={() => downloadBothDocuments()}
-                  className="flex items-center gap-2 bg-[#C5A253] hover:bg-white text-[#0A1B36] px-4 py-2.5 font-display-title text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors cursor-pointer"
+              {/* Primary Connected Download Action */}
+              <div className="shrink-0 flex flex-col items-center md:items-end gap-2">
+                <a
+                  href="/api/documents/obituary"
+                  id="section-download-both-documents-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    downloadBothDocuments();
+                  }}
+                  aria-label="Download Program and Obituary (both separate PDFs in 1 click)"
+                  className="group flex items-center gap-2.5 bg-[#C5A253] hover:bg-white text-[#0A1B36] font-display-title text-sm sm:text-base font-black px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-[#C5A253] hover:border-white shadow-2xl transition-all duration-200 cursor-pointer uppercase tracking-wider active:scale-95 no-underline"
                 >
-                  <Download className="w-4 h-4 text-[#0A1B36]" />
+                  <Download className="w-5 h-5 text-[#0A1B36] group-hover:scale-110 transition-transform" />
                   <span>Download Program and Obituary</span>
-                </button>
+                </a>
+                <span className="font-tech-mono text-[10px] text-[#C5A253] uppercase tracking-wider font-bold">
+                  2 SEPARATE PDFS IN A SINGLE CLICK
+                </span>
               </div>
             </div>
+
+            {/* Visual connector lines leading to both documents below */}
+            <div className="hidden lg:flex items-center justify-between mt-6 pt-4 border-t border-white/15 text-[11px] font-tech-mono text-[#C5A253]">
+              <div className="flex items-center gap-2">
+                <ArrowDown className="w-3.5 h-3.5 text-[#C5A253] animate-bounce" />
+                <span>DOCUMENT 1: CELEBRATION PROGRAM (BELOW LEFT)</span>
+              </div>
+              <span className="text-white/40">• VIEWABLE INDIVIDUALLY BELOW • ZERO PLUGINS NEEDED •</span>
+              <div className="flex items-center gap-2">
+                <span>DOCUMENT 2: OBITUARY & LIFE STORY (BELOW RIGHT)</span>
+                <ArrowDown className="w-3.5 h-3.5 text-[#C5A253] animate-bounce" />
+              </div>
+            </div>
+          </div>
+        </FadeInView>
+
+        {/* Individual Side-by-Side Embeds: Visible Immediately Without Clicking Anything */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Document 1: Celebration Program Embed */}
+          <FadeInView delay={0.1}>
+            <SingleDocumentViewerCard
+              doc={programDoc}
+              documentNumber={1}
+              label="CELEBRATION ORDER OF SERVICE"
+              onOpenModal={onOpenViewerModal}
+            />
+          </FadeInView>
+
+          {/* Document 2: Obituary & Life Story Embed */}
+          <FadeInView delay={0.15}>
+            <SingleDocumentViewerCard
+              doc={obituaryDoc}
+              documentNumber={2}
+              label="OBITUARY & LIFE STORY"
+              onOpenModal={onOpenViewerModal}
+            />
+          </FadeInView>
+        </div>
+
+        {/* Bottom Connected Summary Banner */}
+        <FadeInView delay={0.2}>
+          <div className="mt-10 bg-white border-2 border-[#0A1B36] p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-[#C5A253] shrink-0" />
+              <div className="text-center sm:text-left">
+                <h4 className="font-display-title text-sm sm:text-base font-bold text-[#0A1B36] uppercase">
+                  Connected to Both Archives
+                </h4>
+                <p className="font-body-text text-xs text-[#0A1B36]/80">
+                  Both documents are viewable inline as high-res JPEGs without browser blocking and downloadable together.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => downloadBothDocuments()}
+              className="flex items-center gap-2 bg-[#0A1B36] hover:bg-[#C5A253] text-white hover:text-[#0A1B36] px-5 py-2.5 font-display-title text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+            >
+              <Download className="w-4 h-4 text-[#C5A253] group-hover:text-[#0A1B36]" />
+              <span>Download Program and Obituary</span>
+            </button>
           </div>
         </FadeInView>
       </div>

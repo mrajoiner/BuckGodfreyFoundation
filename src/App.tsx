@@ -128,7 +128,14 @@ export default function App() {
       />
 
       {/* Persistent Floating 'Download Memorial Documents' Button with View link */}
-      <PersistentDownloadButton onViewClick={handleOpenViewer} />
+      <PersistentDownloadButton
+        onViewClick={() => {
+          const el = document.getElementById('documents');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
+      />
 
       {/* Main Content View Switcher */}
       <main id="main-content" className="grow overflow-x-hidden">

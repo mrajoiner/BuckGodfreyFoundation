@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "node scripts/generate-pdfs.cjs && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build": "node scripts/generate-pdfs.cjs && node scripts/generate-jpegs.cjs && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
@@ -24,6 +24,7 @@
     "nodemailer": "^9.0.5",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "sharp": "^0.35.4",
     "vite": "^6.2.3"
   },
   "devDependencies": {
