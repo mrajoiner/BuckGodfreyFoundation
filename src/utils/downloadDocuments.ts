@@ -35,14 +35,14 @@ export const COMBINED_MEMORIAL_DOCUMENT: MemorialDocument = {
     {
       pageNumber: 1,
       title: 'Page 1 — Program Cover & Celebration Details',
-      url: '/documents/William_Buck_Godfrey_Program_Page_1.jpeg',
-      filename: 'William_Buck_Godfrey_Program_Page_1.jpeg',
+      url: '/1.jpg',
+      filename: '1.jpg',
     },
     {
       pageNumber: 2,
       title: 'Page 2 — Official 4-Quarter Order of Service',
-      url: '/documents/William_Buck_Godfrey_Program_Page_2.jpeg',
-      filename: 'William_Buck_Godfrey_Program_Page_2.jpeg',
+      url: '/2.jpg',
+      filename: '2.jpg',
     },
     {
       pageNumber: 3,
@@ -83,14 +83,14 @@ export const MEMORIAL_DOCUMENTS: MemorialDocument[] = [
       {
         pageNumber: 1,
         title: 'Page 1 — Commemorative Cover & Event Details',
-        url: '/documents/William_Buck_Godfrey_Program_Page_1.jpeg',
-        filename: 'William_Buck_Godfrey_Program_Page_1.jpeg',
+        url: '/1.jpg',
+        filename: '1.jpg',
       },
       {
         pageNumber: 2,
         title: 'Page 2 — Official 4-Quarter Order of Service',
-        url: '/documents/William_Buck_Godfrey_Program_Page_2.jpeg',
-        filename: 'William_Buck_Godfrey_Program_Page_2.jpeg',
+        url: '/2.jpg',
+        filename: '2.jpg',
       },
     ],
   },
