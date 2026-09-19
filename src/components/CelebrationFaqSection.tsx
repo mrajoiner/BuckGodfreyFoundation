@@ -25,7 +25,6 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import {
   MEMORIAL_DOCUMENTS,
-  downloadBothDocuments,
   triggerSingleDownload,
 } from '../utils/downloadDocuments';
 
@@ -384,7 +383,7 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
                     className="inline-flex items-center gap-1 text-xs font-tech-mono font-bold text-[#0A1B36] hover:text-[#C5A253] cursor-pointer no-underline"
                   >
                     <Download className="w-3.5 h-3.5 text-[#C5A253]" />
-                    <span>Download (.pdf)</span>
+                    <span>{doc.id === 'program' ? 'Download Program' : 'Download Obituary'}</span>
                   </a>
                 </div>
               </div>
@@ -392,21 +391,6 @@ export const CelebrationFaqSection: React.FC<CelebrationFaqSectionProps> = ({
           </div>
 
           <div className="pt-2 flex flex-wrap items-center gap-3">
-            <a
-              href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-              download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                downloadBothDocuments();
-              }}
-              className="inline-flex items-center gap-2 bg-[#0A1B36] text-white hover:bg-[#C5A253] hover:text-[#0A1B36] font-display-title text-xs sm:text-sm font-bold py-3 px-6 uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer no-underline"
-            >
-              <Download className="w-4 h-4 text-[#C5A253]" />
-              <span>Download Program and Obituary</span>
-            </a>
-
             <button
               onClick={() => {
                 if (onOpenDocumentViewer) {

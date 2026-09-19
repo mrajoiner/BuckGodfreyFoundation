@@ -72,8 +72,6 @@ const serveDocumentFile = (res: express.Response, filename: string, downloadName
   } else {
     const contentType = filename.endsWith('.pdf')
       ? 'application/pdf'
-      : filename.endsWith('.zip')
-      ? 'application/zip'
       : filename.endsWith('.jpeg') || filename.endsWith('.jpg')
       ? 'image/jpeg'
       : 'application/octet-stream';
@@ -91,16 +89,6 @@ app.options('/api/documents/*', (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Range');
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
   res.sendStatus(204);
-});
-
-// Combined Memorial Document (Both Program & Obituary in 1 PDF)
-app.get('/api/documents/combined', (req, res) => {
-  serveDocumentFile(
-    res,
-    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
-    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
-    req.query.view !== '1'
-  );
 });
 
 // Individual Document 1: Obituary & Life Story PDF
@@ -123,26 +111,7 @@ app.get('/api/documents/program', (req, res) => {
   );
 });
 
-// Full Memorial Archive ZIP (All PDFs + JPEGs + Tribute)
-app.get('/api/documents/zip', (req, res) => {
-  serveDocumentFile(
-    res,
-    'William_Buck_Godfrey_Memorial_Documents.zip',
-    'William_Buck_Godfrey_Memorial_Documents.zip',
-    true
-  );
-});
-
 // Inline view endpoints
-app.get('/api/documents/combined/view', (req, res) => {
-  serveDocumentFile(
-    res,
-    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
-    'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
-    false
-  );
-});
-
 app.get('/api/documents/obituary/view', (req, res) => {
   serveDocumentFile(
     res,
@@ -165,15 +134,8 @@ app.get('/api/documents/program/view', (req, res) => {
 app.get('/api/documents/download', (req, res) => {
   const requestedFile = req.query.file as string;
   const allowedFiles: Record<string, string> = {
-    'combined-pdf': 'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf',
     'program-pdf': 'William_Buck_Godfrey_Celebration_Order_of_Service.pdf',
     'obituary-pdf': 'William_Buck_Godfrey_Obituary_and_Life_Story.pdf',
-    'archive-zip': 'William_Buck_Godfrey_Memorial_Documents.zip',
-    'program-p1-jpeg': 'William_Buck_Godfrey_Program_Page_1.jpeg',
-    'program-p2-jpeg': 'William_Buck_Godfrey_Program_Page_2.jpeg',
-    'obituary-p1-jpeg': 'William_Buck_Godfrey_Obituary_Page_1.jpeg',
-    'obituary-p2-jpeg': 'William_Buck_Godfrey_Obituary_Page_2.jpeg',
-    'obituary-p3-jpeg': 'William_Buck_Godfrey_Obituary_Page_3.jpeg',
   };
 
   const filename = allowedFiles[requestedFile];
@@ -184,7 +146,7 @@ app.get('/api/documents/download', (req, res) => {
   serveDocumentFile(res, filename, filename, true);
 });
 
-// Serve public documents statically with permissive cross-origin headers so images are never blocked
+// Serve public documents statically with permissive cross-origin headers.
 app.use('/documents', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');

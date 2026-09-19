@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Download, Eye } from 'lucide-react';
 import { ScholarshipAnnouncementBar } from './ScholarshipAnnouncementBar';
-import { downloadBothDocuments } from '../utils/downloadDocuments';
+import { MEMORIAL_DOCUMENTS, triggerSingleDownload } from '../utils/downloadDocuments';
 
 interface NavigationProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -187,24 +187,27 @@ export const Navigation: React.FC<NavigationProps> = ({ onNavigateSection, isTha
               VIEW INLINE
             </span>
           </button>
-          <a
-            href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-            id="mobile-nav-documents"
-            download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              e.preventDefault();
-              downloadBothDocuments();
-              setMobileMenuOpen(false);
-            }}
-            className="w-full text-left font-body-text text-xs font-bold tracking-[0.05em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 flex items-center justify-between min-h-[44px] bg-[#0A1B36]/5 no-underline"
-          >
-            <span className="flex items-center gap-2">
-              <Download className="w-4 h-4 text-[#C5A253]" />
-              <span>Download Program and Obituary</span>
-            </span>
-          </a>
+          {MEMORIAL_DOCUMENTS.map((doc) => (
+            <a
+              key={doc.id}
+              href={doc.downloadUrl}
+              id={`mobile-nav-download-${doc.id}`}
+              download={doc.filename}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSingleDownload(doc);
+                setMobileMenuOpen(false);
+              }}
+              className="w-full text-left font-body-text text-xs font-bold tracking-[0.05em] text-[#0A1B36] py-3.5 px-3 border-b border-[#0A1B36]/10 flex items-center justify-between min-h-[44px] bg-[#0A1B36]/5 no-underline"
+            >
+              <span className="flex items-center gap-2">
+                <Download className="w-4 h-4 text-[#C5A253]" />
+                <span>{doc.id === 'program' ? 'Download Program' : 'Download Obituary'}</span>
+              </span>
+            </a>
+          ))}
           <button
             onClick={() => scrollToSection('donate')}
             className="w-full font-body-text text-xs font-bold tracking-[0.2em] bg-[#0A1B36] text-white py-4 uppercase mt-3 flex items-center justify-center min-h-[48px]"

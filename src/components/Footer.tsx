@@ -1,6 +1,6 @@
 import React from 'react';
 import { Download, Eye } from 'lucide-react';
-import { downloadBothDocuments } from '../utils/downloadDocuments';
+import { MEMORIAL_DOCUMENTS, triggerSingleDownload } from '../utils/downloadDocuments';
 
 interface FooterProps {
   onNavigateSection?: (sectionId: string) => void;
@@ -73,22 +73,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSection }) => {
             <Eye className="w-3.5 h-3.5 text-[#C5A253]" />
             <span>View Program & Obituary</span>
           </button>
-          <a
-            href="/documents/William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-            id="footer-link-documents"
-            download="William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              e.preventDefault();
-              downloadBothDocuments();
-            }}
-            title="Download Program and Obituary"
-            className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center gap-1 no-underline"
-          >
-            <Download className="w-3.5 h-3.5 text-[#C5A253]" />
-            <span>Download Program and Obituary</span>
-          </a>
+          {MEMORIAL_DOCUMENTS.map((doc) => (
+            <a
+              key={doc.id}
+              href={doc.downloadUrl}
+              id={`footer-link-download-${doc.id}`}
+              download={doc.filename}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                triggerSingleDownload(doc);
+              }}
+              title={doc.id === 'program' ? 'Download Program' : 'Download Obituary'}
+              className="text-[#0A1B36]/80 hover:text-[#C5A253] transition-colors cursor-pointer border-b border-transparent hover:border-[#C5A253] py-1.5 px-1 min-h-[36px] flex items-center gap-1 no-underline"
+            >
+              <Download className="w-3.5 h-3.5 text-[#C5A253]" />
+              <span>{doc.id === 'program' ? 'Download Program' : 'Download Obituary'}</span>
+            </a>
+          ))}
           <button
             id="footer-link-donate"
             onClick={() => scrollToSection('donate')}

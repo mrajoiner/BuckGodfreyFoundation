@@ -421,30 +421,5 @@ function generateOrderOfServicePdf() {
   console.log('Successfully generated:', filePath);
 }
 
-// ---------------------------------------------------------------------------
-// 3. GENERATE COMBINED MEMORIAL EDITION PDF (5 PAGES)
-// ---------------------------------------------------------------------------
-function generateCombinedMemorialPdf() {
-  const doc = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
-  
-  // Page 1: Program Cover
-  drawOrderOfServiceCover(doc);
-  
-  // Page 2: Order of Service
-  doc.addPage();
-  drawOrderOfServiceProgram(doc);
-  
-  // Pages 3-5: Obituary & Life Story
-  obituaryPagesData.forEach((pageData, idx) => {
-    doc.addPage();
-    drawObituaryPage(doc, pageData, idx + 1, 3);
-  });
-
-  const filePath = path.join(outDir, 'William_Buck_Godfrey_Memorial_Program_and_Obituary.pdf');
-  fs.writeFileSync(filePath, Buffer.from(doc.output('arraybuffer')));
-  console.log('Successfully generated:', filePath);
-}
-
 generateObituaryPdf();
 generateOrderOfServicePdf();
-generateCombinedMemorialPdf();

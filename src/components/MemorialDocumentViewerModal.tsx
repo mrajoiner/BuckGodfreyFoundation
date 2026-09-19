@@ -3,7 +3,6 @@ import {
   X,
   Download,
   ExternalLink,
-  BookOpen,
   FileText,
   Maximize2,
   Minimize2,
@@ -11,16 +10,13 @@ import {
   ChevronRight,
   ZoomIn,
   ZoomOut,
-  ShieldCheck,
   Image as ImageIcon,
 } from 'lucide-react';
 import {
   MEMORIAL_DOCUMENTS,
   MemorialDocument,
   triggerSingleDownload,
-  triggerSingleDownloadByUrl,
 } from '../utils/downloadDocuments';
-import { DOCUMENT_TRANSCRIPTS } from '../data/documentTranscripts';
 
 interface MemorialDocumentViewerModalProps {
   isOpen: boolean;
@@ -35,7 +31,7 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
 }) => {
   const [activeDocId, setActiveDocId] = useState<'program' | 'obituary'>(initialDocId);
   const [activePageIndex, setActivePageIndex] = useState<number>(0);
-  const [viewMode, setViewMode] = useState<'image' | 'reader' | 'all-pages'>('image');
+  const [viewMode, setViewMode] = useState<'image' | 'all-pages'>('image');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomScale, setZoomScale] = useState<number>(1);
 
@@ -67,7 +63,6 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
   if (!isOpen) return null;
 
   const currentDoc = MEMORIAL_DOCUMENTS.find((d) => d.id === activeDocId) || MEMORIAL_DOCUMENTS[0];
-  const currentTranscript = DOCUMENT_TRANSCRIPTS[activeDocId];
   const currentPage = currentDoc.jpegPages[activePageIndex] || currentDoc.jpegPages[0];
 
   const handlePrevPage = () => {
@@ -139,7 +134,9 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
               className="inline-flex items-center gap-1 text-[11px] font-tech-mono font-bold text-[#0A1B36] bg-[#C5A253] hover:bg-white px-2.5 sm:px-3 py-1.5 transition-colors cursor-pointer no-underline"
             >
               <Download className="w-3.5 h-3.5" />
-              <span className="hidden xs:inline">DOWNLOAD PDF</span>
+              <span className="hidden xs:inline">
+                {activeDocId === 'program' ? 'DOWNLOAD PROGRAM' : 'DOWNLOAD OBITUARY'}
+              </span>
             </a>
 
             <button
@@ -214,17 +211,6 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
               >
                 <span>All Pages</span>
               </button>
-              <button
-                onClick={() => setViewMode('reader')}
-                className={`flex items-center gap-1 px-2.5 py-1 text-[11px] font-tech-mono font-bold uppercase transition-colors cursor-pointer ${
-                  viewMode === 'reader'
-                    ? 'bg-[#0A1B36] text-white'
-                    : 'text-[#0A1B36]/70 hover:text-[#0A1B36]'
-                }`}
-              >
-                <BookOpen className="w-3 h-3 text-[#C5A253]" />
-                <span>Text</span>
-              </button>
             </div>
 
             {/* Zoom Controls */}
@@ -283,7 +269,7 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
                 </div>
               )}
 
-              {/* Native JPEG Image Element (Guaranteed Never Blocked) */}
+              {/* Memorial page image */}
               <div
                 className="overflow-auto max-w-full max-h-full flex items-center justify-center p-2"
                 style={{ cursor: zoomScale > 1 ? 'grab' : 'default' }}
@@ -297,15 +283,8 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
                 />
               </div>
 
-              <div className="mt-2 text-center text-white/70 font-tech-mono text-xs flex items-center gap-3">
+              <div className="mt-2 text-center text-white/70 font-tech-mono text-xs">
                 <span>{currentPage.title}</span>
-                <span>•</span>
-                <button
-                  onClick={() => triggerSingleDownloadByUrl(currentPage.url, currentPage.filename)}
-                  className="text-[#C5A253] hover:underline cursor-pointer font-bold"
-                >
-                  Save This Page (.jpeg)
-                </button>
               </div>
             </div>
           )}
@@ -323,114 +302,16 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
                     referrerPolicy="no-referrer"
                     className="w-full h-auto max-h-[85vh] object-contain mx-auto shadow-lg"
                   />
-                  <div className="mt-2 text-right">
-                    <button
-                      onClick={() => triggerSingleDownloadByUrl(p.url, p.filename)}
-                      className="text-xs font-tech-mono text-[#C5A253] hover:underline cursor-pointer"
-                    >
-                      Download Page {p.pageNumber} (.jpeg)
-                    </button>
-                  </div>
                 </div>
               ))}
             </div>
           )}
 
-          {viewMode === 'reader' && (
-            /* Interactive Formatted Reader View */
-            <div className="w-full h-full overflow-y-auto p-4 sm:p-8 md:p-12 bg-[#faf9f5] text-[#0A1B36]">
-              <div className="max-w-3xl mx-auto bg-white p-6 sm:p-10 shadow-lg border border-[#0A1B36]/15">
-                <div className="text-center pb-6 mb-8 border-b-2 border-[#C5A253]">
-                  <span className="font-tech-mono text-xs uppercase tracking-widest text-[#C5A253] font-bold block mb-1">
-                    {currentTranscript.meta}
-                  </span>
-                  <h2 className="font-display-title text-2xl sm:text-3xl md:text-4xl font-black text-[#0A1B36] uppercase tracking-wide">
-                    {currentTranscript.title}
-                  </h2>
-                  <p className="font-body-text text-sm sm:text-base text-[#0A1B36]/80 italic mt-2">
-                    {currentTranscript.subtitle}
-                  </p>
-                  {currentTranscript.dateAndLocation && (
-                    <div className="mt-3 inline-block bg-[#0A1B36]/5 px-3 py-1 font-tech-mono text-xs text-[#0A1B36] font-bold">
-                      {currentTranscript.dateAndLocation}
-                    </div>
-                  )}
-                </div>
-
-                <div className="space-y-8">
-                  {currentTranscript.sections.map((sec, idx) => (
-                    <div key={idx} className="space-y-4">
-                      {sec.quarter && (
-                        <div className="bg-[#0A1B36] text-white p-3 border-l-4 border-[#C5A253]">
-                          <span className="font-display-title text-sm sm:text-base font-black tracking-wider uppercase">
-                            {sec.quarter}
-                          </span>
-                        </div>
-                      )}
-
-                      {sec.title && !sec.quarter && (
-                        <h4 className="font-display-title text-lg sm:text-xl font-bold text-[#0A1B36] uppercase tracking-wider pb-1 border-b border-[#0A1B36]/20">
-                          {sec.title}
-                        </h4>
-                      )}
-
-                      {sec.quote && (
-                        <blockquote className="bg-[#0A1B36]/5 border-l-4 border-[#C5A253] p-4 my-4">
-                          <p className="font-body-text text-base sm:text-lg italic text-[#0A1B36] leading-relaxed">
-                            {sec.quote.text}
-                          </p>
-                          <footer className="font-tech-mono text-xs text-[#C5A253] font-bold mt-2">
-                            {sec.quote.author}
-                          </footer>
-                        </blockquote>
-                      )}
-
-                      {sec.items && (
-                        <div className="space-y-2.5">
-                          {sec.items.map((item, itemIdx) => (
-                            <div
-                              key={itemIdx}
-                              className="p-3 bg-[#faf9f5] border border-[#0A1B36]/10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1"
-                            >
-                              <span className="font-display-title text-sm font-bold text-[#0A1B36]">
-                                {item.role}
-                              </span>
-                              <div className="text-right sm:text-right">
-                                <span className="font-body-text text-sm font-bold text-[#C5A253]">
-                                  {item.name}
-                                </span>
-                                {item.detail && (
-                                  <span className="block text-xs text-[#0A1B36]/70">
-                                    {item.detail}
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {sec.paragraphs && (
-                        <div className="space-y-3 font-body-text text-base leading-relaxed text-[#0A1B36]/90">
-                          {sec.paragraphs.map((p, pIdx) => (
-                            <p key={pIdx}>{p}</p>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Modal Bottom Status Bar */}
         <div className="bg-[#f0eee6] px-4 py-2 sm:px-6 border-t border-[#0A1B36]/20 flex items-center justify-between text-[11px] font-tech-mono text-[#0A1B36]/80 shrink-0">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Native JPEG Image Embed • 100% Browser Compatible</span>
-          </div>
+          <span>View the memorial page images above or download the selected PDF.</span>
 
           <div className="flex items-center gap-4">
             <a
@@ -444,7 +325,7 @@ export const MemorialDocumentViewerModal: React.FC<MemorialDocumentViewerModalPr
               }}
               className="font-bold text-[#0A1B36] hover:text-[#C5A253] underline cursor-pointer"
             >
-              Download PDF ({currentDoc.size})
+              {activeDocId === 'program' ? 'Download Program' : 'Download Obituary'}
             </a>
             <button
               onClick={onClose}
