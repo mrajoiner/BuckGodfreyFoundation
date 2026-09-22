@@ -19,7 +19,7 @@ function escapeXml(unsafe) {
 }
 
 // ---------------------------------------------------------------------------
-// 1. CELEBRATION PROGRAM - PAGE 1 (COVER)
+// 1. CELEBRATION PROGRAM - PAGE 1 (COVER) - WARM LIGHT MEMORIAL PALETTE (1.jpg)
 // ---------------------------------------------------------------------------
 function generateProgramPage1Svg() {
   const width = 1200;
@@ -28,37 +28,36 @@ function generateProgramPage1Svg() {
   return `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#071326"/>
-        <stop offset="50%" stop-color="#0A1B36"/>
-        <stop offset="100%" stop-color="#0E2447"/>
+      <linearGradient id="warmBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FCFAF6"/>
+        <stop offset="50%" stop-color="#F7F3EA"/>
+        <stop offset="100%" stop-color="#F2EBDC"/>
       </linearGradient>
       <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F2DF99"/>
-        <stop offset="50%" stop-color="#C5A253"/>
-        <stop offset="100%" stop-color="#9C7B32"/>
+        <stop offset="0%" stop-color="#D4AF37"/>
+        <stop offset="50%" stop-color="#B8860B"/>
+        <stop offset="100%" stop-color="#996515"/>
       </linearGradient>
       <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.45"/>
+        <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0A1B36" flood-opacity="0.12"/>
       </filter>
     </defs>
 
-    <!-- Deep Navy Background -->
-    <rect width="${width}" height="${height}" fill="url(#bgGrad)"/>
+    <!-- Warm Memorial Parchment / Off-White Background (Replaced Dark Blue) -->
+    <rect width="${width}" height="${height}" fill="url(#warmBgGrad)"/>
 
-    <!-- Outer Gold Border -->
-    <rect x="40" y="40" width="${width - 80}" height="${height - 80}" fill="none" stroke="#C5A253" stroke-width="4"/>
+    <!-- Stately Double Navy & Gold Framing Borders -->
+    <rect x="36" y="36" width="${width - 72}" height="${height - 72}" fill="none" stroke="#0A1B36" stroke-width="4"/>
+    <rect x="48" y="48" width="${width - 96}" height="${height - 96}" fill="none" stroke="#C5A253" stroke-width="2"/>
+    <rect x="58" y="58" width="${width - 116}" height="${height - 116}" fill="none" stroke="#0A1B36" stroke-width="1" stroke-opacity="0.4"/>
 
-    <!-- Inner Fine Gold Border -->
-    <rect x="52" y="52" width="${width - 104}" height="${height - 104}" fill="none" stroke="#C5A253" stroke-width="1.5" stroke-opacity="0.7"/>
-
-    <!-- Corner Accents -->
-    <path d="M40 70 L70 40 M${width-40} 70 L${width-70} 40 M40 ${height-70} L70 ${height-40} M${width-40} ${height-70} L${width-70} ${height-40}" stroke="#C5A253" stroke-width="2"/>
+    <!-- Decorative Corner Accents -->
+    <path d="M36 68 L68 36 M${width-36} 68 L${width-68} 36 M36 ${height-68} L68 ${height-36} M${width-36} ${height-68} L${width-68} ${height-36}" stroke="#C5A253" stroke-width="2.5"/>
 
     <!-- Top Badge / Header -->
     <g transform="translate(${width/2}, 160)" text-anchor="middle">
-      <text y="0" font-family="'Georgia', 'Times New Roman', serif" font-size="28" font-weight="bold" fill="#E8D39E" letter-spacing="8">CELEBRATION OF A</text>
-      <text y="70" font-family="'Impact', 'Arial Black', sans-serif" font-size="76" font-weight="900" fill="url(#goldGrad)" letter-spacing="14">LEGEND</text>
+      <text y="0" font-family="'Georgia', 'Times New Roman', serif" font-size="26" font-weight="bold" fill="#0A1B36" letter-spacing="8">CELEBRATION OF A</text>
+      <text y="68" font-family="'Impact', 'Arial Black', sans-serif" font-size="74" font-weight="900" fill="#0A1B36" letter-spacing="12">LEGEND</text>
       <line x1="-180" y1="105" x2="180" y2="105" stroke="#C5A253" stroke-width="3"/>
       <circle cx="0" cy="105" r="5" fill="#C5A253"/>
     </g>
@@ -66,50 +65,50 @@ function generateProgramPage1Svg() {
     <!-- Central Commemorative Portrait Frame -->
     <g transform="translate(${width/2}, 560)">
       <!-- Frame box -->
-      <rect x="-380" y="-190" width="760" height="380" rx="16" fill="#0D2140" stroke="#C5A253" stroke-width="3" filter="url(#shadow)"/>
-      <rect x="-370" y="-180" width="740" height="360" rx="12" fill="none" stroke="#C5A253" stroke-width="1" stroke-dasharray="8 6"/>
+      <rect x="-380" y="-190" width="760" height="380" rx="16" fill="#FFFFFF" stroke="#0A1B36" stroke-width="3" filter="url(#shadow)"/>
+      <rect x="-370" y="-180" width="740" height="360" rx="12" fill="none" stroke="#C5A253" stroke-width="1.5" stroke-dasharray="8 6"/>
 
       <!-- Name Presentation -->
-      <text y="-70" text-anchor="middle" font-family="'Georgia', 'Times New Roman', serif" font-size="44" font-weight="bold" fill="url(#goldGrad)" letter-spacing="10">WILLIAM</text>
-      <text y="25" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="94" font-weight="900" fill="#FFFFFF" letter-spacing="6">“BUCK”</text>
-      <text y="105" text-anchor="middle" font-family="'Georgia', 'Times New Roman', serif" font-size="46" font-weight="bold" fill="url(#goldGrad)" letter-spacing="8">GODFREY, JR.</text>
+      <text y="-70" text-anchor="middle" font-family="'Georgia', 'Times New Roman', serif" font-size="44" font-weight="bold" fill="#C5A253" letter-spacing="10">WILLIAM</text>
+      <text y="28" text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="94" font-weight="900" fill="#0A1B36" letter-spacing="6">“BUCK”</text>
+      <text y="105" text-anchor="middle" font-family="'Georgia', 'Times New Roman', serif" font-size="46" font-weight="bold" fill="#C5A253" letter-spacing="8">GODFREY, JR.</text>
 
       <!-- Life Dates -->
       <rect x="-140" y="130" width="280" height="36" rx="6" fill="#0A1B36" stroke="#C5A253" stroke-width="1.5"/>
-      <text y="154" text-anchor="middle" font-family="'Courier New', monospace" font-size="20" font-weight="bold" fill="#E8D39E" letter-spacing="6">1943 — 2026</text>
+      <text y="154" text-anchor="middle" font-family="'Courier New', monospace" font-size="20" font-weight="bold" fill="#FAF3E0" letter-spacing="6">1943 — 2026</text>
     </g>
 
     <!-- Service Details -->
     <g transform="translate(${width/2}, 980)" text-anchor="middle">
-      <text y="0" font-family="'Arial', sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" letter-spacing="4">SATURDAY, SEPTEMBER 19, 2026</text>
-      <text y="42" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="#E8D39E" letter-spacing="6">5:00 PM EST</text>
+      <text y="0" font-family="'Arial', sans-serif" font-size="28" font-weight="bold" fill="#0A1B36" letter-spacing="4">SATURDAY, SEPTEMBER 19, 2026</text>
+      <text y="42" font-family="'Arial', sans-serif" font-size="24" font-weight="bold" fill="#9C7B32" letter-spacing="6">5:00 PM EST</text>
 
       <line x1="-120" y1="75" x2="120" y2="75" stroke="#C5A253" stroke-width="2"/>
 
-      <text y="125" font-family="'Georgia', 'Times New Roman', serif" font-size="34" font-weight="bold" fill="url(#goldGrad)" letter-spacing="4">COLLEGE FOOTBALL HALL OF FAME</text>
-      <text y="170" font-family="'Arial', sans-serif" font-size="22" fill="#E2E8F0" letter-spacing="2">250 MARIETTA STREET NORTHWEST</text>
-      <text y="202" font-family="'Arial', sans-serif" font-size="22" fill="#CBD5E1" letter-spacing="2">ATLANTA, GEORGIA 30313</text>
+      <text y="125" font-family="'Georgia', 'Times New Roman', serif" font-size="34" font-weight="bold" fill="#0A1B36" letter-spacing="4">COLLEGE FOOTBALL HALL OF FAME</text>
+      <text y="170" font-family="'Arial', sans-serif" font-size="22" fill="#334155" letter-spacing="2">250 MARIETTA STREET NORTHWEST</text>
+      <text y="202" font-family="'Arial', sans-serif" font-size="22" fill="#475569" letter-spacing="2">ATLANTA, GEORGIA 30313</text>
     </g>
 
     <!-- Master of Ceremony Plaque -->
     <g transform="translate(${width/2}, 1320)" text-anchor="middle">
-      <rect x="-300" y="-35" width="600" height="70" rx="8" fill="#0D2140" stroke="#C5A253" stroke-width="1.5"/>
-      <text y="-6" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#C5A253" letter-spacing="3">MASTER OF CEREMONY</text>
-      <text y="20" font-family="'Georgia', 'Times New Roman', serif" font-size="20" font-weight="bold" fill="#FFFFFF">Pastor Jesse Curney, III • New Mercies Christian Church</text>
+      <rect x="-300" y="-35" width="600" height="70" rx="8" fill="#FFFFFF" stroke="#0A1B36" stroke-width="2" filter="url(#shadow)"/>
+      <text y="-6" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#9C7B32" letter-spacing="3">MASTER OF CEREMONY</text>
+      <text y="20" font-family="'Georgia', 'Times New Roman', serif" font-size="20" font-weight="bold" fill="#0A1B36">Pastor Jesse Curney, III • New Mercies Christian Church</text>
     </g>
 
     <!-- Bottom Emblem & Foundation Seal -->
     <g transform="translate(${width/2}, 1500)" text-anchor="middle">
-      <line x1="-240" y1="-25" x2="240" y2="-25" stroke="#C5A253" stroke-width="1"/>
-      <text y="0" font-family="'Arial', sans-serif" font-size="15" font-weight="bold" fill="#C5A253" letter-spacing="3">THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP FOUNDATION</text>
-      <text y="24" font-family="'Courier New', monospace" font-size="13" fill="#94A3B8" letter-spacing="2">OFFICIAL CELEBRATION ORDER OF SERVICE • PAGE 1 OF 2</text>
+      <line x1="-240" y1="-25" x2="240" y2="-25" stroke="#C5A253" stroke-width="1.5"/>
+      <text y="0" font-family="'Arial', sans-serif" font-size="15" font-weight="bold" fill="#0A1B36" letter-spacing="3">THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP FOUNDATION</text>
+      <text y="24" font-family="'Courier New', monospace" font-size="13" fill="#64748B" letter-spacing="2">OFFICIAL CELEBRATION PROGRAM &amp; OBITUARY • PAGE 1 (1.JPG)</text>
     </g>
   </svg>
   `;
 }
 
 // ---------------------------------------------------------------------------
-// 2. CELEBRATION PROGRAM - PAGE 2 (ORDER OF SERVICE)
+// 2. CELEBRATION PROGRAM - PAGE 2 (ORDER OF SERVICE) - WARM LIGHT MEMORIAL PALETTE (2.jpg)
 // ---------------------------------------------------------------------------
 function generateProgramPage2Svg() {
   const width = 1200;
@@ -118,114 +117,115 @@ function generateProgramPage2Svg() {
   return `
   <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#071326"/>
-        <stop offset="50%" stop-color="#0A1B36"/>
-        <stop offset="100%" stop-color="#0E2447"/>
+      <linearGradient id="warmBgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FCFAF6"/>
+        <stop offset="50%" stop-color="#F7F3EA"/>
+        <stop offset="100%" stop-color="#F2EBDC"/>
       </linearGradient>
-      <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F2DF99"/>
-        <stop offset="50%" stop-color="#C5A253"/>
-        <stop offset="100%" stop-color="#9C7B32"/>
-      </linearGradient>
+      <filter id="shadow2" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0A1B36" flood-opacity="0.08"/>
+      </filter>
     </defs>
 
-    <!-- Background & Borders -->
-    <rect width="${width}" height="${height}" fill="url(#bgGrad2)"/>
-    <rect x="40" y="40" width="${width - 80}" height="${height - 80}" fill="none" stroke="#C5A253" stroke-width="4"/>
-    <rect x="52" y="52" width="${width - 104}" height="${height - 104}" fill="none" stroke="#C5A253" stroke-width="1.5" stroke-opacity="0.7"/>
+    <!-- Warm Memorial Parchment / Off-White Background (Replaced Dark Blue) -->
+    <rect width="${width}" height="${height}" fill="url(#warmBgGrad2)"/>
+
+    <!-- Framing Borders -->
+    <rect x="36" y="36" width="${width - 72}" height="${height - 72}" fill="none" stroke="#0A1B36" stroke-width="4"/>
+    <rect x="48" y="48" width="${width - 96}" height="${height - 96}" fill="none" stroke="#C5A253" stroke-width="2"/>
+    <rect x="58" y="58" width="${width - 116}" height="${height - 116}" fill="none" stroke="#0A1B36" stroke-width="1" stroke-opacity="0.4"/>
 
     <!-- Header Section -->
     <g transform="translate(${width/2}, 110)" text-anchor="middle">
-      <text y="0" font-family="'Impact', 'Arial Black', sans-serif" font-size="44" font-weight="900" fill="url(#goldGrad2)" letter-spacing="6">ORDER OF SERVICE</text>
-      <text y="32" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#E8D39E" letter-spacing="3">MASTER OF CEREMONY: PASTOR JESSE CURNEY, III</text>
-      <text y="54" font-family="'Arial', sans-serif" font-size="14" fill="#94A3B8">New Mercies Christian Church</text>
+      <text y="0" font-family="'Impact', 'Arial Black', sans-serif" font-size="44" font-weight="900" fill="#0A1B36" letter-spacing="6">ORDER OF SERVICE</text>
+      <text y="32" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#9C7B32" letter-spacing="3">MASTER OF CEREMONY: PASTOR JESSE CURNEY, III</text>
+      <text y="54" font-family="'Arial', sans-serif" font-size="14" fill="#64748B">New Mercies Christian Church</text>
       <line x1="-220" y1="72" x2="220" y2="72" stroke="#C5A253" stroke-width="2"/>
     </g>
 
     <!-- Pre-Service & Opening Items -->
     <g transform="translate(100, 240)">
-      <rect x="0" y="0" width="1000" height="100" rx="8" fill="#0D2140" stroke="#C5A253" stroke-width="1.5"/>
-      <text x="30" y="40" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="#FFFFFF">Processional</text>
-      <text x="970" y="40" text-anchor="end" font-family="'Arial', sans-serif" font-size="16" fill="#C5A253">Ministers &amp; Family</text>
+      <rect x="0" y="0" width="1000" height="100" rx="8" fill="#FFFFFF" stroke="#0A1B36" stroke-width="1.5" filter="url(#shadow2)"/>
+      <text x="30" y="40" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="#0A1B36">Processional</text>
+      <text x="970" y="40" text-anchor="end" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#9C7B32">Ministers &amp; Family</text>
 
-      <line x1="30" y1="55" x2="970" y2="55" stroke="#1E3A5F" stroke-width="1"/>
+      <line x1="30" y1="55" x2="970" y2="55" stroke="#E2E8F0" stroke-width="1"/>
 
-      <text x="30" y="82" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="#FFFFFF">Opening Prayer</text>
-      <text x="970" y="82" text-anchor="end" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#C5A253">Pastor Jesse Curney, III</text>
+      <text x="30" y="82" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="#0A1B36">Opening Prayer</text>
+      <text x="970" y="82" text-anchor="end" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#9C7B32">Pastor Jesse Curney, III</text>
     </g>
 
     <!-- 1ST QUARTER -->
     <g transform="translate(100, 375)">
-      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#C5A253"/>
-      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#0A1B36" letter-spacing="2">1ST QUARTER — THE MAN</text>
+      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#0A1B36"/>
+      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#FAF3E0" letter-spacing="2">1ST QUARTER — THE MAN</text>
 
-      <rect x="0" y="42" width="1000" height="135" fill="#08172D" stroke="#1E3A5F" stroke-width="1"/>
-      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">Scripture Readings</text>
-      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#E8D39E">Michelle Williams</text>
+      <rect x="0" y="42" width="1000" height="135" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#shadow2)"/>
+      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">Scripture Readings</text>
+      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#9C7B32">Michelle Williams</text>
 
-      <line x1="25" y1="110" x2="975" y2="110" stroke="#162D4A" stroke-width="1"/>
+      <line x1="25" y1="110" x2="975" y2="110" stroke="#F1F5F9" stroke-width="1"/>
 
-      <text x="25" y="145" font-family="'Arial', sans-serif" font-size="16" fill="#94A3B8">Scripture Verses</text>
-      <text x="975" y="145" text-anchor="end" font-family="'Courier New', monospace" font-size="18" font-weight="bold" fill="#C5A253">Psalm 37: 3-6  |  Philippians 4: 4-9</text>
+      <text x="25" y="145" font-family="'Arial', sans-serif" font-size="16" fill="#64748B">Scripture Verses</text>
+      <text x="975" y="145" text-anchor="end" font-family="'Courier New', monospace" font-size="18" font-weight="bold" fill="#0A1B36">Psalm 37: 3-6  |  Philippians 4: 4-9</text>
     </g>
 
     <!-- 2ND QUARTER -->
     <g transform="translate(100, 585)">
-      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#C5A253"/>
-      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#0A1B36" letter-spacing="2">2ND QUARTER — THE VISIONARY</text>
+      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#0A1B36"/>
+      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#FAF3E0" letter-spacing="2">2ND QUARTER — THE VISIONARY</text>
 
-      <rect x="0" y="42" width="1000" height="160" fill="#08172D" stroke="#1E3A5F" stroke-width="1"/>
-      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">Musical Selection</text>
-      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#E8D39E">Dawn Bynoe — “It Is Well With My Soul”</text>
+      <rect x="0" y="42" width="1000" height="160" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#shadow2)"/>
+      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">Musical Selection</text>
+      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#9C7B32">Dawn Bynoe — “It Is Well With My Soul”</text>
 
-      <line x1="25" y1="110" x2="975" y2="110" stroke="#162D4A" stroke-width="1"/>
+      <line x1="25" y1="110" x2="975" y2="110" stroke="#F1F5F9" stroke-width="1"/>
 
-      <text x="25" y="140" font-family="'Arial', sans-serif" font-size="17" font-weight="bold" fill="#E2E8F0">Remarks &amp; Reflections</text>
-      <text x="25" y="165" font-family="'Arial', sans-serif" font-size="14" fill="#94A3B8">(3 minutes please)</text>
-      <text x="975" y="145" text-anchor="end" font-family="'Georgia', serif" font-size="18" font-weight="bold" fill="#C5A253">Reginald Tompkins  •  Quincy Carter  •  Frank Godfrey, Sr.</text>
+      <text x="25" y="140" font-family="'Arial', sans-serif" font-size="17" font-weight="bold" fill="#0A1B36">Remarks &amp; Reflections</text>
+      <text x="25" y="165" font-family="'Arial', sans-serif" font-size="14" fill="#64748B">(3 minutes please)</text>
+      <text x="975" y="145" text-anchor="end" font-family="'Georgia', serif" font-size="18" font-weight="bold" fill="#0A1B36">Reginald Tompkins  •  Quincy Carter  •  Frank Godfrey, Sr.</text>
     </g>
 
     <!-- 3RD QUARTER -->
     <g transform="translate(100, 820)">
-      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#C5A253"/>
-      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#0A1B36" letter-spacing="2">3RD QUARTER — THE LEADER</text>
+      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#0A1B36"/>
+      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#FAF3E0" letter-spacing="2">3RD QUARTER — THE LEADER</text>
 
-      <rect x="0" y="42" width="1000" height="150" fill="#08172D" stroke="#1E3A5F" stroke-width="1"/>
-      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">Family Tribute</text>
-      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#E8D39E">Granddaughters’ Tribute</text>
+      <rect x="0" y="42" width="1000" height="150" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#shadow2)"/>
+      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">Family Tribute</text>
+      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#9C7B32">Granddaughters’ Tribute</text>
 
-      <line x1="25" y1="110" x2="975" y2="110" stroke="#162D4A" stroke-width="1"/>
+      <line x1="25" y1="110" x2="975" y2="110" stroke="#F1F5F9" stroke-width="1"/>
 
-      <text x="25" y="145" font-family="'Arial', sans-serif" font-size="17" font-weight="bold" fill="#E2E8F0">Acknowledgements &amp; Commendations</text>
-      <text x="975" y="145" text-anchor="end" font-family="'Georgia', serif" font-size="18" font-weight="bold" fill="#C5A253">State Rep. Inga Willis  •  State Rep. Omari Crawford</text>
+      <text x="25" y="145" font-family="'Arial', sans-serif" font-size="17" font-weight="bold" fill="#0A1B36">Acknowledgements &amp; Commendations</text>
+      <text x="975" y="145" text-anchor="end" font-family="'Georgia', serif" font-size="18" font-weight="bold" fill="#0A1B36">State Rep. Inga Willis  •  State Rep. Omari Crawford</text>
     </g>
 
     <!-- 4TH QUARTER -->
     <g transform="translate(100, 1045)">
-      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#C5A253"/>
-      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#0A1B36" letter-spacing="2">4TH QUARTER — THE LEGEND</text>
+      <rect x="0" y="0" width="1000" height="42" rx="4" fill="#0A1B36"/>
+      <text x="20" y="28" font-family="'Arial Black', sans-serif" font-size="18" font-weight="900" fill="#FAF3E0" letter-spacing="2">4TH QUARTER — THE LEGEND</text>
 
-      <rect x="0" y="42" width="1000" height="190" fill="#08172D" stroke="#1E3A5F" stroke-width="1"/>
-      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">His Life. His Legacy. His Way.</text>
-      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="url(#goldGrad2)">Rashan Ali Smith</text>
+      <rect x="0" y="42" width="1000" height="190" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" filter="url(#shadow2)"/>
+      <text x="25" y="85" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">His Life. His Legacy. His Way.</text>
+      <text x="975" y="85" text-anchor="end" font-family="'Georgia', serif" font-size="22" font-weight="bold" fill="#9C7B32">Rashan Ali Smith</text>
 
-      <line x1="25" y1="110" x2="975" y2="110" stroke="#162D4A" stroke-width="1"/>
+      <line x1="25" y1="110" x2="975" y2="110" stroke="#F1F5F9" stroke-width="1"/>
 
-      <text x="25" y="140" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">Benediction | Committal</text>
-      <text x="975" y="140" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#E8D39E">Pastor Jesse Curney, III</text>
+      <text x="25" y="140" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">Benediction | Committal</text>
+      <text x="975" y="140" text-anchor="end" font-family="'Georgia', serif" font-size="20" font-weight="bold" fill="#9C7B32">Pastor Jesse Curney, III</text>
 
-      <line x1="25" y1="160" x2="975" y2="160" stroke="#162D4A" stroke-width="1"/>
+      <line x1="25" y1="160" x2="975" y2="160" stroke="#F1F5F9" stroke-width="1"/>
 
-      <text x="25" y="195" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#E2E8F0">Recessional</text>
-      <text x="975" y="195" text-anchor="end" font-family="'Arial', sans-serif" font-size="16" fill="#C5A253">Family &amp; Attendees</text>
+      <text x="25" y="195" font-family="'Arial', sans-serif" font-size="18" font-weight="bold" fill="#0A1B36">Recessional</text>
+      <text x="975" y="195" text-anchor="end" font-family="'Arial', sans-serif" font-size="16" font-weight="bold" fill="#64748B">Family &amp; Attendees</text>
     </g>
 
     <!-- Footer -->
     <g transform="translate(${width/2}, 1500)" text-anchor="middle">
-      <line x1="-240" y1="-25" x2="240" y2="-25" stroke="#C5A253" stroke-width="1"/>
-      <text y="0" font-family="'Arial', sans-serif" font-size="15" font-weight="bold" fill="#C5A253" letter-spacing="3">THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP FOUNDATION</text>
-      <text y="24" font-family="'Courier New', monospace" font-size="13" fill="#94A3B8" letter-spacing="2">OFFICIAL CELEBRATION ORDER OF SERVICE • PAGE 2 OF 2</text>
+      <line x1="-240" y1="-25" x2="240" y2="-25" stroke="#C5A253" stroke-width="1.5"/>
+      <text y="0" font-family="'Arial', sans-serif" font-size="15" font-weight="bold" fill="#0A1B36" letter-spacing="3">THE WILLIAM BUCK GODFREY LEGACY SCHOLARSHIP FOUNDATION</text>
+      <text y="24" font-family="'Courier New', monospace" font-size="13" fill="#64748B" letter-spacing="2">OFFICIAL CELEBRATION PROGRAM &amp; OBITUARY • PAGE 2 (2.JPG)</text>
     </g>
   </svg>
   `;
@@ -456,14 +456,27 @@ function generateObituaryPageSvg(pageNumber) {
 async function buildAllJpegs() {
   console.log('Generating document JPEGs...');
 
+  const program1Svg = generateProgramPage1Svg();
+  const program2Svg = generateProgramPage2Svg();
+
   const documents = [
+    // Primary user-requested filenames: 1.jpg (Page 1) and 2.jpg (Page 2)
+    {
+      filename: '1.jpg',
+      svg: program1Svg,
+    },
+    {
+      filename: '2.jpg',
+      svg: program2Svg,
+    },
+    // Backwards compatibility filenames
     {
       filename: 'William_Buck_Godfrey_Program_Page_1.jpeg',
-      svg: generateProgramPage1Svg(),
+      svg: program1Svg,
     },
     {
       filename: 'William_Buck_Godfrey_Program_Page_2.jpeg',
-      svg: generateProgramPage2Svg(),
+      svg: program2Svg,
     },
     {
       filename: 'William_Buck_Godfrey_Obituary_Page_1.jpeg',
@@ -481,10 +494,19 @@ async function buildAllJpegs() {
 
   for (const doc of documents) {
     const dest = path.join(outDir, doc.filename);
-    await sharp(Buffer.from(doc.svg))
+    const buffer = await sharp(Buffer.from(doc.svg))
       .jpeg({ quality: 96, mozjpeg: true })
-      .toFile(dest);
+      .toBuffer();
+
+    fs.writeFileSync(dest, buffer);
     console.log('Created JPEG:', doc.filename);
+
+    // Also place 1.jpg and 2.jpg in public root for immediate accessibility at /1.jpg and /2.jpg
+    if (doc.filename === '1.jpg' || doc.filename === '2.jpg') {
+      const publicRootDest = path.join(__dirname, '..', 'public', doc.filename);
+      fs.writeFileSync(publicRootDest, buffer);
+      console.log('Also mirrored to public root:', doc.filename);
+    }
   }
 
   console.log('All document JPEGs generated successfully!');

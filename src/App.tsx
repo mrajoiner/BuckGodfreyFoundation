@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { HeroSection } from './components/HeroSection';
+import { VideoSection } from './components/VideoSection';
 import { LegacySection } from './components/LegacySection';
 import { VisionSection } from './components/VisionSection';
 import { ScholarCriteriaSection } from './components/ScholarCriteriaSection';
@@ -145,6 +146,9 @@ export default function App() {
           <>
             {/* Hero Section */}
             <HeroSection />
+
+            {/* Memorial Tribute Video Section */}
+            <VideoSection />
 
             {/* Legacy Section with Inline Bio & Milestones */}
             <LegacySection />
