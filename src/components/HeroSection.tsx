@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { ArrowDown, ArrowRight, MessageSquareHeart } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { FadeInView } from './FadeInView';
 import buckHallOfFameImg from '../assets/images/buck_hall_of_fame_1787153220868.jpg';
@@ -25,18 +24,11 @@ export const HeroSection: React.FC = () => {
   const textContentY = useTransform(smoothProgress, [0, 1], ['0%', '8%']);
   const badgeY = useTransform(smoothProgress, [0, 1], ['0%', '-25%']);
 
-  const scrollToSection = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
     <section
       ref={containerRef}
       id="about"
-      className="relative min-h-[90vh] md:min-h-[94vh] pt-36 pb-4 sm:pt-44 sm:pb-5 md:pt-48 md:pb-6 lg:pt-52 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
+      className="relative pt-36 pb-12 sm:pt-44 sm:pb-16 md:pt-48 md:pb-20 lg:pt-52 px-4 sm:px-8 md:px-14 lg:px-20 overflow-hidden flex flex-col justify-center bg-[#ffffff]"
     >
       {/* Parallax Background Typography Watermark */}
       <motion.div
@@ -80,46 +72,13 @@ export const HeroSection: React.FC = () => {
 
           {/* Lead Quote Paragraph */}
           <FadeInView direction="up" delay={0.3} distance={20}>
-            <div className="border-l-2 border-[#C5A253] pl-3.5 sm:pl-6 py-2 sm:py-3 mb-6 sm:mb-10 max-w-2xl bg-[#ffffff] border border-[#0A1B36]/10">
+            <div className="border-l-2 border-[#C5A253] pl-3.5 sm:pl-6 py-2 sm:py-3 mb-2 sm:mb-4 max-w-2xl bg-[#ffffff] border border-[#0A1B36]/10">
               <p
                 id="hero-subtext"
                 className="font-body-text text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-[#0A1B36]/90 font-medium"
               >
                 Coach William 'Buck' Godfrey spent more than three decades at Southwest DeKalb High School as a head football coach, English teacher, and author. He led his teams to 273 victories and a state championship, while sending hundreds of student-athletes to college on scholarship. This fund carries his work forward by supporting students attending Historically Black Colleges and Universities.
               </p>
-            </div>
-          </FadeInView>
-
-          {/* Action Buttons & Phase Indicator */}
-          <FadeInView direction="up" delay={0.4} distance={20}>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center justify-between pt-1">
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center w-full sm:w-auto">
-                <button
-                  id="hero-cta-support"
-                  onClick={() => scrollToSection('memories')}
-                  className="font-body-text text-xs sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-3.5 sm:py-4 px-5 sm:px-8 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase text-center cursor-pointer shadow-md min-h-[48px] flex items-center justify-center leading-snug"
-                >
-                  SHARE YOUR MEMORIES OF COACH GODFREY
-                </button>
-
-                <button
-                  id="hero-cta-discover"
-                  onClick={() => scrollToSection('legacy')}
-                  className="group font-body-text text-xs sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] border border-[#0A1B36]/25 text-[#0A1B36] hover:border-[#0A1B36] hover:bg-[#ffffff] transition-all py-3.5 sm:py-4 px-4 sm:px-6 flex items-center justify-center gap-2 uppercase cursor-pointer min-h-[48px]"
-                >
-                  COACH GODFREY'S CAREER{' '}
-                  <ArrowDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-1 text-[#C5A253] shrink-0" />
-                </button>
-              </div>
-
-              {/* Current Phase Accent (Desktop) */}
-              <div className="hidden lg:flex items-baseline gap-3 shrink-0">
-                <div className="font-display-title text-4xl font-light italic text-[#0A1B36]/30">01</div>
-                <div className="w-12 xl:w-16 h-[1px] bg-[#0A1B36]/20 mb-2"></div>
-                <div className="font-tech-mono text-[10px] uppercase tracking-widest text-[#C5A253] font-bold">
-                  HBCU SCHOLARSHIP FUND
-                </div>
-              </div>
             </div>
           </FadeInView>
         </motion.div>
@@ -155,36 +114,6 @@ export const HeroSection: React.FC = () => {
             </motion.div>
           </FadeInView>
         </div>
-      </div>
-
-      {/* Just Below The Fold: Branded Tribute Callout Ribbon */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full pt-2 sm:pt-4 mt-1 sm:mt-2">
-        <FadeInView direction="up" delay={0.45}>
-          <div className="bg-[#ffffff] border-2 border-[#0A1B36] p-4 sm:p-6 md:p-7 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
-            <div className="flex items-center gap-3 sm:gap-4 text-left w-full md:w-auto">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 bg-[#ffffff] border-2 border-[#C5A253] flex items-center justify-center text-[#C5A253]">
-                <MessageSquareHeart className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <div className="space-y-0.5 min-w-0">
-                <span className="font-tech-mono text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#C5A253] font-bold block">
-                  COMMUNITY REMEMBRANCE &amp; TRIBUTES
-                </span>
-                <p className="font-display-title text-sm sm:text-lg md:text-xl font-bold text-[#0A1B36] uppercase tracking-tight leading-snug">
-                  Tributes &amp; Stories Celebrating Coach Godfrey
-                </p>
-              </div>
-            </div>
-
-            <button
-              id="hero-share-memories-btn"
-              onClick={() => scrollToSection('memories')}
-              className="w-full md:w-auto shrink-0 font-body-text text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] bg-[#0A1B36] text-white py-3.5 sm:py-4 px-5 sm:px-8 md:px-10 hover:bg-[#C5A253] hover:text-[#0A1B36] active:scale-[0.98] transition-all duration-200 uppercase cursor-pointer shadow-md flex items-center justify-center gap-2 border-2 border-[#0A1B36] hover:border-[#C5A253] min-h-[48px] text-center"
-            >
-              <span>Share Your Memories of Coach Godfrey</span>
-              <ArrowRight className="w-4 h-4 shrink-0" />
-            </button>
-          </div>
-        </FadeInView>
       </div>
     </section>
   );

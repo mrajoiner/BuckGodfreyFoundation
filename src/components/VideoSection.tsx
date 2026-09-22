@@ -6,7 +6,7 @@ export const VideoSection: React.FC = () => {
   return (
     <section
       id="tribute-video"
-      className="py-12 sm:py-16 md:py-20 bg-[#ffffff] border-t border-[#0A1B36]/10 relative overflow-hidden"
+      className="py-10 sm:py-14 md:py-16 bg-[#ffffff] border-t border-[#0A1B36]/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-8 md:px-14 lg:px-20">
         <FadeInView direction="up" delay={0.1}>
